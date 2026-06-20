@@ -5,6 +5,9 @@ Ordered by leverage. (v4 note: item 1, own-brand, is DONE. Item 0, the PDF deck 
 ## v4 follow-up
 0. ~~**Refresh the PDF deck to v4 parity.**~~ **DONE (v4).** `deck.html` / `Scenario-La-Redoute-Proposal.pdf` rebuilt to match `index.html`: jumpsuit lead, Every-brand page, 3-screenshot provenance, off-the-grey + Localize geo, two-keyframe motion, measured pilot, accuracy/C10 page removed. Now 16 pages (appendix split so the cited sources stay on-page). Send the deck and the site together.
 
+## v4 loose end (needs a quick call)
+0b. **Sizzle reel is pre-v4 (red-satin-led).** `reel/build_reel.sh` and `media/video/sizzle_*.mp4` predate the jumpsuit re-anchor and are currently orphaned (not linked by site or deck), but `README.md` lists them in the package. Either rebuild the reel jumpsuit-led (ffmpeg, no credits) or drop it from the package so the leave-behind is internally consistent. See `BUGS.md`.
+
 ## Highest leverage (turn promises into proof)
 1. ~~**Own-brand render.**~~ **DONE (v4).** A real La Redoute Collections garment (Robe en lin Signature HELOISE, scraped from laredoute.fr) is rendered on the house cast in `#brands`, beside a Vero Moda tenant-brand garment. The rights gate is now proof, not a promise.
 2. **Body-size range.** Dress one look across XS to XXL house builds (the dimension that actually drives fashion returns). Converts "every face" honesty into evidence and previews the returns lever.
