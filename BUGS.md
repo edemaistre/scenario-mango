@@ -1,11 +1,18 @@
 # BUGS and known issues
 
-Status as of 2026-06-20. "Documented" means it is surfaced honestly in the deliverable on purpose, not hidden.
+Status as of 2026-06-21. "Documented" means it is surfaced honestly in the deliverable on purpose, not hidden.
+
+## Fixed in v4 (2026-06-21)
+- **Gemini stretched body proportions** on two full-body environment swaps (Tokyo, NYC geo): the figure was elongated (abnormal head-to-body and leg length). Fixed by redoing those placements with **GPT Image 2 img2img** (1024x1536, quality medium) with a prompt explicitly demanding natural proportions. Lesson: prefer GPT Image 2 over Gemini for full-body person-into-environment placement; Gemini is fine for light/background but can distort the body.
+- **Video clips were static, then drifted.** first=last frame produced no motion (boring); single-first-frame let Seedance reinvent the garment (a dress grew into a full-length gown). Fixed with the **two-keyframe technique**: `image` = verified try-on still (pose A), `lastFrameImage` = a Gemini re-pose of the SAME garment mid-walk (pose B). Real walking motion, garment length pinned at both ends.
+- **Own-brand render gap closed.** Was an intentional Phase-1 gap; now a real La Redoute Collections try-on scraped from the live site (ROADMAP item 1, done).
+- **Accuracy/C10 section removed at client direction** ("everything is supposed to hold; no need to shoot ourselves in the foot"). The dedicated section and the explorer C10 "caveat" badge were removed; the positive colorway-win notes remain. The C10 source/render files stay in the repo, just unsurfaced.
+- **Pruna `personImage` from a dressed still.** Brand try-ons reused the jumpsuit try-on stills as the person (Pruna re-dresses). No garment bleed observed; `preserveInputSize:true` kept natural proportions (unlike the Gemini geo stretch).
 
 ## Open / by design
-- **C10 fidelity: silhouette substitution (DOCUMENTED, not fixed).** The cropped short-sleeve striped shirt rendered as a long-sleeve, full-length tucked shirt and the blue stripe faded. Blazer and trousers held. This is shown in the deck/site as the reason a human-QA gate is mandatory. Fix path: tighter garment prompt + the QA gate catching it pre-publish. Do not quietly "fix" by hiding it; it is load-bearing for the pitch.
+- **C10 fidelity: silhouette substitution (DOCUMENTED).** The cropped short-sleeve striped shirt rendered as a long-sleeve, full-length tucked shirt and the blue stripe faded. Blazer and trousers held. v4: the dedicated accuracy section was REMOVED from the site at the client's direction; the case still motivates the human-QA-gate copy in Automate/Explorer and still appears in the PDF deck until that is refreshed. It remains a real fidelity limitation: a tighter garment prompt plus the QA gate is the fix path.
 - **Body diversity is faces only.** All 5 models share one slim build. Not a render bug; a scope honesty point. Body-size range is a roadmap/pilot item (see ROADMAP).
-- **No own-brand render.** Intentional gap, labelled Phase-1 everywhere.
+- ~~**No own-brand render.**~~ RESOLVED in v4 (see "Fixed in v4"): a real La Redoute Collections try-on now ships in `#brands`.
 
 ## Fixed during build
 - **GPT Image 2 output moderation** flagged a young woman in minimal grey tank+shorts as sexual (stochastic). Fixed by a more modest base wardrobe (crew tee + knee-length shorts) and "tasteful" in the prompt.

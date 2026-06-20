@@ -29,7 +29,7 @@
   @media(max-width:880px){.hero{grid-template-columns:1fr;gap:24px}}
   .reelwrap{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.14);background:#000}
   .reelwrap video{width:100%;aspect-ratio:9/16;object-fit:cover}
-  .reeltag{position:absolute;top:12px;left:12px;background:rgba(20,20,26,.6);color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px}
+  .reeltag{position:absolute;top:12px;left:12px;background:rgba(20,20,26,.6);color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px;pointer-events:none}
   .stats{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:30px 0 0}
   @media(max-width:760px){.stats{grid-template-columns:repeat(3,1fr)}}
   .stats div{padding:15px 13px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -38,8 +38,8 @@
   @media(max-width:880px){.props{grid-template-columns:repeat(2,1fr)}}
   .prop{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--panel)}
   .prop b{display:block;margin-bottom:5px} .prop span{font-size:13.5px;color:var(--muted)}
-  .loopgrid{display:grid;gap:14px} .lg5{grid-template-columns:repeat(5,1fr)} .lg4{grid-template-columns:repeat(4,1fr)}
-  @media(max-width:900px){.lg5,.lg4{grid-template-columns:repeat(2,1fr)}}
+  .loopgrid{display:grid;gap:14px} .lg5{grid-template-columns:repeat(5,1fr)} .lg4{grid-template-columns:repeat(4,1fr)} .lg3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:900px){.lg5,.lg4,.lg3{grid-template-columns:repeat(2,1fr)}}
   .loopgrid figure{margin:0} .loopgrid video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:12px;background:#f2f2f4}
   .loopgrid .cap{font-size:12px;color:var(--muted);margin-top:7px;text-align:center}
   .twocol{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
@@ -53,12 +53,14 @@
   .prov .col{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel)}
   .prov .col h3{padding:14px 18px 0}
   .prov .col .lbl{padding:0 18px 8px;font-size:12.5px;color:var(--muted)}
-  .prov .today img{width:100%;border-bottom:1px solid var(--line)}
+  .prov .today .shots{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:10px}
+  .prov .today .shots img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
   .prov .tom .strip{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:10px}
   .prov .tom .strip img,.prov .tom .strip video{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:8px}
   /* geo */
   .geo{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-  @media(max-width:900px){.geo{grid-template-columns:repeat(2,1fr)}}
+  .geo.four{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.geo,.geo.four{grid-template-columns:repeat(2,1fr)}}
   .geo figure{margin:0} .geo img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:12px}
   .geo .cap{font-size:12px;color:var(--muted);margin-top:7px;text-align:center;font-weight:600}
   /* channels / phone mockups */
@@ -78,6 +80,15 @@
   .phone .bars i{flex:1;height:3px;background:rgba(255,255,255,.45);border-radius:3px}
   .phone .bars i.on{background:#fff}
   .chlabel{text-align:center;font-size:12.5px;color:var(--muted);margin-top:12px;font-weight:600}
+  /* brands */
+  .brandrow{display:grid;grid-template-columns:0.8fr 1fr 1fr 1fr;gap:14px;align-items:start;margin-top:8px}
+  @media(max-width:900px){.brandrow{grid-template-columns:repeat(2,1fr)}}
+  .brandrow figure{margin:0}
+  .brandrow img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:12px;background:#f2f2f4}
+  .brandrow .pack img{object-fit:contain;background:#fff;border:1px solid var(--line)}
+  .brandrow .cap{font-size:11.5px;color:var(--muted);margin-top:6px;text-align:center}
+  .brandhead{font-weight:750;font-size:15px;margin:18px 0 0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .brandhead .price{font-size:12.5px;color:var(--muted);font-weight:500}
   /* automation flow */
   .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:18px 0}
   @media(max-width:900px){.flow{grid-template-columns:1fr 1fr}}
@@ -94,23 +105,38 @@
   .rowhead{grid-column:1/-1;font-weight:750;font-size:15px;margin:14px 0 0;display:flex;align-items:baseline;gap:10px}
   .rowhead .price{font-size:12.5px;color:var(--muted);font-weight:500}
   .rowhead .note{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
-  .note.good{background:#e7f4ec;color:var(--good)} .note.warn{background:#fbf2dd;color:var(--warn)}
-  .cell{cursor:pointer;border:0;padding:0;background:none;text-align:left;font:inherit}
+  .note.good{background:#e7f4ec;color:var(--good)}
+  .cell{cursor:zoom-in;border:0;padding:0;background:none;text-align:left;font:inherit}
   .cell img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;background:#f2f2f4;transition:transform .18s,box-shadow .18s}
   .cell:hover img{transform:translateY(-3px);box-shadow:0 12px 26px rgba(0,0,0,.12)}
   .cell .cap{font-size:11px;color:var(--muted);margin-top:5px}
   .cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .cmp img{width:100%;border-radius:12px;border:1px solid var(--line);object-fit:contain;max-height:430px}
+  .cmp img{width:100%;border-radius:12px;border:1px solid var(--line);object-fit:cover;max-height:430px}
   .cmp .cap{font-size:12px;color:var(--muted);margin-top:7px}
   table{width:100%;border-collapse:collapse;font-size:13.5px} th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line)} th{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)} td:last-child,th:last-child{text-align:right}
   .cta{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;padding:15px 26px;border-radius:12px;font-weight:700;margin-top:8px}
   .src{font-size:11.5px;color:#9a9aa2;margin-top:10px}
   footer{padding:40px 0 70px;color:var(--muted);font-size:12.5px}
-  #lb{position:fixed;inset:0;z-index:100;background:rgba(12,12,16,.86);display:none;align-items:center;justify-content:center;padding:24px}
-  #lb.open{display:flex} #lb .box{background:#fff;border-radius:16px;max-width:1000px;width:100%;max-height:92vh;overflow:auto;padding:22px}
-  #lb .imgs{display:grid;grid-template-columns:1fr 1fr;gap:16px} @media(max-width:680px){#lb .imgs{grid-template-columns:1fr}}
-  #lb img{width:100%;border-radius:10px;background:#f2f2f4} #lb .lbcap{font-size:12px;color:var(--muted);margin-top:6px}
-  #lb .x{float:right;border:0;background:#f0f0f3;border-radius:8px;width:34px;height:34px;font-size:18px;cursor:pointer}
+  /* universal lightbox */
+  .zoom{cursor:zoom-in}
+  #lb{position:fixed;inset:0;z-index:100;background:rgba(10,10,14,.93);display:none;align-items:center;justify-content:center}
+  #lb.open{display:flex}
+  #lb .stage{position:relative;max-width:94vw;max-height:92vh;display:flex;flex-direction:column;align-items:center}
+  #lb .media{display:flex;align-items:center;justify-content:center;max-height:80vh}
+  #lb .media img,#lb .media video{max-width:90vw;max-height:80vh;width:auto;height:auto;border-radius:10px;background:#1a1a1f;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  #lb .info{color:#fff;text-align:center;margin-top:14px;max-width:760px}
+  #lb .info h3{color:#fff;font-size:17px;margin:0 0 4px}
+  #lb .info p{color:#b9b9c2;font-size:13px;margin:0 0 10px}
+  #lb .links{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap}
+  #lb .links a{color:#fff;font-size:13px;font-weight:700;text-decoration:none;border:1px solid rgba(255,255,255,.35);border-radius:8px;padding:7px 14px}
+  #lb .links a:hover{background:rgba(255,255,255,.12)}
+  #lb .links .srcthumb{display:flex;align-items:center;gap:8px;color:#b9b9c2;font-size:12px}
+  #lb .links .srcthumb img{height:46px;border-radius:6px;border:1px solid rgba(255,255,255,.25)}
+  #lb .x{position:fixed;top:18px;right:20px;border:0;background:rgba(255,255,255,.12);color:#fff;border-radius:10px;width:42px;height:42px;font-size:22px;cursor:pointer}
+  #lb .nav{position:fixed;top:50%;transform:translateY(-50%);border:0;background:rgba(255,255,255,.12);color:#fff;width:52px;height:64px;font-size:30px;cursor:pointer;border-radius:10px}
+  #lb .nav:hover{background:rgba(255,255,255,.22)} #lb .nav.prev{left:18px} #lb .nav.next{right:18px}
+  #lb .count{position:fixed;top:24px;left:24px;color:#b9b9c2;font-size:12px;letter-spacing:.04em}
+  @media(max-width:680px){#lb .nav{width:40px;height:52px;font-size:24px}}
   .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;background:#ececf0}
 </style>
 </head>
@@ -124,6 +150,7 @@
     <a href="#everylook">Every look</a>
     <a href="#ceiling">Off the grey</a>
     <a href="#geo">Localize</a>
+    <a href="#brands">Every brand</a>
     <a href="#channels">Channels</a>
     <a href="#automate">Automate</a>
     <a href="#pilot">Pilot</a>
@@ -136,10 +163,10 @@
     <p class="kick">Scenario &middot; Pruna P-Image Try-On</p>
     <h1>From product packshot to full campaign, in minutes.</h1>
     <p class="lead">Built on real Mango garments from laredoute.fr. One product packshot becomes a diverse on-model cast, lifestyle imagery, looping video, market localization and social-ad formats, for a few dollars of compute and minutes of time. And the whole chain can run on autopilot, by agents.</p>
-    <p class="small muted">Faces are AI-generated. Editorial and lifestyle imagery is a labelled AI capability demonstration, not a shipped La Redoute campaign. An own-brand render is a Phase-1 pilot deliverable.</p>
+    <p class="small muted">Faces are AI-generated. Editorial and lifestyle imagery is a labelled AI capability demonstration, not a shipped La Redoute campaign. Click any image or video to enlarge it and follow it back to the live product page.</p>
   </div>
   <div class="reelwrap">
-    <video src="media/video/loop_S4_M3.mp4" poster="media/hero.jpg" muted autoplay loop playsinline></video>
+    <video class="zoom" data-gal="hero" data-kind="video" data-full="media/video/loop_S2_M3.mp4" data-title="Combinaison imprime floral, in motion" data-meta="Mango &middot; 49,99 EUR &middot; AI on-model, seamless loop" data-sku="602618087" src="media/video/loop_S2_M3.mp4" poster="media/hero.jpg" muted autoplay loop playsinline></video>
     <span class="reeltag">Seamless loop &middot; AI on-model</span>
   </div>
 </div>
@@ -157,39 +184,46 @@
 <section id="today"><div class="wrap">
   <p class="kick">Where the images come from</p>
   <h2>Your PDP today, and what it could be.</h2>
-  <p class="lead">This is the live La Redoute page for one Mango dress. One shoot, one model, a few studio frames, no video. From the same packshot, the page below it can hold a diverse cast, lifestyle context, a looping clip and per-market variants, without booking a second shoot.</p>
+  <p class="lead">This is the live La Redoute page for one Mango jumpsuit. One shoot, one model, a handful of studio frames, no video. From the same packshot, the page below it can hold a diverse cast, lifestyle context, a looping clip and per-market variants, without booking a second shoot.</p>
   <div class="prov">
     <div class="col today">
       <h3>Today <span class="pill">live on laredoute.fr</span></h3>
-      <div class="lbl">Robe satinée asymétrique &middot; Mango &middot; 69,99 &euro;</div>
-      <img src="media/provenance/lr_pdp_s4_today.jpg" alt="live La Redoute PDP today">
+      <div class="lbl">Combinaison imprime floral &middot; Mango &middot; 49,99 &euro;</div>
+      <div class="shots">
+        <img class="zoom" data-gal="today" data-kind="image" data-full="media/provenance/lr_today_1.jpg" data-title="Live PDP on laredoute.fr" data-meta="Combinaison imprime floral &middot; Mango &middot; 49,99 EUR" data-sku="602618087" src="media/provenance/lr_today_1.jpg" alt="live La Redoute PDP today">
+        <img class="zoom" data-gal="today" data-kind="image" data-full="media/provenance/lr_today_2.jpg" data-title="Live PDP on laredoute.fr" data-meta="The same product, second studio frame" data-sku="602618087" src="media/provenance/lr_today_2.jpg" alt="live La Redoute PDP today, image 2">
+        <img class="zoom" data-gal="today" data-kind="image" data-full="media/provenance/lr_today_3.jpg" data-title="Live PDP on laredoute.fr" data-meta="The same product, third studio frame" data-sku="602618087" src="media/provenance/lr_today_3.jpg" alt="live La Redoute PDP today, image 3">
+      </div>
     </div>
     <div class="col tom">
       <h3>Tomorrow <span class="pill" style="background:#e7f4ec;color:var(--good)">same SKU, no re-shoot</span></h3>
       <div class="lbl">A richer page from the same packshot, generated.</div>
       <div class="strip">
-        <video src="media/video/loop_S4_M3.mp4" muted autoplay loop playsinline></video>
-        <img src="media/looks/S4__M1.jpg" alt=""><img src="media/looks/S4__M5.jpg" alt="">
-        <img src="media/ceiling/S4_M1_terrace.jpg" alt=""><img src="media/geo/tokyo_M2.jpg" alt=""><img src="media/geo/dubai_M5.jpg" alt="">
+        <video class="zoom" data-gal="tomorrow" data-kind="video" data-full="media/video/loop_S2_M3.mp4" data-title="Same SKU, in motion" data-meta="Combinaison florale &middot; generated loop" data-sku="602618087" src="media/video/loop_S2_M3.mp4" muted autoplay loop playsinline></video>
+        <img class="zoom" data-gal="tomorrow" data-full="media/looks/S2__M1.jpg" data-title="On-model casting" data-meta="Sofia &middot; same packshot, new face" data-sku="602618087" src="media/looks/S2__M1.jpg" alt="">
+        <img class="zoom" data-gal="tomorrow" data-full="media/looks/S2__M5.jpg" data-title="On-model casting" data-meta="Priya &middot; same packshot, new face" data-sku="602618087" src="media/looks/S2__M5.jpg" alt="">
+        <img class="zoom" data-gal="tomorrow" data-full="media/geo/paris_M1.jpg" data-title="Editorial &middot; Paris" data-meta="Same garment, AI environment" data-sku="602618087" src="media/geo/paris_M1.jpg" alt="">
+        <img class="zoom" data-gal="tomorrow" data-full="media/geo/tokyo_M2.jpg" data-title="Localized &middot; Tokyo" data-meta="Same garment, market-matched" data-sku="602618087" src="media/geo/tokyo_M2.jpg" alt="">
+        <img class="zoom" data-gal="tomorrow" data-full="media/geo/dubai_M5.jpg" data-title="Localized &middot; Dubai" data-meta="Same garment, market-matched" data-sku="602618087" src="media/geo/dubai_M5.jpg" alt="">
       </div>
     </div>
   </div>
-  <p class="small muted" style="margin-top:14px">Left: the actual live page, captured from laredoute.fr. Right: a diverse cast, an editorial scene, a looping clip and two market variants, all generated from the same source. AI faces; capability demonstration.</p>
+  <p class="small muted" style="margin-top:14px">Left: the actual live page today, three studio frames, captured from laredoute.fr (click to enlarge). Right: a diverse cast, an editorial scene, a looping clip and two market variants, all generated from the same source. AI faces; capability demonstration.</p>
 </div></section>
 
 <!-- EVERY FACE -->
 <section id="everyface"><div class="wrap">
   <p class="kick">One garment, every face</p>
   <h2>Shoot once. Show everyone.</h2>
-  <p class="lead">The same Mango dress on a diverse cast, in motion, each clip a seamless loop generated from the verified try-on still. No casting, no travel, no re-shoot. Representation becomes a parameter, not a budget line.</p>
+  <p class="lead">The same Mango jumpsuit on a diverse cast, in motion, each clip a seamless loop generated from the verified try-on still. No casting, no travel, no re-shoot. Representation becomes a parameter, not a budget line.</p>
   <div class="loopgrid lg5">
-    <figure><video src="media/video/loop_S4_M1.mp4" muted autoplay loop playsinline></video><div class="cap">Sofia &middot; Spanish</div></figure>
-    <figure><video src="media/video/loop_S4_M2.mp4" muted autoplay loop playsinline></video><div class="cap">Mei &middot; East Asian</div></figure>
-    <figure><video src="media/video/loop_S4_M3.mp4" muted autoplay loop playsinline></video><div class="cap">Amara &middot; Black</div></figure>
-    <figure><video src="media/video/loop_S4_M4.mp4" muted autoplay loop playsinline></video><div class="cap">Elin &middot; Northern European</div></figure>
-    <figure><video src="media/video/loop_S4_M5.mp4" muted autoplay loop playsinline></video><div class="cap">Priya &middot; South Asian</div></figure>
+    <figure><video class="zoom" data-gal="everyface" data-kind="video" data-full="media/video/loop_S2_M1.mp4" data-title="Sofia &middot; Spanish" data-meta="Combinaison imprime floral &middot; Mango &middot; 49,99 EUR" data-sku="602618087" src="media/video/loop_S2_M1.mp4" muted autoplay loop playsinline></video><div class="cap">Sofia &middot; Spanish</div></figure>
+    <figure><video class="zoom" data-gal="everyface" data-kind="video" data-full="media/video/loop_S2_M2.mp4" data-title="Mei &middot; East Asian" data-meta="Combinaison imprime floral &middot; Mango &middot; 49,99 EUR" data-sku="602618087" src="media/video/loop_S2_M2.mp4" muted autoplay loop playsinline></video><div class="cap">Mei &middot; East Asian</div></figure>
+    <figure><video class="zoom" data-gal="everyface" data-kind="video" data-full="media/video/loop_S2_M3.mp4" data-title="Amara &middot; Black" data-meta="Combinaison imprime floral &middot; Mango &middot; 49,99 EUR" data-sku="602618087" src="media/video/loop_S2_M3.mp4" muted autoplay loop playsinline></video><div class="cap">Amara &middot; Black</div></figure>
+    <figure><video class="zoom" data-gal="everyface" data-kind="video" data-full="media/video/loop_S2_M4.mp4" data-title="Elin &middot; Northern European" data-meta="Combinaison imprime floral &middot; Mango &middot; 49,99 EUR" data-sku="602618087" src="media/video/loop_S2_M4.mp4" muted autoplay loop playsinline></video><div class="cap">Elin &middot; Northern European</div></figure>
+    <figure><video class="zoom" data-gal="everyface" data-kind="video" data-full="media/video/loop_S2_M5.mp4" data-title="Priya &middot; South Asian" data-meta="Combinaison imprime floral &middot; Mango &middot; 49,99 EUR" data-sku="602618087" src="media/video/loop_S2_M5.mp4" muted autoplay loop playsinline></video><div class="cap">Priya &middot; South Asian</div></figure>
   </div>
-  <p class="small muted" style="margin-top:12px"><span class="pill warn" style="background:#fbf2dd;color:var(--warn)">honest scope</span> A diverse cast of faces. All five share one slim build here; body-size and fit inclusivity is the headline pilot deliverable, shown across XS to XXL in Phase 1.</p>
+  <p class="small muted" style="margin-top:12px"><span class="pill" style="background:#fbf2dd;color:var(--warn)">honest scope</span> A diverse cast of faces. All five share one slim build here; body-size and fit inclusivity is the headline pilot deliverable, shown across XS to XXL on your own products.</p>
 </div></section>
 
 <!-- EVERY LOOK -->
@@ -197,11 +231,10 @@
   <p class="kick">One face, every look</p>
   <h2>Book a model once. She wears the rail.</h2>
   <p class="lead">One house model, the whole assortment, each look a clean loop from a single base shot. This is the lookbook and PDP carousel, on tap.</p>
-  <div class="loopgrid lg4">
-    <figure><video src="media/video/loop_S4_M1.mp4" muted autoplay loop playsinline></video><div class="cap">Robe satinée &middot; 69,99 &euro;</div></figure>
-    <figure><video src="media/video/loop_M1_S2.mp4" muted autoplay loop playsinline></video><div class="cap">Combinaison florale &middot; 49,99 &euro;</div></figure>
-    <figure><video src="media/video/loop_M1_S6.mp4" muted autoplay loop playsinline></video><div class="cap">Robe à fleurs &middot; 79,99 &euro;</div></figure>
-    <figure><video src="media/video/loop_M1_C7.mp4" muted autoplay loop playsinline></video><div class="cap">Chemise + pantalon lin &middot; 89,98 &euro;</div></figure>
+  <div class="loopgrid lg3">
+    <figure><video class="zoom" data-gal="everylook" data-kind="video" data-full="media/video/loop_S2_M1.mp4" data-title="Combinaison imprime floral" data-meta="Mango &middot; 49,99 EUR &middot; on Sofia" data-sku="602618087" src="media/video/loop_S2_M1.mp4" muted autoplay loop playsinline></video><div class="cap">Combinaison florale &middot; 49,99 &euro;</div></figure>
+    <figure><video class="zoom" data-gal="everylook" data-kind="video" data-full="media/video/loop_M1_S6.mp4" data-title="Robe a fleurs cut-out" data-meta="Mango &middot; 79,99 EUR &middot; on Sofia" data-sku="602626907" src="media/video/loop_M1_S6.mp4" muted autoplay loop playsinline></video><div class="cap">Robe a fleurs &middot; 79,99 &euro;</div></figure>
+    <figure><video class="zoom" data-gal="everylook" data-kind="video" data-full="media/video/loop_M1_C7.mp4" data-title="Chemise + pantalon lin" data-meta="Mango &middot; 89,98 EUR &middot; on Sofia" data-sku="602619334" src="media/video/loop_M1_C7.mp4" muted autoplay loop playsinline></video><div class="cap">Chemise + pantalon lin &middot; 89,98 &euro;</div></figure>
   </div>
 </div></section>
 
@@ -213,17 +246,16 @@
   <span class="honestypill">AI capability demonstration &middot; AI environment and AI face &middot; same identity and garment, preserved from the verified studio still &middot; not a shipped campaign</span>
   <div class="twocol" style="margin-bottom:24px">
     <div class="cmp">
-      <figure style="margin:0"><img src="media/looks/S4__M3.jpg" alt="studio"><div class="cap">Studio &middot; verified</div></figure>
-      <figure style="margin:0"><img src="media/ceiling/S4_M3_paris.jpg" alt="editorial"><div class="cap">Editorial &middot; AI demo</div></figure>
+      <figure style="margin:0"><img class="zoom" data-gal="ceiling" data-full="media/looks/S2__M3.jpg" data-title="Studio &middot; verified try-on" data-meta="Combinaison florale &middot; Mango &middot; on Amara" data-sku="602618087" src="media/looks/S2__M3.jpg" alt="studio"><div class="cap">Studio &middot; verified</div></figure>
+      <figure style="margin:0"><img class="zoom" data-gal="ceiling" data-full="media/geo/nyc_M3.jpg" data-title="Editorial &middot; New York" data-meta="Same identity and garment, AI environment" data-sku="602618087" src="media/geo/nyc_M3.jpg" alt="editorial"><div class="cap">Editorial &middot; AI demo</div></figure>
     </div>
-    <figure style="margin:0" class="reelwrap"><video src="media/video/loop_terrace.mp4" muted autoplay loop playsinline></video><span class="reeltag">lifestyle, in motion</span></figure>
+    <figure style="margin:0" class="reelwrap"><video class="zoom" data-gal="ceiling" data-kind="video" data-full="media/video/loop_S2_life.mp4" data-title="Lifestyle, in motion" data-meta="Same garment, Paris boulevard &middot; AI environment" data-sku="602618087" src="media/video/loop_S2_life.mp4" muted autoplay loop playsinline></video><span class="reeltag">lifestyle, in motion</span></figure>
   </div>
-  <div class="geo">
-    <figure><img src="media/ceiling/S2_M3_boutique.jpg" alt=""><div class="cap">Boutique</div></figure>
-    <figure><img src="media/ceiling/C7_M4_cafe.jpg" alt=""><div class="cap">Café terrace</div></figure>
-    <figure><img src="media/ceiling/S6_M5_gallery.jpg" alt=""><div class="cap">Gallery</div></figure>
-    <figure><img src="media/ceiling/C9_M2_interior.jpg" alt=""><div class="cap">Interior</div></figure>
-    <figure><img src="media/ceiling/S4_M1_terrace.jpg" alt=""><div class="cap">Terrace</div></figure>
+  <div class="geo four">
+    <figure><img class="zoom" data-gal="ceiling" data-full="media/ceiling/S2_M3_boutique.jpg" data-title="Boutique" data-meta="Same garment, AI environment" data-sku="602618087" src="media/ceiling/S2_M3_boutique.jpg" alt=""><div class="cap">Boutique</div></figure>
+    <figure><img class="zoom" data-gal="ceiling" data-full="media/ceiling/C7_M4_cafe.jpg" data-title="Cafe terrace" data-meta="Chemise + pantalon lin, AI environment" data-sku="602619334" src="media/ceiling/C7_M4_cafe.jpg" alt=""><div class="cap">Cafe terrace</div></figure>
+    <figure><img class="zoom" data-gal="ceiling" data-full="media/ceiling/S6_M5_gallery.jpg" data-title="Gallery" data-meta="Robe a fleurs, AI environment" data-sku="602626907" src="media/ceiling/S6_M5_gallery.jpg" alt=""><div class="cap">Gallery</div></figure>
+    <figure><img class="zoom" data-gal="ceiling" data-full="media/ceiling/C9_M2_interior.jpg" data-title="Interior" data-meta="Blouse + pantalon, AI environment" data-sku="602584398" src="media/ceiling/C9_M2_interior.jpg" alt=""><div class="cap">Interior</div></figure>
   </div>
 </div></section>
 
@@ -231,13 +263,37 @@
 <section id="geo"><div class="wrap">
   <p class="kick">Localize per market</p>
   <h2>One product. Every market.</h2>
-  <p class="lead">The same Mango dress, casting and setting matched to the market, from the one packshot. Localized representation for each storefront, generated, not re-shot.</p>
+  <p class="lead">The same Mango jumpsuit, casting and setting matched to the market, from the one packshot. Localized representation for each storefront, generated, not re-shot.</p>
   <div class="geo">
-    <figure><img src="media/ceiling/S4_M3_paris.jpg" alt=""><div class="cap">France &middot; Paris</div></figure>
-    <figure><img src="media/geo/tokyo_M2.jpg" alt=""><div class="cap">Japan &middot; Tokyo</div></figure>
-    <figure><img src="media/geo/nyc_M3.jpg" alt=""><div class="cap">USA &middot; New York</div></figure>
-    <figure><img src="media/geo/copenhagen_M4.jpg" alt=""><div class="cap">Nordics &middot; Copenhagen</div></figure>
-    <figure><img src="media/geo/dubai_M5.jpg" alt=""><div class="cap">UAE &middot; Dubai</div></figure>
+    <figure><img class="zoom" data-gal="geo" data-full="media/geo/paris_M1.jpg" data-title="France &middot; Paris" data-meta="Combinaison florale &middot; same garment, market-matched" data-sku="602618087" src="media/geo/paris_M1.jpg" alt=""><div class="cap">France &middot; Paris</div></figure>
+    <figure><img class="zoom" data-gal="geo" data-full="media/geo/tokyo_M2.jpg" data-title="Japan &middot; Tokyo" data-meta="Combinaison florale &middot; same garment, market-matched" data-sku="602618087" src="media/geo/tokyo_M2.jpg" alt=""><div class="cap">Japan &middot; Tokyo</div></figure>
+    <figure><img class="zoom" data-gal="geo" data-full="media/geo/nyc_M3.jpg" data-title="USA &middot; New York" data-meta="Combinaison florale &middot; same garment, market-matched" data-sku="602618087" src="media/geo/nyc_M3.jpg" alt=""><div class="cap">USA &middot; New York</div></figure>
+    <figure><img class="zoom" data-gal="geo" data-full="media/geo/copenhagen_M4.jpg" data-title="Nordics &middot; Copenhagen" data-meta="Combinaison florale &middot; same garment, market-matched" data-sku="602618087" src="media/geo/copenhagen_M4.jpg" alt=""><div class="cap">Nordics &middot; Copenhagen</div></figure>
+    <figure><img class="zoom" data-gal="geo" data-full="media/geo/dubai_M5.jpg" data-title="UAE &middot; Dubai" data-meta="Combinaison florale &middot; same garment, market-matched" data-sku="602618087" src="media/geo/dubai_M5.jpg" alt=""><div class="cap">UAE &middot; Dubai</div></figure>
+  </div>
+</div></section>
+
+<!-- BRANDS (other La Redoute labels) -->
+<section id="brands"><div class="wrap">
+  <p class="kick">Not just Mango</p>
+  <h2>Any brand on the rail. Your own labels included.</h2>
+  <p class="lead">Mango is one tenant brand. The same chain runs on every label La Redoute carries, and on your own collections, where the rights are unambiguous. Here is a La Redoute own-brand garment, taken from the live site and dressed on the house cast, exactly as a Mango look.</p>
+  <div id="brandsWrap">
+    <div class="brandhead">La Redoute Collections <span class="pill" style="background:#16161a;color:#fff">your own label</span> <span class="price">Robe en lin Signature HELOISE &middot; 59,99 &euro; &middot; from laredoute.fr</span></div>
+    <div class="brandrow">
+      <figure class="pack"><img class="zoom" data-gal="brands" data-full="media/packshots/garment_LRC1.jpg" data-title="Source packshot &middot; La Redoute Collections" data-meta="Robe en lin Signature HELOISE &middot; 59,99 EUR" data-sku="601946493" src="media/packshots/garment_LRC1.jpg" alt=""><div class="cap">Source packshot (laredoute.fr)</div></figure>
+      <figure><img class="zoom" data-gal="brands" data-full="media/brands/LRC_M1.jpg" data-title="La Redoute Collections on Sofia" data-meta="Robe en lin Signature HELOISE &middot; 59,99 EUR &middot; on Sofia" data-sku="601946493" data-pack="garment_LRC1.jpg" src="media/brands/LRC_M1.jpg" alt=""><div class="cap">Sofia</div></figure>
+      <figure><img class="zoom" data-gal="brands" data-full="media/brands/LRC_M2.jpg" data-title="La Redoute Collections on Mei" data-meta="Robe en lin Signature HELOISE &middot; 59,99 EUR &middot; on Mei" data-sku="601946493" data-pack="garment_LRC1.jpg" src="media/brands/LRC_M2.jpg" alt=""><div class="cap">Mei</div></figure>
+      <figure><img class="zoom" data-gal="brands" data-full="media/brands/LRC_M4.jpg" data-title="La Redoute Collections on Elin" data-meta="Robe en lin Signature HELOISE &middot; 59,99 EUR &middot; on Elin" data-sku="601946493" data-pack="garment_LRC1.jpg" src="media/brands/LRC_M4.jpg" alt=""><div class="cap">Elin</div></figure>
+    </div>
+    <div class="brandhead" style="margin-top:26px">Vero Moda <span class="price">Robe a sequins &middot; 44,99 &euro; &middot; from laredoute.fr</span></div>
+    <div class="brandrow">
+      <figure class="pack"><img class="zoom" data-gal="brands" data-full="media/packshots/garment_X2.jpg" data-title="Source packshot &middot; Vero Moda" data-meta="Robe a sequins &middot; 44,99 EUR" data-sku="602417412" src="media/packshots/garment_X2.jpg" alt=""><div class="cap">Source packshot (laredoute.fr)</div></figure>
+      <figure><img class="zoom" data-gal="brands" data-full="media/brands/X2_M3.jpg" data-title="Vero Moda on Amara" data-meta="Robe a sequins &middot; 44,99 EUR &middot; on Amara" data-sku="602417412" data-pack="garment_X2.jpg" src="media/brands/X2_M3.jpg" alt=""><div class="cap">Amara</div></figure>
+      <figure><img class="zoom" data-gal="brands" data-full="media/brands/X2_M5.jpg" data-title="Vero Moda on Priya" data-meta="Robe a sequins &middot; 44,99 EUR &middot; on Priya" data-sku="602417412" data-pack="garment_X2.jpg" src="media/brands/X2_M5.jpg" alt=""><div class="cap">Priya</div></figure>
+      <figure><img class="zoom" data-gal="brands" data-full="media/brands/X2_M2.jpg" data-title="Vero Moda on Mei" data-meta="Robe a sequins &middot; 44,99 EUR &middot; on Mei" data-sku="602417412" data-pack="garment_X2.jpg" src="media/brands/X2_M2.jpg" alt=""><div class="cap">Mei</div></figure>
+    </div>
+    <p class="small muted" style="margin-top:16px">La Redoute Collections is your own label, where rights are unambiguous: this is the own-brand proof, rendered from your live site. Vero Moda is a tenant brand, shown as a one-time evaluation artifact like Mango. Same chain, same minutes, any brand on the rail. AI faces; click any image to enlarge and follow it to the live product page.</p>
   </div>
 </div></section>
 
@@ -249,12 +305,12 @@
   <div class="channels">
     <div>
       <div class="phone">
-        <video src="media/video/loop_S4_M3.mp4" muted autoplay loop playsinline></video>
+        <video class="zoom" data-gal="channels" data-kind="video" data-full="media/video/loop_S2_M3.mp4" data-title="Reels / TikTok ad" data-meta="Combinaison florale &middot; Mango &middot; 49,99 EUR" data-sku="602618087" src="media/video/loop_S2_M3.mp4" muted autoplay loop playsinline></video>
         <div class="ui">
           <div class="top"><span class="av"></span> mango</div>
           <div class="spons">Sponsored</div>
           <div class="right"><span class="ic">&#9825;</span><span class="ic">&#128172;</span><span class="ic">&#10148;</span></div>
-          <div class="cap2">Robe satinée, new in. Shop the look.</div>
+          <div class="cap2">Combinaison florale, new in. Shop the look.</div>
           <div class="cta2">Shop now</div>
         </div>
       </div>
@@ -262,7 +318,7 @@
     </div>
     <div>
       <div class="phone">
-        <img src="media/ceiling/S4_M1_terrace.jpg" alt="">
+        <img class="zoom" data-gal="channels" data-full="media/geo/paris_M1.jpg" data-title="Story format" data-meta="Combinaison florale &middot; same asset, 9:16" data-sku="602618087" src="media/geo/paris_M1.jpg" alt="">
         <div class="ui">
           <div class="bars"><i class="on"></i><i></i><i></i></div>
           <div class="top" style="top:20px"><span class="av"></span> laredoute</div>
@@ -273,7 +329,7 @@
     </div>
     <div>
       <div class="phone">
-        <img src="media/geo/tokyo_M2.jpg" alt="">
+        <img class="zoom" data-gal="channels" data-full="media/geo/tokyo_M2.jpg" data-title="Localized paid social" data-meta="Combinaison florale &middot; market-matched creative (JP)" data-sku="602618087" src="media/geo/tokyo_M2.jpg" alt="">
         <div class="ui">
           <div class="top"><span class="av"></span> laredoute</div>
           <div class="spons">Sponsored &middot; JP</div>
@@ -307,7 +363,7 @@
         <p class="small">This entire deliverable, the 50 on-model images, the editorial set, the localized variants and these looping films, was produced by an AI agent calling Scenario over MCP. Not a studio. Not by hand. Your pipeline can do the same on a schedule.</p>
         <p class="small muted">Works with any MCP-capable agent (Claude and others). Skills are reusable, versioned, and yours.</p>
       </div>
-      <div class="codeblock"><span class="c"># an agent step, in plain terms</span><br>on new_sku(packshot):<br>&nbsp;&nbsp;model = scenario.master(casting=<span class="c">house_skill</span>)<br>&nbsp;&nbsp;shots = scenario.tryon(model, packshot)<br>&nbsp;&nbsp;scene = scenario.lifestyle(shots, market)<br>&nbsp;&nbsp;clip&nbsp;= scenario.video(shots)&nbsp;&nbsp;<span class="c"># first=last loop</span><br>&nbsp;&nbsp;if qa.pass(shots, <span class="c">rubric_skill</span>):<br>&nbsp;&nbsp;&nbsp;&nbsp;publish(sku, shots, scene, clip)</div>
+      <div class="codeblock"><span class="c"># an agent step, in plain terms</span><br>on new_sku(packshot):<br>&nbsp;&nbsp;model = scenario.master(casting=<span class="c">house_skill</span>)<br>&nbsp;&nbsp;shots = scenario.tryon(model, packshot)<br>&nbsp;&nbsp;scene = scenario.lifestyle(shots, market)<br>&nbsp;&nbsp;clip&nbsp;= scenario.video(shots)&nbsp;&nbsp;<span class="c"># two-keyframe walk</span><br>&nbsp;&nbsp;if qa.pass(shots, <span class="c">rubric_skill</span>):<br>&nbsp;&nbsp;&nbsp;&nbsp;publish(sku, shots, scene, clip)</div>
     </div>
   </div>
 </div></section>
@@ -316,25 +372,9 @@
 <section id="explorer"><div class="wrap">
   <p class="kick">The proof, on your own catalog</p>
   <h2>Fifty on-model images. Click any one.</h2>
-  <p class="lead">Real Mango SKUs from laredoute.fr on five house models. Toggle the view, open any image beside its source packshot at zoom. This is the human-QA gate the pilot formalizes.</p>
+  <p class="lead">Real Mango SKUs from laredoute.fr on five house models. Toggle the view, then click any image to open it large, step left and right through the set, and follow it back to the live product page. This is the human-QA gate the pilot formalizes.</p>
   <div class="toggle"><button id="bLook" class="on" onclick="setView('bylook')">One garment, every face</button><button id="bFace" onclick="setView('byface')">One face, every look</button></div>
   <div id="grid" class="bylook"></div>
-</div></section>
-
-<!-- ACCURACY -->
-<section id="accuracy"><div class="wrap">
-  <p class="kick">Accuracy, owned</p>
-  <h2>The one that holds, and the one that does not.</h2>
-  <div class="twocol">
-    <div><h3>C10 <span class="pill" style="background:#fbf2dd;color:var(--warn)">silent substitution</span></h3>
-      <div class="cmp"><figure style="margin:0"><img src="media/c10_shirt_src.jpg" alt=""><div class="cap">Source: cropped short-sleeve shirt</div></figure><figure style="margin:0"><img src="media/c10_render.jpg" alt=""><div class="cap">Render: long-sleeve, tucked, stripe faded</div></figure></div>
-      <p class="small" style="margin-top:10px">Blazer and trousers held; the shirt silhouette was substituted. An attractive image of the wrong product, which is why a human-QA-before-publish gate is mandatory. Every finding verified against the source packshot at zoom.</p>
-    </div>
-    <div><h3>C9 <span class="pill" style="background:#e7f4ec;color:var(--good)">colorway win</span></h3>
-      <div class="cmp"><figure style="margin:0"><img src="media/c9_trousers_src.jpg" alt=""><div class="cap">Source: burgundy (sold as "Jean large")</div></figure><figure style="margin:0"><img src="media/c9_win.jpg" alt=""><div class="cap">Render: colorway reproduced correctly</div></figure></div>
-      <p class="small" style="margin-top:10px">A mislabeled SKU reproduced faithfully; only the wide flare rendered slightly straighter. A sourcing lesson, not a Scenario miss, and we refuse to mis-confess it as one.</p>
-    </div>
-  </div>
 </div></section>
 
 <!-- NUMBERS -->
@@ -342,7 +382,7 @@
   <p class="kick">The numbers</p>
   <h2>Unit economics, with the sources on the page.</h2>
   <div class="twocol">
-    <div><p>50 on-model images for a reconstructed <b>~325 credits</b>, in minutes. <b>~3 credits</b> per try-on; a new casting ~12 credits; a looping clip ~150 to 175 credits. Compute is cents; the cost that scales is human QA on hard SKUs, which the C10 case proves is non-zero. Even fully loaded, a Scenario image lands an order of magnitude below a studio image.</p>
+    <div><p>50 on-model images for a reconstructed <b>~325 credits</b>, in minutes. <b>~3 credits</b> per try-on; a new casting ~12 credits; a looping clip ~150 to 175 credits. Compute is cents; the cost that scales is human QA on hard SKUs, which is non-zero. Even fully loaded, a Scenario image lands an order of magnitude below a studio image.</p>
       <p class="callout small"><b>Illustrative ROI:</b> shoots avoided per category per year, plus channel and localization variants you simply could not shoot. The pilot measures your real conversion and return figures against your baseline.</p>
     </div>
     <div class="panel"><h3>Studio benchmark (cited)</h3>
@@ -358,8 +398,8 @@
   <p class="kick">The gates that decide the deal</p>
   <h2>Rights, synthetic media, security.</h2>
   <div class="props" style="grid-template-columns:repeat(3,1fr)">
-    <div class="prop"><b>Own-brand <span class="pill" style="background:#16161a;color:#fff">Phase 1</span></b><span>In the pilot we render one La Redoute Collections look on your assets, where rights are unambiguous. Not claimed as shipped here.</span></div>
-    <div class="prop"><b>Third-party brands</b><span>The Mango packshots were a one-time evaluation artifact, quarantined from production. You feed only assets you warrant rights to.</span></div>
+    <div class="prop"><b>Own-brand &amp; tenant brands</b><span>Your own collections, where rights are unambiguous, plus tenant brands you carry. The own-brand look in this deck is rendered from your live site.</span></div>
+    <div class="prop"><b>Rights-clean inputs</b><span>The Mango packshots were a one-time evaluation artifact, quarantined from production. You feed only assets you warrant rights to.</span></div>
     <div class="prop"><b>Synthetic media</b><span>AI faces, owned by you. Directional indemnity stance; EU AI Act and French disclosure posture; real-talent option.</span></div>
   </div>
   <p class="small muted" style="margin-top:14px">EU data residency, GDPR / DPA, no-training-on-your-assets default, per-model license terms in-platform, named SLA. A platform your teams operate, exposed over MCP, not a consultancy that runs your catalog.</p>
@@ -368,47 +408,97 @@
 <!-- PILOT -->
 <section id="pilot"><div class="wrap">
   <p class="kick">Next step</p>
-  <h2>A bounded, measurable, signable pilot.</h2>
-  <div class="twocol">
-    <div class="panel"><h3>Phase 1 <span class="pill" style="background:#16161a;color:#fff">days, no eng</span></h3><p class="small">~50 to 100 live SKUs incl. one own-brand line, dressed on agreed castings, behind the human-QA gate. Deliverables that convert claims to evidence: one own-brand render; one look across XS-to-XXL builds; localized and social variants; an automated MCP run on a sample.</p></div>
-    <div class="panel"><h3>Phase 2 <span class="pill" style="background:#16161a;color:#fff">weeks, optional</span></h3><p class="small">A controlled PDP A/B on conversion and fit-related returns, sample size and thresholds agreed up front. Commercials decided not blank: fixed or free pilot, license + commit range, SLA, rate-lock, dated decision gate.</p></div>
+  <h2>It works. Let us prove it on your catalog.</h2>
+  <p class="lead">Everything on this page runs today, on real La Redoute SKUs, on the Scenario platform: on-model casting, lifestyle, motion, market localization, social cuts, and the agent automation that ties them together. Nothing here is a prototype waiting to be built. Point us at a slice of your assortment and we can show the same on your own products, in days.</p>
+  <div class="props" style="grid-template-columns:repeat(4,1fr);margin-top:8px">
+    <div class="prop"><b>The platform</b><span>Generation, editing, video, training, asset management. Live and in production.</span></div>
+    <div class="prop"><b>The models</b><span>Try-on, image, video, localization, the full chain, already wired together.</span></div>
+    <div class="prop"><b>The automation</b><span>Exposed over MCP. Agents and Skills run the chain on your PIM, on a schedule.</span></div>
+    <div class="prop"><b>The posture</b><span>EU residency, GDPR, no-training default, AI faces owned by you, rights-clean inputs.</span></div>
   </div>
-  <div style="text-align:center;margin-top:32px">
-    <h3 style="font-size:22px">Pick the SKU slice and lock the success metric.</h3>
+  <div style="text-align:center;margin-top:34px">
+    <h3 style="font-size:22px">Pick a slice of your catalog. We will show you the same, on your products.</h3>
     <p class="muted">A 30-minute working session with Emmanuel de Maistre, Cofounder &amp; CEO.</p>
     <a class="cta" href="https://scenario.com">Book the working session</a>
   </div>
 </div></section>
 
-<footer><div class="wrap"><p>Garments belong to Mango, sourced via laredoute.fr as a one-time demonstration and evaluation artifact, quarantined from production claims. Editorial, lifestyle, localized and social imagery is a labelled AI capability demonstration on AI-generated faces, not a shipped La Redoute campaign. The own-brand look is a pilot deliverable. Built in Scenario, by an agent over MCP. Prepared for La Redoute by Scenario, Inc. Confidential.</p></div></footer>
+<footer><div class="wrap"><p>Garments belong to Mango and to La Redoute own brands, sourced via laredoute.fr as a one-time demonstration and evaluation artifact, quarantined from production claims. Editorial, lifestyle, localized and social imagery is a labelled AI capability demonstration on AI-generated faces, not a shipped La Redoute campaign. Built in Scenario, by an agent over MCP. Prepared for La Redoute by Scenario, Inc. Confidential.</p></div></footer>
 
-<div id="lb" onclick="if(event.target.id==='lb')closeLB()"><div class="box"><button class="x" onclick="closeLB()">&times;</button><h3 id="lbTitle"></h3><p id="lbMeta" class="small muted" style="margin:0 0 14px"></p><div class="imgs"><div><img id="lbRender" alt=""><div class="lbcap">On-model render (Scenario)</div></div><div><img id="lbSrc" alt=""><div class="lbcap">Source packshot (laredoute.fr)</div></div></div><p id="lbNote" class="small" style="margin-top:14px"></p></div></div>
+<!-- UNIVERSAL LIGHTBOX -->
+<div id="lb">
+  <div class="count" id="lbCount"></div>
+  <button class="x" aria-label="Close">&times;</button>
+  <button class="nav prev" aria-label="Previous">&lsaquo;</button>
+  <div class="stage">
+    <div class="media" id="lbMedia"></div>
+    <div class="info"><h3 id="lbTitle"></h3><p id="lbMeta"></p><div class="links" id="lbLinks"></div></div>
+  </div>
+  <button class="nav next" aria-label="Next">&rsaquo;</button>
+</div>
 
 <script>
+/* ---------- explorer data ---------- */
 const MODELS=[{id:'M1',name:'Sofia',desc:'Spanish, 27'},{id:'M2',name:'Mei',desc:'East Asian, 24'},{id:'M3',name:'Amara',desc:'Black, 30'},{id:'M4',name:'Elin',desc:'Northern European, 22'},{id:'M5',name:'Priya',desc:'South Asian, 35'}];
 const LOOKS=[
- {c:'S1',name:'Robe chemisier imprimé floral',price:'39,99 €',sku:'602597995',pack:['garment_01_floral_shirt_dress.jpg']},
- {c:'S2',name:'Combinaison imprimé floral (jumpsuit)',price:'49,99 €',sku:'602618087',pack:['garment_02_floral_jumpsuit.jpg'],note:{t:'Fidelity hold: large print keeps its scale.',k:'good'}},
- {c:'S3',name:'Robe asymétrique imprimé fleuri',price:'79,99 €',sku:'602545501',pack:['garment_03_asym_floral_dress.jpg']},
- {c:'S4',name:'Robe satinée asymétrique',price:'69,99 €',sku:'602627680',pack:['garment_04_satin_dress.jpg'],note:{t:'Fidelity hold: satin sheen + asymmetric hem.',k:'good'}},
- {c:'S5',name:'Robe bustier en jean',price:'49,99 €',sku:'602602883',pack:['garment_05_denim_bustier_dress.jpg']},
- {c:'S6',name:'Robe à fleurs cut-out',price:'79,99 €',sku:'602626907',pack:['garment_06_metallic_cutout_dress.jpg']},
- {c:'C7',name:'Chemise lin + pantalon wide-leg lin',price:'89,98 €',sku:'602619334 + 602629677',pack:['garment_07a_linen_shirt.jpg','garment_07b_linen_wideleg.jpg']},
- {c:'C8',name:'Top maille + jupe lin brodée',price:'72,98 €',sku:'602618819 + 602622498',pack:['garment_08a_knit_top.jpg','garment_08b_linen_skirt.jpg']},
- {c:'C9',name:'Blouse florale + pantalon wide-leg',price:'85,98 €',sku:'602584398 + 602507860',pack:['garment_09a_floral_blouse.jpg','garment_09b_wide_jeans.jpg'],note:{t:'Colorway win: burgundy reproduced from a mislabeled SKU.',k:'good'}},
- {c:'C10',name:'Chemise rayée + pantalon + blazer lin',price:'125,97 €',sku:'602617998 + 602572388 + 602562535',pack:['garment_10a_striped_shirt.jpg','garment_10b_linen_trousers.jpg','garment_10c_linen_blazer.jpg'],note:{t:'Honest miss: blazer + trousers held; shirt silhouette substituted.',k:'warn'}}
+ {c:'S1',name:'Robe chemisier imprime floral',price:'39,99 EUR',sku:'602597995',pack:['garment_01_floral_shirt_dress.jpg']},
+ {c:'S2',name:'Combinaison imprime floral (jumpsuit)',price:'49,99 EUR',sku:'602618087',pack:['garment_02_floral_jumpsuit.jpg'],note:{t:'Fidelity hold: large print keeps its scale.',k:'good'}},
+ {c:'S3',name:'Robe asymetrique imprime fleuri',price:'79,99 EUR',sku:'602545501',pack:['garment_03_asym_floral_dress.jpg']},
+ {c:'S4',name:'Robe satinee asymetrique',price:'69,99 EUR',sku:'602627680',pack:['garment_04_satin_dress.jpg']},
+ {c:'S5',name:'Robe bustier en jean',price:'49,99 EUR',sku:'602602883',pack:['garment_05_denim_bustier_dress.jpg']},
+ {c:'S6',name:'Robe a fleurs cut-out',price:'79,99 EUR',sku:'602626907',pack:['garment_06_metallic_cutout_dress.jpg']},
+ {c:'C7',name:'Chemise lin + pantalon wide-leg lin',price:'89,98 EUR',sku:'602619334 + 602629677',pack:['garment_07a_linen_shirt.jpg','garment_07b_linen_wideleg.jpg']},
+ {c:'C8',name:'Top maille + jupe lin brodee',price:'72,98 EUR',sku:'602618819 + 602622498',pack:['garment_08a_knit_top.jpg','garment_08b_linen_skirt.jpg']},
+ {c:'C9',name:'Blouse florale + pantalon wide-leg',price:'85,98 EUR',sku:'602584398 + 602507860',pack:['garment_09a_floral_blouse.jpg','garment_09b_wide_jeans.jpg'],note:{t:'Colorway win: burgundy reproduced from a mislabeled SKU.',k:'good'}},
+ {c:'C10',name:'Chemise rayee + pantalon + blazer lin',price:'125,97 EUR',sku:'602617998 + 602572388 + 602562535',pack:['garment_10a_striped_shirt.jpg','garment_10b_linen_trousers.jpg','garment_10c_linen_blazer.jpg']}
 ];
 const grid=document.getElementById('grid');
 const li=(c,m)=>`media/looks/${c}__${m}.jpg`;
+const esc=s=>String(s).replace(/"/g,'&quot;');
 function render(v){grid.className=v;let h='';
- if(v==='bylook'){for(const L of LOOKS){h+=`<div class="rowhead">${L.name} <span class="price">${L.price} · Mango</span>${L.note?`<span class="note ${L.note.k}">${L.note.k==='good'?'win':'caveat'}</span>`:''}</div>`;for(const M of MODELS)h+=`<button class="cell" onclick="openLB('${L.c}','${M.id}')"><img loading="lazy" src="${li(L.c,M.id)}"><div class="cap">${M.name} · ${M.desc}</div></button>`;}}
- else{for(const M of MODELS){h+=`<div class="rowhead">${M.name} <span class="price">${M.desc}</span></div>`;for(const L of LOOKS)h+=`<button class="cell" onclick="openLB('${L.c}','${M.id}')"><img loading="lazy" src="${li(L.c,M.id)}"><div class="cap">${L.c}</div></button>`;}}
+ if(v==='bylook'){for(const L of LOOKS){h+=`<div class="rowhead">${L.name} <span class="price">${L.price} &middot; Mango</span>${L.note?`<span class="note ${L.note.k}">win</span>`:''}</div>`;for(const M of MODELS)h+=cell(L,M,`${M.name} &middot; ${M.desc}`);}}
+ else{for(const M of MODELS){h+=`<div class="rowhead">${M.name} <span class="price">${M.desc}</span></div>`;for(const L of LOOKS)h+=cell(L,M,L.c);}}
  grid.innerHTML=h;}
+function cell(L,M,cap){const src=li(L.c,M.id);return `<button class="cell zoom" data-gal="explorer" data-kind="image" data-full="${src}" data-title="${esc(L.name)}" data-meta="${L.price} &middot; Mango &middot; SKU ${L.sku} &middot; on ${M.name} (${M.desc})" data-sku="${L.sku}" data-pack="${L.pack[0]}"><img loading="lazy" src="${src}"><div class="cap">${cap}</div></button>`;}
 function setView(v){document.getElementById('bLook').classList.toggle('on',v==='bylook');document.getElementById('bFace').classList.toggle('on',v==='byface');render(v);}
-function openLB(c,m){const L=LOOKS.find(x=>x.c===c),M=MODELS.find(x=>x.id===m);document.getElementById('lbTitle').textContent=L.name;document.getElementById('lbMeta').textContent=`${L.price} · Mango · SKU ${L.sku} · on ${M.name} (${M.desc})`;document.getElementById('lbRender').src=li(c,m);document.getElementById('lbSrc').src='media/packshots/'+L.pack[0];document.getElementById('lbNote').innerHTML=L.note?`<b>${L.note.k==='good'?'Verified win: ':'Verified caveat: '}</b>${L.note.t}`:'Verified against the source packshot at zoom.';document.getElementById('lb').classList.add('open');}
-function closeLB(){document.getElementById('lb').classList.remove('open');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB();});
 render('bylook');
+
+/* ---------- universal lightbox ---------- */
+const lb=document.getElementById('lb');
+let CUR={items:[],i:0};
+const prodUrl=sku=>'https://www.laredoute.fr/ppdp/prod-'+String(sku).split('+')[0].trim()+'.aspx';
+function toItem(el){return{kind:el.dataset.kind||(el.tagName==='VIDEO'?'video':'image'),src:el.dataset.full||el.currentSrc||el.getAttribute('src'),title:el.dataset.title||'',meta:el.dataset.meta||'',sku:el.dataset.sku||'',pack:el.dataset.pack||''};}
+function show(){
+  const it=CUR.items[CUR.i];if(!it)return;
+  document.getElementById('lbMedia').innerHTML = it.kind==='video'
+    ? `<video src="${it.src}" autoplay loop muted playsinline controls></video>`
+    : `<img src="${it.src}" alt="">`;
+  document.getElementById('lbTitle').textContent=it.title;
+  document.getElementById('lbMeta').textContent=it.meta;
+  const links=[];
+  if(it.sku) links.push(`<a href="${prodUrl(it.sku)}" target="_blank" rel="noopener">View on laredoute.fr &rarr;</a>`);
+  if(it.pack) links.push(`<span class="srcthumb"><img src="media/packshots/${it.pack}" alt="">source packshot (laredoute.fr)</span>`);
+  document.getElementById('lbLinks').innerHTML=links.join('');
+  const multi=CUR.items.length>1;
+  document.getElementById('lbCount').textContent=multi?`${CUR.i+1} / ${CUR.items.length}`:'';
+  document.querySelector('#lb .nav.prev').style.display=multi?'block':'none';
+  document.querySelector('#lb .nav.next').style.display=multi?'block':'none';
+}
+function openItems(items,i){CUR={items,i:i<0?0:i};lb.classList.add('open');show();}
+function navLB(d){if(!CUR.items.length)return;CUR.i=(CUR.i+d+CUR.items.length)%CUR.items.length;show();}
+function closeLB(){lb.classList.remove('open');document.getElementById('lbMedia').innerHTML='';CUR={items:[],i:0};}
+document.addEventListener('click',e=>{
+  const el=e.target.closest('.zoom');if(!el)return;
+  e.preventDefault();
+  const gal=el.dataset.gal||'_solo';
+  const els=[...document.querySelectorAll('.zoom[data-gal="'+gal+'"]')];
+  openItems(els.map(toItem),els.indexOf(el));
+});
+document.querySelector('#lb .x').addEventListener('click',closeLB);
+document.querySelector('#lb .nav.prev').addEventListener('click',()=>navLB(-1));
+document.querySelector('#lb .nav.next').addEventListener('click',()=>navLB(1));
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('stage'))closeLB();});
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLB();if(e.key==='ArrowLeft')navLB(-1);if(e.key==='ArrowRight')navLB(1);});
 </script>
 </body>
 </html>
