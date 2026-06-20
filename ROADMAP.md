@@ -1,9 +1,9 @@
 # ROADMAP
 
-Ordered by leverage. (v4 note: item 1, own-brand, is DONE. The top open item is now refreshing the PDF deck to match the site.)
+Ordered by leverage. (v4 note: item 1, own-brand, is DONE. Item 0, the PDF deck refresh, is DONE: site and deck are now at parity. The top open item is now body-size range, item 2.)
 
-## v4 follow-up (do first)
-0. **Refresh the PDF deck to v4 parity.** `deck.html` / `Scenario-La-Redoute-Proposal.pdf` still show the old red-satin lead, the removed accuracy/C10 page, the phased pilot, and lack the brands / 3-screenshot provenance / GPT-Image-2 geo. Rebuild it to match `index.html` before sending the two together.
+## v4 follow-up
+0. ~~**Refresh the PDF deck to v4 parity.**~~ **DONE (v4).** `deck.html` / `Scenario-La-Redoute-Proposal.pdf` rebuilt to match `index.html`: jumpsuit lead, Every-brand page, 3-screenshot provenance, off-the-grey + Localize geo, two-keyframe motion, measured pilot, accuracy/C10 page removed. Now 16 pages (appendix split so the cited sources stay on-page). Send the deck and the site together.
 
 ## Highest leverage (turn promises into proof)
 1. ~~**Own-brand render.**~~ **DONE (v4).** A real La Redoute Collections garment (Robe en lin Signature HELOISE, scraped from laredoute.fr) is rendered on the house cast in `#brands`, beside a Vero Moda tenant-brand garment. The rights gate is now proof, not a promise.

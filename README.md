@@ -6,7 +6,7 @@ An enterprise pitch package from Scenario (Emmanuel de Maistre, Cofounder and CE
 
 ## What is in here
 - **`index.html`** : interactive microsite (v4), led by the floral jumpsuit. Hero plays a looping motion clip. Sections: Today to Tomorrow (live La Redoute PDP, 3 screenshots, vs enriched), one-garment-every-face and one-face-every-look looping galleries, off-the-grey (studio to editorial), Localize per market (geo), Every brand (La Redoute Collections own-label + Vero Moda try-ons), One asset every channel (Instagram / TikTok / UA mockups), Automate (agents / MCP / Skills), the 50-look explorer, rights, numbers, measured pilot CTA. A universal lightbox makes every image and video click-to-enlarge, with left/right navigation and a link to the live product page.
-- **`Scenario-La-Redoute-Proposal.pdf`** : the 15-page leave-behind, rendered from `deck.html`.
+- **`Scenario-La-Redoute-Proposal.pdf`** : the 16-page leave-behind, rendered from `deck.html`, at v4 parity with the site.
 - **`deck.html`** : source of the PDF.
 - **`media/`** : all assets. `looks/` (50 try-ons), `ceiling/` (6 editorial renders), `packshots/` (15 source packshots), `video/` (5 per-model clips, 1 lifestyle clip, the 9:16 + 16:9 sizzle reels), `audio/` (music bed), plus montages and the hero frame.
 - **`reel/`** : the sizzle-reel build script and its text/overlay PNGs.
@@ -42,10 +42,10 @@ Note: Railway deploys from a local `railway up` (not GitHub auto-deploy). After 
 - **Measured pilot.** No timeline/cost/phase commitments: it states the work runs today, can be proven on the client catalog in days, and that Scenario has everything; keeps the "Book the working session" CTA. The dedicated accuracy/C10 section was removed at the client's direction.
 - **Engaging motion, no garment drift.** Clips are two-keyframe interpolations: pose A (verified try-on still) to pose B (a re-posed walk of the SAME garment) via Seedance. Real walking motion, garment length locked at both ends.
 - **Geo placement uses GPT Image 2.** Gemini stretched body proportions on two full-body environment swaps; those were redone with GPT Image 2 img2img, which holds proportions. See `BUGS.md`.
-- **The PDF deck still lags the site.** Refresh `deck.html` before sending the two together (see `ROADMAP.md`).
+- **The PDF deck is refreshed to v4 parity.** `deck.html` now leads on the jumpsuit, carries the new Every-brand page (own-label proof), the three-screenshot provenance strip, the off-the-grey + Localize geo page, two-keyframe motion and the measured pilot. The accuracy/C10 confession page is removed (the human-QA gate rationale stays). The deck is now 16 pages (the appendix split across two to keep the cited sources on-page).
 
 ## The spine (do not break)
-Credibility is the product. The deck opens on a verified, bounded claim, states the boundary out loud, owns the one fidelity miss (C10) against the pixels under a named QA gate, and concedes C9 as a colorway win. See `CLAUDE.md` for the hard guardrails.
+Credibility is the product. The deck opens on a verified, bounded claim, states the boundary out loud, verifies every fidelity claim against the pixels under a named human-QA gate, concedes C9 as a colorway win, and shows a real own-label render rather than promising one. The dedicated accuracy/C10 confession was removed at the client's direction (v4); the QA-gate rationale stays. See `CLAUDE.md` for the hard guardrails.
 
 ## Cost
-~1,300 Scenario credits across the whole build (50 stills ~325, motion clips ~876, editorial renders ~80, music ~15, re-poses ~26). A few dollars to low tens. Built on the Public Data project.
+~1,600 Scenario credits across the whole build (50 stills ~325, 6 motion clips at ~176 ~1,056, re-poses + geo + lifestyle ~156, 6 brand try-ons ~18, 2 GPT Image 2 geo redos ~26, music ~15). A few dollars to low tens. Built on the Public Data project.

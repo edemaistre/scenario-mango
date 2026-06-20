@@ -40,7 +40,7 @@ Six verified try-ons were placed into editorial environments with Gemini 3.1 Fla
 - `reel/build_reel.sh` assembles the 30-second film: Act 1 (studio clips + lower-thirds + AI tag), Act 2 (the lifestyle clip + editorial Ken-Burns beats + capability label), Act 3 (CTA card), scored to `media/audio/bed.mp3`. Text is pre-rendered PNG (ffmpeg here lacks drawtext); composited via `overlay`, segments concatenated, music muxed with `loudnorm` + `afade`. Outputs `media/video/sizzle_9x16.mp4` and `sizzle_16x9.mp4`.
 
 ## 7. The documents
-- `deck.html` -> Chrome headless `--print-to-pdf` -> `Scenario-La-Redoute-Proposal.pdf` (15 pages, A4). Swiss-minimal, serif display headings, per-page confidential footer.
+- `deck.html` -> Chrome headless `--print-to-pdf` -> `Scenario-La-Redoute-Proposal.pdf` (16 pages, A4, v4). Swiss-minimal, serif display headings, per-page confidential footer.
 - `index.html`: self-contained microsite, vanilla HTML/CSS/JS, lazy-loaded explorer, lightbox, autoplay-muted hero reel.
 
 ## 8. Cost benchmark (cited)
@@ -61,5 +61,18 @@ Studio: ~$46 per finished image lean (one-day, ~60 images, ~$2,750), ~$96 fully-
 ## 11. Motion (two-keyframe technique)
 The per-model and lifestyle clips are Seedance 2.0 Fast, 6s, 720p, 9:16, `generateAudio:false`, run with BOTH `image` (pose A = the verified try-on still) and `lastFrameImage` (pose B = a Gemini re-pose of the SAME garment mid-walk). Seedance interpolates A to B, producing real walking motion while the garment is pinned at both ends. Single-first-frame drifts (garment reinvented); first=last is static. Jumpsuit clips: `media/video/loop_S2_M1..M5.mp4` (every face) and `loop_S2_life.mp4` (Paris lifestyle).
 
-## 12. Cost (this build, approx)
+## 12. The PDF deck at v4 parity
+The leave-behind (`deck.html` -> `Scenario-La-Redoute-Proposal.pdf`) was refreshed to match the site (16 pages). Changes from the prior 15-page deck:
+- **Cover** leads on the floral jumpsuit (`media/hero_s2.jpg`), stat block carries "3 brands incl. your own", and the own-brand note flips from "Phase-1 promise" to "rendered in this deck".
+- **Page 3** adds the three-screenshot provenance strip (`media/provenance_strip.jpg`, "Today on laredoute.fr").
+- **Page 4** combines off-the-grey (editorial `media/ceiling_grid.jpg`) with Localize (`media/geo_strip.jpg`, 5 markets), noting GPT Image 2 for full-body placement.
+- **Page 5 is new: Every brand** (`media/brands_grid.jpg`): La Redoute Collections own-label + Vero Moda, the own-brand proof.
+- **The dedicated accuracy/C10 page was removed** at the client's direction; the human-QA-gate rationale now lives in the fidelity callout (page 8) framed positively. The fidelity page leads on the jumpsuit (`media/fid_s2.jpg`, capped at 330px so the C9 win card and QA callout fit) and keeps the C9 colorway win.
+- **Rights** (page 9) reframes own-brand as `rendered`, not `Phase 1`.
+- **Motion** (page 13) documents the two-keyframe technique and shows `media/video_strip_s2.jpg` (one garment, five faces).
+- **Pilot** (page 14) is the measured pilot: no phases/timelines/commercials, "it works, we can prove it on your catalog in days", keeps the 30-minute working session.
+- **Appendix** split across pages 15 to 16 so the cited cost sources stay on-page (guardrail 6).
+Build montages: see the `magick montage` commands used for `geo_strip.jpg`, `brands_grid.jpg`, `provenance_strip.jpg`, `video_strip_s2.jpg`; `hero_s2.jpg` is `media/looks/S2__M3.jpg` resized to 2:3.
+
+## 13. Cost (this build, approx)
 50 stills ~325 cr; 6 jumpsuit walk re-poses + 5 geo + 1 lifestyle re-pose (Gemini, ~13 cr each) ~156 cr; 6 motion clips (Seedance, 176 cr each) ~1,056 cr; 2 GPT Image 2 geo redos ~26 cr; 6 brand try-ons (Pruna, 3 cr each) ~18 cr; music ~15 cr. A few dollars to low tens, on the Public Data project.
