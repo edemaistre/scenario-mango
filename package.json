@@ -1,5 +1,5 @@
 {
-  "name": "scenario-la-redoute-pitch",
+  "name": "scenario-la-redoute",
   "version": "1.0.0",
   "private": true,
   "description": "Scenario to La Redoute pitch microsite (virtual try-on built on the live Mango catalog).",

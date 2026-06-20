@@ -25,8 +25,8 @@ This repo deploys as a Node static server (Nixpacks detects `package.json`, runs
 railway up         # from the linked project
 railway domain     # generate / show the public URL
 ```
-**Live:** https://scenario-la-redoute-pitch-production.up.railway.app
-**Repo:** https://github.com/edemaistre/scenario-la-redoute-pitch (private)
+**Live:** https://scenario-la-redoute-production.up.railway.app
+**Repo:** https://github.com/edemaistre/scenario-la-redoute (private)
 
 Note: Railway deploys from a local `railway up` (not GitHub auto-deploy). After changing site files, run `railway up` again to publish. The site is currently public on the URL above; see ROADMAP item 11 to password-protect it before wide external sharing.
 
