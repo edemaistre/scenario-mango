@@ -1,0 +1,15 @@
+{
+  "name": "scenario-la-redoute-pitch",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Scenario to La Redoute pitch microsite (virtual try-on built on the live Mango catalog).",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scenario for La Redoute: on-model imagery from your own catalog</title>
+<style>
+  :root{ --ink:#16161a; --muted:#6b6b73; --line:#e8e8ec; --bg:#fff; --panel:#fafafb; --good:#1f7a4d; --warn:#9a6a00; }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+  nav b{font-weight:800;letter-spacing:-.01em}
+  nav .links{display:flex;gap:20px;font-size:13.5px}
+  nav .links a{color:var(--muted);text-decoration:none}
+  nav .links a:hover{color:var(--ink)}
+  @media(max-width:760px){nav .links{display:none}}
+  .kick{letter-spacing:.18em;text-transform:uppercase;font-size:11px;color:var(--muted);font-weight:700;margin:0 0 12px}
+  section{padding:70px 0;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:0}
+  h1{font-size:clamp(34px,5vw,58px);line-height:1.04;letter-spacing:-.025em;margin:0 0 18px;font-weight:850}
+  h2{font-size:clamp(24px,3vw,34px);line-height:1.1;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  h3{font-size:17px;margin:0 0 6px;font-weight:700}
+  p{margin:0 0 14px} .lead{font-size:clamp(17px,2vw,21px);line-height:1.5;color:#2a2a2e;max-width:820px}
+  .muted{color:var(--muted)} .small{font-size:13.5px}
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:64px 0 50px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr;gap:24px}}
+  .hero img{width:100%;border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.12)}
+  .stats{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:30px 0 0}
+  @media(max-width:760px){.stats{grid-template-columns:repeat(3,1fr)}}
+  .stats div{padding:16px 14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stats b{display:block;font-size:24px;font-weight:850;letter-spacing:-.02em}
+  .stats span{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+  .props{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px}
+  @media(max-width:860px){.props{grid-template-columns:repeat(2,1fr)}}
+  .prop{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--panel)}
+  .prop b{display:block;margin-bottom:5px}
+  .prop span{font-size:13.5px;color:var(--muted)}
+  .toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:4px;background:var(--panel);margin:8px 0 22px}
+  .toggle button{border:0;background:transparent;padding:9px 18px;border-radius:999px;font:inherit;font-size:14px;font-weight:650;color:var(--muted);cursor:pointer}
+  .toggle button.on{background:var(--ink);color:#fff}
+  #grid{display:grid;gap:14px}
+  #grid.byface{grid-template-columns:repeat(5,1fr)}
+  #grid.bylook{grid-template-columns:repeat(5,1fr)}
+  @media(max-width:860px){#grid.byface,#grid.bylook{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:520px){#grid.byface,#grid.bylook{grid-template-columns:repeat(2,1fr)}}
+  .rowhead{grid-column:1/-1;font-weight:750;font-size:15px;margin:14px 0 0;display:flex;align-items:baseline;gap:10px}
+  .rowhead .price{font-size:12.5px;color:var(--muted);font-weight:500}
+  .rowhead .note{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+  .note.good{background:#e7f4ec;color:var(--good)} .note.warn{background:#fbf2dd;color:var(--warn)}
+  .cell{cursor:pointer;border:0;padding:0;background:none;text-align:left;font:inherit}
+  .cell img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;background:#f2f2f4;display:block;transition:transform .18s,box-shadow .18s}
+  .cell:hover img{transform:translateY(-3px);box-shadow:0 12px 26px rgba(0,0,0,.12)}
+  .cell .cap{font-size:11px;color:var(--muted);margin-top:5px}
+  .vids{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  @media(max-width:860px){.vids{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:520px){.vids{grid-template-columns:repeat(2,1fr)}}
+  .vids video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:12px;background:#000;display:block}
+  .vids .cap{font-size:11.5px;color:var(--muted);margin-top:6px;text-align:center}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start}
+  @media(max-width:860px){.twocol{grid-template-columns:1fr}}
+  .cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .cmp img{width:100%;border-radius:12px;border:1px solid var(--line);object-fit:contain;max-height:420px}
+  .cmp .cap{font-size:12px;color:var(--muted);margin-top:7px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px}
+  .callout{border-left:3px solid var(--ink);padding:6px 0 6px 16px;margin:14px 0;color:#2a2a2e}
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:14px}
+  .chip{display:inline-block;background:var(--ink);color:#fff;border-radius:8px;padding:6px 12px;font-weight:650;font-size:13px}
+  .chip.soft{background:#ececf0;color:var(--ink)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line)}
+  th{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  td:last-child,th:last-child{text-align:right}
+  .cta{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;padding:15px 26px;border-radius:12px;font-weight:700;margin-top:8px}
+  .src{font-size:11.5px;color:#9a9aa2;margin-top:10px}
+  footer{padding:40px 0 70px;color:var(--muted);font-size:12.5px}
+  /* lightbox */
+  #lb{position:fixed;inset:0;z-index:100;background:rgba(12,12,16,.86);display:none;align-items:center;justify-content:center;padding:24px}
+  #lb.open{display:flex}
+  #lb .box{background:#fff;border-radius:16px;max-width:1000px;width:100%;max-height:92vh;overflow:auto;padding:22px}
+  #lb .imgs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:680px){#lb .imgs{grid-template-columns:1fr}}
+  #lb img{width:100%;border-radius:10px;background:#f2f2f4}
+  #lb .lbcap{font-size:12px;color:var(--muted);margin-top:6px}
+  #lb .x{float:right;border:0;background:#f0f0f3;border-radius:8px;width:34px;height:34px;font-size:18px;cursor:pointer}
+  #lb h3{font-size:20px;margin:2px 0 2px}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;background:#ececf0}
+  h1,h2{font-family:"Hoefler Text","Iowan Old Style",Georgia,"Times New Roman",serif;letter-spacing:-.015em}
+  .reelwrap{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.14);background:#000}
+  .reelwrap video{width:100%;display:block;aspect-ratio:9/16;object-fit:cover}
+  .reeltag{position:absolute;top:12px;left:12px;background:rgba(20,20,26,.62);color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px;letter-spacing:.04em}
+  .ba{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+  @media(max-width:980px){.ba{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:620px){.ba{grid-template-columns:1fr}}
+  .bapair{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel)}
+  .bapair .imgs{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .bapair .imgs figure{margin:0;position:relative}
+  .bapair img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block}
+  .bapair .imgs figure:first-child img{filter:saturate(.96)}
+  .bapair .lbl{position:absolute;bottom:8px;left:8px;font-size:10px;font-weight:700;color:#fff;background:rgba(20,20,26,.66);padding:3px 8px;border-radius:14px;letter-spacing:.03em}
+  .bapair .cap{font-size:12px;color:var(--muted);padding:10px 14px}
+  .honestypill{display:inline-block;font-size:12px;font-weight:650;color:var(--warn);background:#fbf2dd;border-radius:20px;padding:6px 14px;margin:2px 0 16px}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <b>Scenario <span class="muted" style="font-weight:500">for La Redoute</span></b>
+  <div class="links">
+    <a href="#explorer">The 50 looks</a>
+    <a href="#ceiling">The ceiling</a>
+    <a href="#motion">Motion</a>
+    <a href="#accuracy">Accuracy</a>
+    <a href="#rights">Rights</a>
+    <a href="#numbers">Numbers</a>
+    <a href="#pilot">Pilot</a>
+  </div>
+</div></nav>
+
+<!-- HERO -->
+<header class="wrap">
+  <div class="hero">
+    <div>
+      <p class="kick">Scenario · Pruna P-Image Try-On</p>
+      <h1>From product packshot to full campaign, in minutes.</h1>
+      <p class="lead">Built on real Mango garments from laredoute.fr: 10 looks on 5 house faces, 50 photoreal on-model images, a 30-second film, and an editorial set that lifts the same looks off the grey and into real light, for a few dollars of compute and minutes of time. One model can wear the whole rail; one garment can land on every face.</p>
+      <p class="small muted">Lifestyle and editorial art direction are a pilot objective; the studio backdrop here is a starting point, not the ceiling. Faces are AI-generated. No own-brand render is claimed: it is a Phase-1 deliverable.</p>
+    </div>
+    <div class="reelwrap">
+      <video src="media/video/sizzle_9x16.mp4" poster="media/hero.jpg" controls muted autoplay loop playsinline preload="metadata"></video>
+      <span class="reeltag">30s film · tap for sound</span>
+    </div>
+  </div>
+  <div class="stats">
+    <div><b>10</b><span>Mango looks</span></div>
+    <div><b>5</b><span>house castings</span></div>
+    <div><b>50</b><span>on-model images</span></div>
+    <div><b>5</b><span>real motion clips</span></div>
+    <div><b>~325</b><span>credits (recon.)</span></div>
+    <div><b>minutes</b><span>not weeks</span></div>
+  </div>
+  <div class="props">
+    <div class="prop"><b>Shoot once, restyle endlessly</b><span>One booked face wears the entire rail. New drop? Re-dress, do not re-shoot.</span></div>
+    <div class="prop"><b>One garment, every face</b><span>Each piece on a diverse cast, no casting call or travel.</span></div>
+    <div class="prop"><b>Packshot to on-model</b><span>Your existing still-life shots become editorial imagery.</span></div>
+    <div class="prop"><b>Minutes, not weeks</b><span>~3 credits per try-on; the whole set cost a few dollars.</span></div>
+  </div>
+</header>
+
+<!-- EXPLORER -->
+<section id="explorer"><div class="wrap">
+  <p class="kick">The proof, on your own catalog</p>
+  <h2>Fifty on-model images. Click any one.</h2>
+  <p class="lead">These are real Mango SKUs from laredoute.fr, dressed on five Scenario house models. Toggle the view, then open any image beside its source packshot, product name and price. This is the human-QA gate the pilot formalizes: judge stripes, florals, satin and seams at zoom.</p>
+  <div class="toggle">
+    <button id="bLook" class="on" onclick="setView('bylook')">One garment, every face</button>
+    <button id="bFace" onclick="setView('byface')">One face, every look</button>
+  </div>
+  <div id="grid" class="bylook"></div>
+</div></section>
+
+<!-- CEILING -->
+<section id="ceiling"><div class="wrap">
+  <p class="kick">The ceiling</p>
+  <h2>The same image, off the grey.</h2>
+  <p class="lead">Studio is the floor, not the ceiling. We took the exact verified try-ons and changed only the world around them: same face, same garment, real light. This is the art direction the studio grid cannot show, and it is the gap between "a competent PDP factory" and "a campaign engine."</p>
+  <span class="honestypill">AI capability demonstration · AI environment and AI face · same identity and garment, preserved from the verified studio still · not a shipped La Redoute campaign · own-brand render remains a Phase-1 deliverable</span>
+  <div class="ba">
+    <div class="bapair"><div class="imgs"><figure><img src="media/looks/S4__M3.jpg" alt="studio"><span class="lbl">Studio · verified</span></figure><figure><img src="media/ceiling/S4_M3_paris.jpg" alt="editorial"><span class="lbl">Editorial · AI demo</span></figure></div><div class="cap">Robe satinée · Amara · golden-hour Paris street</div></div>
+    <div class="bapair"><div class="imgs"><figure><img src="media/looks/S4__M1.jpg" alt="studio"><span class="lbl">Studio · verified</span></figure><figure><img src="media/ceiling/S4_M1_terrace.jpg" alt="editorial"><span class="lbl">Editorial · AI demo</span></figure></div><div class="cap">Robe satinée · Sofia · dusk rooftop terrace</div></div>
+    <div class="bapair"><div class="imgs"><figure><img src="media/looks/S2__M3.jpg" alt="studio"><span class="lbl">Studio · verified</span></figure><figure><img src="media/ceiling/S2_M3_boutique.jpg" alt="editorial"><span class="lbl">Editorial · AI demo</span></figure></div><div class="cap">Combinaison florale · Amara · sunlit boutique</div></div>
+    <div class="bapair"><div class="imgs"><figure><img src="media/looks/C9__M2.jpg" alt="studio"><span class="lbl">Studio · verified</span></figure><figure><img src="media/ceiling/C9_M2_interior.jpg" alt="editorial"><span class="lbl">Editorial · AI demo</span></figure></div><div class="cap">Blouse + pantalon · Mei · raking-light interior</div></div>
+    <div class="bapair"><div class="imgs"><figure><img src="media/looks/C7__M4.jpg" alt="studio"><span class="lbl">Studio · verified</span></figure><figure><img src="media/ceiling/C7_M4_cafe.jpg" alt="editorial"><span class="lbl">Editorial · AI demo</span></figure></div><div class="cap">Lin · Elin · Parisian café terrace</div></div>
+    <div class="bapair"><div class="imgs"><figure><img src="media/looks/S6__M5.jpg" alt="studio"><span class="lbl">Studio · verified</span></figure><figure><img src="media/ceiling/S6_M5_gallery.jpg" alt="editorial"><span class="lbl">Editorial · AI demo</span></figure></div><div class="cap">Robe à fleurs · Priya · gallery interior</div></div>
+  </div>
+  <p class="small muted" style="margin-top:16px">Each pair: the verified studio still (left) and the same identity and garment moved into an editorial environment (right), one Gemini pass, ~13 credits each. The studio grid above remains the fidelity proof; this is the labelled "what it can look like" layer.</p>
+</div></section>
+
+<!-- MOTION -->
+<section id="motion"><div class="wrap">
+  <p class="kick">Motion</p>
+  <h2>Real clips, not a storyboard.</h2>
+  <p class="lead">Five 9:16 clips, one per casting, each generated from an already-approved try-on still via Seedance 2.0 Fast. The first frame is the still you inspected, so the motion is provably the same garment and face. Drape and hem movement are what a flat image cannot sell.</p>
+  <div class="vids">
+    <figure style="margin:0"><video src="media/video/turn_M1_red_satin.mp4" muted loop autoplay playsinline></video><div class="cap">M1 · red satin</div></figure>
+    <figure style="margin:0"><video src="media/video/turn_M2_pink.mp4" muted loop autoplay playsinline></video><div class="cap">M2 · floral dress</div></figure>
+    <figure style="margin:0"><video src="media/video/turn_M3_jumpsuit.mp4" muted loop autoplay playsinline></video><div class="cap">M3 · jumpsuit</div></figure>
+    <figure style="margin:0"><video src="media/video/turn_M4_linen.mp4" muted loop autoplay playsinline></video><div class="cap">M4 · linen separates</div></figure>
+    <figure style="margin:0"><video src="media/video/turn_M5_orange.mp4" muted loop autoplay playsinline></video><div class="cap">M5 · slip dress</div></figure>
+  </div>
+  <p class="small muted" style="margin-top:14px">9:16, 720p, ~5s, the everyday PDP and social format, ~146 credits each. A cross-model morph (one garment across faces) is an optional capability, held behind a garment-shape and face-stability QA pass before it represents the brand. Rollout clip volumes are projected at the platform rate (~120 to 400 credits per clip).</p>
+</div></section>
+
+<!-- ACCURACY -->
+<section id="accuracy"><div class="wrap">
+  <p class="kick">Accuracy, owned</p>
+  <h2>The one that holds, and the one that does not.</h2>
+  <div class="twocol">
+    <div>
+      <h3>C10 <span class="pill" style="background:#fbf2dd;color:var(--warn)">silent substitution</span></h3>
+      <div class="cmp">
+        <figure style="margin:0"><img src="media/c10_shirt_src.jpg" alt="source shirt"><div class="cap">Source: cropped, short-sleeve striped shirt.</div></figure>
+        <figure style="margin:0"><img src="media/c10_render.jpg" alt="render"><div class="cap">Render: shirt became long-sleeve, full-length, tucked; stripe faded.</div></figure>
+      </div>
+      <p class="small" style="margin-top:12px">The brown blazer and aubergine trousers held. The shirt silhouette was substituted and the stripe washed out, an attractive image of the wrong product. That is why a human-QA-before-publish gate is mandatory, not optional. Every finding here was verified against its source packshot at zoom by a named reviewer.</p>
+    </div>
+    <div>
+      <h3>C9 <span class="pill" style="background:#e7f4ec;color:var(--good)">colorway win</span></h3>
+      <div class="cmp">
+        <figure style="margin:0"><img src="media/c9_trousers_src.jpg" alt="source trousers"><div class="cap">Source: burgundy wide-leg (sold as "Jean large").</div></figure>
+        <figure style="margin:0"><img src="media/c9_win.jpg" alt="render"><div class="cap">Render: the unusual burgundy colorway reproduced correctly.</div></figure>
+      </div>
+      <p class="small" style="margin-top:12px">A mislabeled SKU reproduced faithfully; only the source's very wide flare rendered slightly straighter. A sourcing and metadata lesson, not a Scenario miss, and we refuse to mis-confess it as one.</p>
+      <div class="panel" style="margin-top:16px;padding:16px 18px">
+        <h3 style="margin-bottom:6px">The acceptance rubric we propose</h3>
+        <p class="small" style="margin:0">Lighting · styling · drape · print-scale · color-accuracy · silhouette. Plus a target share of images publishable unedited, agreed before the pilot.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- POSE / DIVERSITY -->
+<section id="cast"><div class="wrap">
+  <p class="kick">Casting and pose</p>
+  <h2>A diverse cast, and pose is a dial.</h2>
+  <div class="twocol">
+    <div>
+      <h3>One face, three poses (re-pose)</h3>
+      <img src="media/pose_strip.jpg" alt="three poses" style="width:100%;border-radius:12px;border:1px solid var(--line)">
+      <p class="small muted" style="margin-top:10px">Same model, same Mango look, three poses generated by re-pose. Pose variety per model is a pilot deliverable; this is what the capability already produces, shown not claimed.</p>
+    </div>
+    <div>
+      <h3>Honest scope on diversity</h3>
+      <p>The cast spans Spanish, East Asian, Black, Northern European and South Asian faces, a represented cast for every product with no casting or travel. We say <b>face</b> deliberately: all five models share one slim build here.</p>
+      <p class="callout"><b>Body-size and fit inclusivity, the dimension that actually drives fashion returns, is the headline pilot deliverable.</b> In Phase 1 we render one look across XS-to-XXL builds to convert it from a claim into evidence.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- RIGHTS -->
+<section id="rights"><div class="wrap">
+  <p class="kick">The gates that decide the deal</p>
+  <h2>Rights, synthetic media, security.</h2>
+  <div class="props" style="grid-template-columns:repeat(3,1fr)">
+    <div class="prop"><b>Own-brand <span class="pill" style="background:#16161a;color:#fff">Phase 1</span></b><span>In the pilot we render one La Redoute Collections look on your assets, where rights are unambiguous. We do not claim a shipped own-brand render here, because there is not one yet.</span></div>
+    <div class="prop"><b>Third-party brands</b><span>The Mango packshots were a one-time evaluation artifact, quarantined from production. In production you feed only assets you warrant rights to; we set out the brand-consent path for marketplace items.</span></div>
+    <div class="prop"><b>Synthetic media</b><span>AI-generated faces, owned by you. Directional indemnity stance stated now; EU AI Act and French disclosure posture; real contracted talent remains an option.</span></div>
+  </div>
+  <div class="panel" style="margin-top:18px">
+    <div class="twocol">
+      <div><h3>Data posture</h3><ul class="small"><li>EU data residency, GDPR / DPA.</li><li>No-training-on-your-assets default, with opt-out.</li><li>Retention controls; per-model license terms visible in-platform.</li><li>Production runs only on assets you warrant you have rights to.</li></ul></div>
+      <div><h3>Fits your pipeline</h3>
+        <div class="flow"><span class="chip">PIM / DAM</span> → <span class="chip soft">packshot in</span> → <span class="chip">Scenario</span> → <span class="chip soft">SKU-keyed image + clip</span> → <span class="chip">PDP</span></div>
+        <p class="small muted" style="margin-top:10px">Integration via API / MCP, with the human-QA gate before publish. A platform your teams operate, not a consultancy that runs your catalog.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- NUMBERS -->
+<section id="numbers"><div class="wrap">
+  <p class="kick">The numbers</p>
+  <h2>Unit economics, with the sources on the page.</h2>
+  <div class="twocol">
+    <div>
+      <p>50 on-model images for a reconstructed <b>~325 credits</b> (a few dollars), in minutes. <b>~3 credits</b> per try-on. A new casting is ~12 credits plus ~3 per swap, so representation is a parameter, not a budget line. Compute is cents; the cost that scales is human QA and retouch, which the C10 case proves is non-zero. Even fully loaded, a Scenario image lands an order of magnitude below a studio image.</p>
+      <p class="callout small"><b>Illustrative ROI:</b> shoots avoided per category per year from the cost and speed delta. The pilot measures your real conversion and return figures against your own baseline; we assert no percentage here.</p>
+    </div>
+    <div class="panel">
+      <h3>Studio benchmark (cited)</h3>
+      <table>
+        <tr><th>Line item</th><th>Range</th></tr>
+        <tr><td>Photographer / day</td><td>$1,000 to $2,000+</td></tr>
+        <tr><td>Model (agency) / day</td><td>$500 to $3,000 +fee</td></tr>
+        <tr><td>Studio / day</td><td>$300 to $2,000</td></tr>
+        <tr><td>Hair &amp; make-up / day</td><td>$800 to $2,400</td></tr>
+        <tr><td>Styling / day</td><td>$400 to $1,000</td></tr>
+        <tr><td>Retouching / image</td><td>$20 to $80</td></tr>
+        <tr><td><b>Per finished image</b></td><td><b>~$46 to ~$96</b></td></tr>
+      </table>
+      <p class="small muted" style="margin:6px 0 0">Effective cost runs 2 to 3x quoted once coordination, samples and re-shoots are counted.</p>
+    </div>
+  </div>
+  <p class="src">Sources: squareshot.com, blendnow.com, nightjar.so. Public industry benchmarks, not La Redoute data. Replace any figure with your blended cost.</p>
+</div></section>
+
+<!-- PILOT -->
+<section id="pilot"><div class="wrap">
+  <p class="kick">Next step</p>
+  <h2>A bounded, measurable, signable pilot.</h2>
+  <div class="twocol">
+    <div class="panel">
+      <h3>Phase 1 <span class="pill" style="background:#16161a;color:#fff">days, no eng</span></h3>
+      <p class="small">~50 to 100 live SKUs including one own-brand line, dressed on 3 to 5 agreed castings, measured against your studio baseline, behind the human-QA gate.</p>
+      <p class="small"><b>Deliverables that convert claims to evidence:</b> one own-brand look on your assets; one look across XS-to-XXL builds; 2 to 3 alternate poses; 2 to 3 localized variants.</p>
+    </div>
+    <div class="panel">
+      <h3>Phase 2 <span class="pill" style="background:#16161a;color:#fff">weeks, optional</span></h3>
+      <p class="small">A controlled PDP A/B measuring conversion and fit-related return rate vs existing imagery, with sample size, duration and pass thresholds agreed up front. Requires your engineering.</p>
+      <p class="small"><b>Commercials, decided not blank:</b> fixed or free pilot price; license + commit range; credit estimate; asset ownership; IP terms; named SLA; a rate-lock so rollout pricing is known. Dated decision gate.</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:34px">
+    <h3 style="font-size:22px">Pick the SKU slice and lock the success metric.</h3>
+    <p class="muted">A 30-minute working session with Emmanuel de Maistre, Cofounder &amp; CEO.</p>
+    <a class="cta" href="https://scenario.com">Book the working session</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <p>Garments belong to Mango, sourced via laredoute.fr as a one-time demonstration and evaluation artifact, quarantined from any production claim. The own-brand look is a pilot deliverable, not yet rendered. Faces are AI-generated. Built in Scenario. Prepared for La Redoute by Scenario, Inc. Confidential.</p>
+</div></footer>
+
+<!-- LIGHTBOX -->
+<div id="lb" onclick="if(event.target.id==='lb')closeLB()">
+  <div class="box">
+    <button class="x" onclick="closeLB()">×</button>
+    <h3 id="lbTitle"></h3>
+    <p id="lbMeta" class="small muted" style="margin:0 0 14px"></p>
+    <div class="imgs">
+      <div><img id="lbRender" alt="on-model render"><div class="lbcap">On-model render (Scenario)</div></div>
+      <div><img id="lbSrc" alt="source packshot"><div class="lbcap">Source packshot (laredoute.fr)</div></div>
+    </div>
+    <p id="lbNote" class="small" style="margin-top:14px"></p>
+  </div>
+</div>
+
+<script>
+const MODELS = [
+  {id:'M1', name:'Sofia', desc:'Spanish, 27'},
+  {id:'M2', name:'Mei', desc:'East Asian, 24'},
+  {id:'M3', name:'Amara', desc:'Black, 30'},
+  {id:'M4', name:'Elin', desc:'Northern European, 22'},
+  {id:'M5', name:'Priya', desc:'South Asian, 35'}
+];
+const LOOKS = [
+  {c:'S1', name:'Robe chemisier imprimé floral', price:'39,99 €', sku:'602597995', pack:['garment_01_floral_shirt_dress.jpg']},
+  {c:'S2', name:'Combinaison imprimé floral (jumpsuit)', price:'49,99 €', sku:'602618087', pack:['garment_02_floral_jumpsuit.jpg'], note:{t:'Fidelity hold: large print keeps its scale.',k:'good'}},
+  {c:'S3', name:'Robe asymétrique imprimé fleuri', price:'79,99 €', sku:'602545501', pack:['garment_03_asym_floral_dress.jpg']},
+  {c:'S4', name:'Robe satinée asymétrique', price:'69,99 €', sku:'602627680', pack:['garment_04_satin_dress.jpg'], note:{t:'Fidelity hold: satin sheen + asymmetric hem.',k:'good'}},
+  {c:'S5', name:'Robe bustier en jean', price:'49,99 €', sku:'602602883', pack:['garment_05_denim_bustier_dress.jpg']},
+  {c:'S6', name:'Robe à fleurs cut-out', price:'79,99 €', sku:'602626907', pack:['garment_06_metallic_cutout_dress.jpg']},
+  {c:'C7', name:'Chemise lin + pantalon wide-leg lin', price:'89,98 €', sku:'602619334 + 602629677', pack:['garment_07a_linen_shirt.jpg','garment_07b_linen_wideleg.jpg']},
+  {c:'C8', name:'Top maille + jupe lin brodée', price:'72,98 €', sku:'602618819 + 602622498', pack:['garment_08a_knit_top.jpg','garment_08b_linen_skirt.jpg']},
+  {c:'C9', name:'Blouse florale + pantalon wide-leg', price:'85,98 €', sku:'602584398 + 602507860', pack:['garment_09a_floral_blouse.jpg','garment_09b_wide_jeans.jpg'], note:{t:'Colorway win: burgundy reproduced from a mislabeled SKU.',k:'good'}},
+  {c:'C10', name:'Chemise rayée + pantalon + blazer lin', price:'125,97 €', sku:'602617998 + 602572388 + 602562535', pack:['garment_10a_striped_shirt.jpg','garment_10b_linen_trousers.jpg','garment_10c_linen_blazer.jpg'], note:{t:'Honest miss: blazer + trousers held; shirt silhouette substituted, stripe faded.',k:'warn'}}
+];
+const grid = document.getElementById('grid');
+function lookImg(c,m){return `media/looks/${c}__${m}.jpg`}
+function render(view){
+  grid.className = view;
+  let h='';
+  if(view==='bylook'){
+    for(const L of LOOKS){
+      h += `<div class="rowhead">${L.name} <span class="price">${L.price} · Mango</span>${L.note?`<span class="note ${L.note.k}">${L.note.k==='good'?'win':'caveat'}</span>`:''}</div>`;
+      for(const M of MODELS){
+        h += `<button class="cell" onclick="openLB('${L.c}','${M.id}')"><img loading="lazy" src="${lookImg(L.c,M.id)}" alt="${L.c} ${M.id}"><div class="cap">${M.name} · ${M.desc}</div></button>`;
+      }
+    }
+  } else {
+    for(const M of MODELS){
+      h += `<div class="rowhead">${M.name} <span class="price">${M.desc}</span></div>`;
+      for(const L of LOOKS){
+        h += `<button class="cell" onclick="openLB('${L.c}','${M.id}')"><img loading="lazy" src="${lookImg(L.c,M.id)}" alt="${L.c} ${M.id}"><div class="cap">${L.c}</div></button>`;
+      }
+    }
+  }
+  grid.innerHTML=h;
+}
+function setView(v){
+  document.getElementById('bLook').classList.toggle('on',v==='bylook');
+  document.getElementById('bFace').classList.toggle('on',v==='byface');
+  render(v);
+}
+function openLB(c,m){
+  const L=LOOKS.find(x=>x.c===c), M=MODELS.find(x=>x.id===m);
+  document.getElementById('lbTitle').textContent=L.name;
+  document.getElementById('lbMeta').textContent=`${L.price} · Mango · SKU ${L.sku} · on ${M.name} (${M.desc})`;
+  document.getElementById('lbRender').src=lookImg(c,m);
+  document.getElementById('lbSrc').src='media/packshots/'+L.pack[0];
+  document.getElementById('lbNote').innerHTML = L.note?`<b>${L.note.k==='good'?'Verified win: ':'Verified caveat: '}</b>${L.note.t}`:'Verified against the source packshot at zoom by a named reviewer.';
+  document.getElementById('lb').classList.add('open');
+}
+function closeLB(){document.getElementById('lb').classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB()});
+render('bylook');
+</script>
+</body>
+</html>

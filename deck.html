@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scenario for La Redoute: on-model imagery from your own catalog</title>
+<style>
+  :root{ --ink:#16161a; --muted:#6b6b73; --line:#e6e6e9; --bg:#fff; --accent:#1a1a1a; --good:#1f7a4d; --warn:#9a6a00; }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:#f3f3f5;color:var(--ink);
+       font:14.5px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+       -webkit-font-smoothing:antialiased;}
+  .page{position:relative;width:210mm;min-height:297mm;background:var(--bg);margin:14px auto;
+        padding:22mm 20mm 18mm;box-shadow:0 6px 26px rgba(0,0,0,.10);overflow:hidden}
+  .page::after{content:"Scenario, Inc. · Confidential · Prepared for La Redoute";position:absolute;
+        bottom:9mm;left:20mm;right:20mm;font-size:9.5px;color:#aaa;border-top:1px solid var(--line);padding-top:5px;
+        display:flex;justify-content:space-between}
+  .page::before{counter-increment:pg;content:counter(pg);position:absolute;bottom:9mm;right:20mm;font-size:9.5px;color:#aaa;z-index:2}
+  body{counter-reset:pg}
+  .kick{letter-spacing:.18em;text-transform:uppercase;font-size:10.5px;color:var(--muted);font-weight:700;margin:0 0 12px}
+  h1{font-size:33px;line-height:1.08;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  h2{font-size:22px;line-height:1.15;letter-spacing:-.015em;margin:0 0 12px;font-weight:750}
+  h3{font-size:14px;margin:18px 0 5px;font-weight:700;letter-spacing:.01em}
+  h1,h2{font-family:"Hoefler Text","Iowan Old Style",Georgia,"Times New Roman",serif}
+  .ceilgrid img{width:100%;border-radius:8px;border:1px solid var(--line)}
+  .honesty{font-size:11px;color:var(--warn);background:#fbf2dd;border-radius:8px;padding:8px 12px;margin:10px 0}
+  p{margin:0 0 11px} .lead{font-size:16px;line-height:1.5;color:#2a2a2e}
+  ul{margin:0 0 11px;padding-left:18px} li{margin:0 0 6px}
+  .muted{color:var(--muted)} .small{font-size:12px} .tiny{font-size:10.5px;color:var(--muted)}
+  .rule{border:0;border-top:1px solid var(--line);margin:16px 0}
+  .stat{display:flex;gap:0;flex-wrap:wrap;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:18px 0}
+  .stat div{flex:1;min-width:96px;padding:12px 14px;border-right:1px solid var(--line)}
+  .stat div:last-child{border-right:0}
+  .stat b{display:block;font-size:19px;font-weight:800;letter-spacing:-.01em}
+  .stat span{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .card{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#fafafa}
+  .card h3{margin-top:0}
+  figure{margin:14px 0}
+  img{max-width:100%;display:block;border-radius:8px}
+  figcaption{font-size:11px;color:var(--muted);margin-top:7px}
+  .tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .tag.good{background:#e7f4ec;color:var(--good)} .tag.warn{background:#fbf2dd;color:var(--warn)}
+  .tag.dark{background:#16161a;color:#fff}
+  table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}
+  th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+  .cover{display:flex;flex-direction:column;min-height:253mm}
+  .cover .hero{flex:1;display:grid;grid-template-columns:1.05fr 1fr;gap:0;align-items:stretch;margin:6px 0 0}
+  .cover .hero img{height:100%;width:100%;object-fit:cover;border-radius:12px}
+  .cover .herotext{padding-right:22px;display:flex;flex-direction:column;justify-content:center}
+  .src{font-size:10px;color:#9a9aa2}
+  .src a{color:#9a9aa2}
+  .callout{border-left:3px solid var(--ink);padding:6px 0 6px 14px;margin:12px 0;color:#2a2a2e}
+  .two-img{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .cmp img{max-height:300px;width:auto;margin:0 auto;object-fit:contain}
+  .ledger td:last-child{text-align:right;white-space:nowrap}
+  @page{ size:A4; margin:0; }
+  @media print{
+    body{background:#fff}
+    .page{margin:0;box-shadow:none;width:auto;min-height:auto;height:297mm;page-break-after:always}
+    .page:last-child{page-break-after:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- 1. COVER -->
+<section class="page cover">
+  <p class="kick">Scenario &nbsp;·&nbsp; Proposal for La Redoute</p>
+  <div class="hero">
+    <div class="herotext">
+      <h1>Your next Mango drop is already shot.</h1>
+      <p class="lead">From the live laredoute.fr packshots, we dressed 10 real Mango looks on 5 house faces: 50 photoreal on-model images, for a reconstructed ~325 credits of compute (a few dollars), in minutes, with no studio, casting or sample.</p>
+      <p class="small muted">Every image was checked by hand against its source packshot. The one look our try-on did not yet reproduce faithfully is in this deck too, beside a real on-model video, because the honest version is the one you can put in front of legal.</p>
+      <p class="small" style="margin-top:14px"><b>Emmanuel de Maistre</b><br><span class="muted">Cofounder &amp; CEO, Scenario</span></p>
+    </div>
+    <img src="media/hero.jpg" alt="Mango red satin dress, AI on-model, on a Black house model">
+  </div>
+  <div class="stat">
+    <div><b>10</b><span>real Mango looks</span></div>
+    <div><b>5</b><span>house castings</span></div>
+    <div><b>50</b><span>on-model images</span></div>
+    <div><b>5</b><span>real motion clips</span></div>
+    <div><b>~325</b><span>credits (reconstructed)</span></div>
+    <div><b>minutes</b><span>not weeks</span></div>
+  </div>
+  <p class="tiny">Built on real Mango garments sourced from laredoute.fr, dressed on five Scenario-designed faces with Pruna P-Image Try-On. Lifestyle and editorial art direction (location, light, styling) are a pilot objective: the seamless studio backdrop here is a starting point, not the ceiling. No own-brand render is claimed on this page; it is a Phase-1 pilot deliverable. Faces are AI-generated.</p>
+</section>
+
+<!-- 2. BOTTLENECK -->
+<section class="page">
+  <p class="kick">The problem</p>
+  <h2>The bottleneck is the studio, not the photo.</h2>
+  <p class="lead">On-model imagery sells. The constraint is never the picture, it is the physical production behind it: book a body, a photographer, a studio, hair, make-up and styling, ship samples, then do it again for the next drop, the next market and the next of thousands of SKUs.</p>
+  <div class="grid2" style="margin-top:6px">
+    <div class="card">
+      <h3>What makes it slow and expensive</h3>
+      <ul>
+        <li>Casting, travel and agency fees to put a range on a represented cast.</li>
+        <li>Sample logistics: garments physically present, on the day, in the right size.</li>
+        <li>Re-shoots and overruns when a look, a size or a market is missing.</li>
+        <li>Scale: a fast-moving assortment, third-party brands included, across 20+ markets.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Why it matters commercially</h3>
+      <ul>
+        <li>On-model context is a known driver of PDP conversion and a known reducer of fit-related returns.</li>
+        <li>Representation on the model is increasingly a brand and conversion question, not only an ethical one.</li>
+        <li>Speed to a sellable PDP is the gap between a new SKU landing and earning.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="callout">We are deliberately not putting invented percentages on those last points. They are well-established directional levers; the pilot in this proposal is designed to measure your real figures, not assert ours.</p>
+  <p>The rest of this document is the proof, its exact boundary, and the two gates that actually decide a deal like this: rights and accuracy. We built it on your own catalog so you can judge it on your own product.</p>
+</section>
+
+<!-- 3. WHAT WE BUILT + BOUNDARY -->
+<section class="page">
+  <p class="kick">The proof</p>
+  <h2>What we built on your own catalog, and its exact boundary.</h2>
+  <p>We took one La Redoute brand page (Mango), read 99 live products, selected 10 real looks (6 single pieces plus 4 multi-piece combinations, 15 garment images in all) and dressed 5 Scenario-designed house models in every look. That is 50 on-model images, plus 5 real motion clips.</p>
+  <h3>The method, in three steps</h3>
+  <table>
+    <tr><th>Step</th><th>Model</th><th>What it does</th></tr>
+    <tr><td>1 · Master</td><td>GPT Image 2</td><td>Generates one full-body studio house model per casting (~12 credits, ~45s).</td></tr>
+    <tr><td>2 · Try-on</td><td>Pruna P-Image Try-On</td><td>Dresses that model in a garment packshot (~3 credits). Up to 11 garment images at once, so a 2 or 3 piece outfit is dressed in a single pass.</td></tr>
+    <tr><td>3 · Motion</td><td>Seedance 2.0 Fast</td><td>Animates the approved still into a 5s 9:16 PDP clip (~146 credits), so the motion is provably the same garment and face.</td></tr>
+  </table>
+  <p class="small">Identity, the model's pose, the shoes and the backdrop are preserved across every swap. Only the clothing changes.</p>
+  <p class="callout"><b>The boundary, stated plainly.</b> What you see here is one frontal hero per look, one held pose per identity, on a seamless grey backdrop, with no own-brand render. Back views, multiple angles, in-context lifestyle scenes, editorial lighting, alternate poses per model and a La Redoute own-brand look are all on the roadmap and in the pilot scope on the closing page. They are not implied as done here.</p>
+  <p class="tiny">Provenance: the Mango packshots were scraped from laredoute.fr as a one-time evaluation artifact, quarantined from any production claim. In production, the platform runs only on assets you warrant you have the rights to use. See the rights page.</p>
+</section>
+
+<!-- 3b. THE CEILING -->
+<section class="page">
+  <p class="kick">The ceiling</p>
+  <h2>The same image, off the grey.</h2>
+  <p class="lead">Studio is the floor, not the ceiling. We took the exact verified try-ons and changed only the world around them: same face, same garment, real light. This is the art direction the studio grid cannot show, and the gap between a competent PDP factory and a campaign engine.</p>
+  <figure class="ceilgrid" style="margin:14px 0 8px">
+    <img src="media/ceiling_grid.jpg" alt="before and after: grey studio vs editorial environment">
+    <figcaption>Each pair: the verified studio still (left) and the same identity and garment moved into an editorial environment (right). One Gemini pass, ~13 credits each.</figcaption>
+  </figure>
+  <p class="honesty"><b>AI capability demonstration.</b> AI-generated environment and AI face. Same identity and garment, preserved from the verified studio still. Not a shipped La Redoute campaign. The studio grid remains the fidelity proof; this is the labelled "what it can look like" layer. An own-brand render stays a Phase-1 deliverable.</p>
+</section>
+
+<!-- 4. PROOF 1 GRID -->
+<section class="page">
+  <p class="kick">Proof 1</p>
+  <h2>One garment, every face.</h2>
+  <p class="small">Ten looks down, five castings across. A diverse cast (Spanish, East Asian, Black, Northern European, South Asian) for every product, with no casting call, travel or re-shoot. Swap the wearer, keep the garment.</p>
+  <figure>
+    <img src="media/overview_50.jpg" alt="50-image grid: 10 looks across 5 models">
+    <figcaption>50 on-model images generated from La Redoute's own Mango product pages. Each holds one pose per identity, with two clearly distinct poses in the cast (M2 a walking stride, M4 a relaxed lean) plus frontal variation, so the cast reads dynamic rather than a single repeated stance.</figcaption>
+  </figure>
+  <div class="grid2">
+    <p class="small"><span class="tag warn">honesty note</span> All five models share one slim build here. Body-size, age and fit inclusivity, the dimension that actually drives fashion returns, is the headline pilot deliverable, not yet proven across the cast.</p>
+    <p class="small"><span class="tag warn">honesty note</span> Each model holds one pose across its looks. Varied poses per model is a re-pose capability, shown on the next page, not a five-pose claim.</p>
+  </div>
+</section>
+
+<!-- 5. PROOF 2 IDENTITY + POSE -->
+<section class="page">
+  <p class="kick">Proof 2</p>
+  <h2>One face, every look. And the pose is a dial.</h2>
+  <p class="small">A reusable, identity-consistent house model is the asset a lookbook or a PDP carousel needs. Here is one face (M5) across all ten Mango looks, from a single base shot.</p>
+  <figure>
+    <img src="media/model_M5.jpg" alt="One model, all 10 looks">
+    <figcaption>M5 (South Asian, straight-on stance) in all 10 looks. The same face, hair and pose; only the garment changes.</figcaption>
+  </figure>
+  <h3>Pose variety, shown not claimed</h3>
+  <figure>
+    <img src="media/pose_strip.jpg" alt="Same model and dress, three poses">
+    <figcaption>Same model, same Mango look, three poses generated by re-pose (contrapposto, walking, hand to hair). Alternate poses per model are a pilot deliverable; this is what the capability already produces.</figcaption>
+  </figure>
+</section>
+
+<!-- 6. PROOF 3 FIDELITY WINS -->
+<section class="page">
+  <p class="kick">Proof 3</p>
+  <h2>Fidelity, up close. <span class="tag good">verified</span></h2>
+  <p class="small">The fair test of try-on is whether it survives a zoom. These two were checked by hand against their source packshots.</p>
+  <div class="two-img">
+    <figure style="margin:6px 0">
+      <img src="media/fid_s4.jpg" alt="Red satin dress on model">
+      <figcaption><b>S4 · red satin.</b> The one-shoulder cowl, the satin sheen and the high-low asymmetric hem all hold.</figcaption>
+    </figure>
+    <figure style="margin:6px 0">
+      <img src="media/fid_s2.jpg" alt="Floral jumpsuit on model">
+      <figcaption><b>S2 · floral jumpsuit.</b> The large red-and-white print holds its scale across the body; halter and belt intact.</figcaption>
+    </figure>
+  </div>
+  <div class="card" style="margin-top:8px">
+    <h3>A colorway win, not a miss <span class="tag good">verified</span></h3>
+    <div class="grid3" style="grid-template-columns:0.8fr 0.8fr 1.4fr;align-items:center">
+      <figure style="margin:0"><img src="media/c9_trousers_src.jpg" alt="burgundy trousers packshot"><figcaption>Source packshot</figcaption></figure>
+      <figure style="margin:0"><img src="media/c9_win.jpg" alt="C9 on model"><figcaption>On-model render</figcaption></figure>
+      <p class="small" style="margin:0">The C9 bottom is a real burgundy wide-leg trouser, sold under the misleading name <em>Jean large</em>. The try-on reproduced that unusual colorway correctly. The only honest note: the source's very wide flare rendered slightly straighter. That is a sourcing and metadata lesson, not a Scenario miss, and a lazier deck would have wrongly confessed it as one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. WHERE IT IS NOT PERFECT -->
+<section class="page">
+  <p class="kick">Accuracy, owned</p>
+  <h2>Where it is not perfect yet. <span class="tag warn">the C10 case</span></h2>
+  <p>One look did not reproduce faithfully, and it is the most important image in this deck. The honest failure mode is not visible breakage; it is silent substitution.</p>
+  <div class="two-img cmp">
+    <figure style="margin:6px 0"><img src="media/c10_shirt_src.jpg" alt="source striped shirt"><figcaption>Source: cropped, short-sleeve, blue-and-white striped shirt.</figcaption></figure>
+    <figure style="margin:6px 0"><img src="media/c10_render.jpg" alt="C10 render on model"><figcaption>Render: the shirt became long-sleeve and full-length tucked, and the blue stripe faded to a pale wash.</figcaption></figure>
+  </div>
+  <p><b>What held:</b> the brown blazer and the aubergine wide-leg trousers reproduced faithfully. <b>What was substituted:</b> the cropped short-sleeve striped shirt rendered as a long-sleeve, full-length tucked shirt, and the crisp blue stripe washed out. The result is an attractive, photoreal image of the wrong product, which is more dangerous than an obviously broken one, because nothing looks wrong.</p>
+  <p class="callout"><b>This is exactly why a human-QA-before-publish gate is mandatory, not optional.</b> Every fidelity finding in this deck, hold or miss, was verified against the source packshot at zoom by a named reviewer. The C10 catch is the proof that the gate runs.</p>
+  <h3>What we propose you adopt</h3>
+  <ul>
+    <li>An art-director acceptance rubric, one line: lighting, styling, drape, print-scale, color-accuracy, silhouette.</li>
+    <li>A strawman acceptance threshold: a target share of images publishable unedited, plus a pattern / color / silhouette fidelity pass-rate, agreed before the pilot starts.</li>
+  </ul>
+</section>
+
+<!-- 8. RIGHTS + SYNTHETIC MEDIA -->
+<section class="page">
+  <p class="kick">The first gate</p>
+  <h2>Rights, IP and synthetic media.</h2>
+  <p class="small">This page is honest about what is built and what is pilot work. No own-brand proof exists on disk today, so it is named as future everywhere it appears.</p>
+  <div class="grid3">
+    <div class="card"><h3>Own-brand <span class="tag dark">Phase 1</span></h3><p class="small">In the pilot we will render one La Redoute Collections garment on-model, on your own assets, where the rights are unambiguous. This makes the rights story a proof, not a promise. We do not claim a shipped own-brand render here, because there is not one yet.</p></div>
+    <div class="card"><h3>Third-party brands</h3><p class="small">The Mango packshots used here were a one-time evaluation artifact, quarantined from any production claim. In production you feed only assets you warrant you have derivative-image rights to; for marketplace products we set out the brand-consent path.</p></div>
+    <div class="card"><h3>Synthetic media</h3><p class="small">These are AI-generated faces. You own the five synthetic identities. We state a directional indemnity stance on IP and likeness for synthetic-media output now, not later, and our position on EU AI Act and French advertising disclosure. Real, contracted talent remains an option.</p></div>
+  </div>
+  <p class="callout">This is the gate between an interesting demo and a signable pilot. We are clearing it head-on rather than claiming an own-brand proof we have not built.</p>
+  <hr class="rule">
+  <h3>Data and platform posture</h3>
+  <ul>
+    <li>GDPR / DPA posture and EU data residency for La Redoute assets.</li>
+    <li>Retention defaults and a no-training-on-your-assets default, with opt-out.</li>
+    <li>Per-model sub-processor list and license terms exposed in the Scenario catalog. Production runs only on assets you warrant you have rights to.</li>
+  </ul>
+</section>
+
+<!-- 9. SECURITY / PIPELINE -->
+<section class="page">
+  <p class="kick">The second gate</p>
+  <h2>Security, data, and how it fits your pipeline.</h2>
+  <p>Scenario is a platform your teams operate, not a consultancy that runs your catalog. It sits between your PIM and your PDP.</p>
+  <figure>
+    <div class="card" style="background:#fff">
+      <p class="small" style="margin:0;text-align:center;line-height:2.2">
+        <span class="tag dark">PIM / DAM</span> &nbsp;→&nbsp; packshot in &nbsp;→&nbsp;
+        <span class="tag dark">Scenario</span> <span class="muted">(GPT Image 2 · P-Image Try-On · Seedance 2.0 Fast)</span> &nbsp;→&nbsp;
+        on-model asset keyed to SKU &nbsp;→&nbsp; <span class="tag dark">PDP</span>
+      </p>
+    </div>
+    <figcaption>Integration via API / MCP. Packshot in, SKU-keyed on-model image and clip out, with the human-QA gate before publish.</figcaption>
+  </figure>
+  <div class="grid2">
+    <div class="card">
+      <h3>Service levels (to be set in the pilot)</h3>
+      <ul class="small"><li>Turnaround commitment per batch</li><li>Uptime target</li><li>Support response time</li><li>Rate-lock so rollout pricing is known, not renegotiated</li></ul>
+    </div>
+    <div class="card">
+      <h3>Governance</h3>
+      <ul class="small"><li>EU data residency, GDPR / DPA</li><li>No-training default, retention controls</li><li>Per-model license terms visible in-platform</li><li>Audit trail: every image traceable to its source packshot and reviewer</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10. BUSINESS CASE -->
+<section class="page">
+  <p class="kick">The numbers</p>
+  <h2>Unit economics, with the sources on the page.</h2>
+  <h3>Demonstrated, hand-verified</h3>
+  <p class="small">50 on-model images across a 5-casting cast for a reconstructed ~325 credits, in minutes. ~3 credits per try-on. A new casting costs ~12 credits (one master) plus ~3 per swap, so representation across faces is a parameter, not a budget line. The ~325 figure is reconstructed from job-log line items (the logs hold job IDs, not a single metered total); the appendix shows it summing.</p>
+  <h3>The cost that actually scales is QA, not compute</h3>
+  <p class="small">Compute is cents. The honest fully-loaded Scenario cost per on-model image is compute plus human art-direction, QA and retouch minutes at the accepted rate. The C10 case proves that QA labor on hard, patterned SKUs is non-zero. Even fully loaded, it lands an order of magnitude below a studio image.</p>
+  <h3>The studio benchmark, cited</h3>
+  <table class="small">
+    <tr><th>Line item</th><th>Range (per day unless noted)</th></tr>
+    <tr><td>Photographer</td><td>$1,000 to $2,000 (up to $5,000+)</td></tr>
+    <tr><td>Model (agency)</td><td>$500 to $3,000, plus 20 to 40% agency fee</td></tr>
+    <tr><td>Studio rental</td><td>$300 to $2,000</td></tr>
+    <tr><td>Hair &amp; make-up</td><td>$800 to $2,400</td></tr>
+    <tr><td>Styling</td><td>$400 to $1,000</td></tr>
+    <tr><td>Retouching</td><td>$20 to $80 per image</td></tr>
+  </table>
+  <p class="small">A lean one-day shoot lands near <b>~$46 per finished image</b> (about 60 images for ~$2,750). A worked two-day, 200-image shoot lands near <b>~$96 per image</b> on line items alone, and the sources note that effective per-image cost runs <b>2 to 3 times</b> the quoted rate once coordination, sample logistics and re-shoots are counted. Set against a Scenario image at cents of compute plus minutes of QA, the order-of-magnitude case does not depend on a single number.</p>
+  <p class="callout small"><b>Illustrative ROI (labelled illustrative):</b> shoots avoided per category per year from the cost and speed delta, with a sensitivity range on conversion lift and return reduction. The pilot measures your real figures against your own baseline; we do not assert a conversion percentage here.</p>
+  <p class="src">Sources: squareshot.com (per-image and one-day-shoot benchmark); blendnow.com and nightjar.so (day-rate line items and the 2 to 3x effective-cost finding). Full citations in the appendix. Replace any figure with your own blended cost.</p>
+</section>
+
+<!-- 11. COMPETITIVE -->
+<section class="page">
+  <p class="kick">Why us</p>
+  <h2>What separates this from a generic AI-imagery pitch.</h2>
+  <div class="grid2">
+    <div class="card"><h3>1 · Built on your live catalog</h3><p class="small">Real Mango SKUs from laredoute.fr, hard cases included (prints, satin, denim, a three-piece tailored look), not stock demos. You judge it on your own product. An own-brand render is an honest Phase-1 deliverable, named as future.</p></div>
+    <div class="card"><h3>2 · A platform you operate</h3><p class="small">Your packshots, your identity-locked house-model library, your pipeline via API/MCP, your data governance, with a directional indemnity stance stated upfront. This clears the procurement, IT and EU-compliance bar that pure-service vendors stumble on.</p></div>
+    <div class="card"><h3>3 · Honesty as the moat</h3><p class="small">Every number grounded and shown summing, the benchmark cited inline, the motion a real file not a storyboard, the body claim scoped to faces, the one fidelity miss shown with a confession that matches the pixels, and a colorway conceded as a win rather than mis-confessed.</p></div>
+    <div class="card"><h3>4 · Stills to video, one platform</h3><p class="small">GPT Image 2, P-Image Try-On and Seedance 2.0 Fast in one place, proven by a real on-model turn clip. This is infrastructure, not a one-trick demo.</p></div>
+  </div>
+  <p class="callout">For a buyer who has sat through overclaiming AI demos, a confession that matches the pixels, plus a refusal to manufacture a fake miss, is the differentiator that earns the pilot.</p>
+</section>
+
+<!-- 12. MOTION -->
+<section class="page">
+  <p class="kick">Motion</p>
+  <h2>Real clips, not a storyboard.</h2>
+  <p>Five 9:16 on-model clips, one per casting, each generated from an already-approved try-on still via Seedance 2.0 Fast. Because the first frame is the still you inspected, the motion is provably the same garment and the same face. The drape and hem movement is the part a flat image cannot sell. These cut together into a 30-second branded film (in the package and on the microsite), which also carries one editorial-environment motion beat: the same red-satin look turning on a dusk terrace, motion grown from the editorial still.</p>
+  <div class="grid3">
+    <div class="card"><h3>The format</h3><p class="small">9:16, 720p, ~5s, the everyday PDP and social format. ~146 credits per clip.</p></div>
+    <div class="card"><h3>How it is made</h3><p class="small">First-frame mode reuses the approved still. No new shoot, no continuity gap between the photo and the video.</p></div>
+    <div class="card"><h3>What it proves</h3><p class="small">Stills-to-video on one platform is real, today, removing the last unproven capability from the pitch.</p></div>
+  </div>
+  <p class="small muted">The five clips ship as real files in this package (media/video) and play in the microsite. A cross-model morph (one garment moving across faces) is an optional capability, deliberately held behind a garment-shape and face-stability QA pass before it represents the brand. Any additional clip volumes in a rollout are projected at the platform rate (~120 to 400 credits per clip), labelled as estimates.</p>
+  <figure>
+    <img src="media/video_strip.jpg" alt="Five motion clips, one frame each">
+    <figcaption>One frame from each of the five real clips: M1 red satin, M2 floral, M3 jumpsuit, M4 linen separates, M5 slip dress.</figcaption>
+  </figure>
+</section>
+
+<!-- 13. PILOT -->
+<section class="page">
+  <p class="kick">Next step</p>
+  <h2>The pilot. Bounded, measurable, signable.</h2>
+  <p class="small"><b>Scope.</b> You pick ~50 to 100 live SKUs including at least one own-brand line (rights unambiguous) plus a fast-moving third-party set, and a casting brief of 3 to 5 identity-locked faces. You art-direct and approve; we provide the platform, onboarding and pipeline templates.</p>
+  <div class="grid2">
+    <div class="card"><h3>Phase 1 <span class="tag dark">days, no eng</span></h3>
+      <p class="small">Cost and lead-time baseline. Every SKU dressed on the agreed castings, into a shared review space, measured against your studio baseline. Includes the mandatory human-QA gate and the acceptance rubric.</p>
+      <p class="small"><b>Deliverables that convert claims to evidence:</b></p>
+      <ul class="small"><li>one La Redoute own-brand look rendered on your assets;</li><li>one look across XS-to-XXL builds (body-size, the returns lever);</li><li>2 to 3 alternate poses on one model;</li><li>2 to 3 localized variants.</li></ul>
+    </div>
+    <div class="card"><h3>Phase 2 <span class="tag dark">weeks, optional</span></h3>
+      <p class="small">A controlled PDP A/B on a SKU subset, measuring conversion and fit-related return rate against existing imagery, with minimum sample size, duration and pass thresholds agreed up front. Requires your engineering.</p>
+      <h3 style="margin-top:14px">Acceptance criteria</h3>
+      <p class="small">Art-director acceptance rate (share publishable unedited) against the rubric, a pattern/color/silhouette fidelity pass-rate, turnaround, and fully-loaded cost per look.</p>
+    </div>
+  </div>
+  <h3>Commercials, decided not blank</h3>
+  <p class="small">A fixed pilot price, or free with the reason stated; a directional platform-license and annual-commit range for rollout; an estimated credit consumption for the agreed SKU x casting x motion volume; asset ownership by La Redoute; usage and IP terms for third-party-derived imagery; a directional indemnity stance; named SLA values; and a rate-lock so the Phase-2 price is known. <b>Decision gate:</b> a dated go / no-go with the rollout price and the single number the pilot was built to produce.</p>
+  <p class="callout"><b>Emmanuel offers a 30-minute working session to pick the SKU slice and lock the success metric.</b><br>Cordialement.</p>
+</section>
+
+<!-- 14. APPENDIX -->
+<section class="page">
+  <p class="kick">Appendix</p>
+  <h2>Method, costs, provenance, sources.</h2>
+  <h3>The looks (live laredoute.fr SKUs)</h3>
+  <table class="small">
+    <tr><th>Code</th><th>Look</th><th>Price</th></tr>
+    <tr><td>S1</td><td>Robe chemisier imprimé floral</td><td>39,99 €</td></tr>
+    <tr><td>S2</td><td>Combinaison imprimé floral (jumpsuit)</td><td>49,99 €</td></tr>
+    <tr><td>S3</td><td>Robe asymétrique imprimé fleuri</td><td>79,99 €</td></tr>
+    <tr><td>S4</td><td>Robe satinée asymétrique</td><td>69,99 €</td></tr>
+    <tr><td>S5</td><td>Robe bustier en jean</td><td>49,99 €</td></tr>
+    <tr><td>S6</td><td>Robe à fleurs cut-out</td><td>79,99 €</td></tr>
+    <tr><td>C7 to C10</td><td>Four multi-piece combinations (shirt + trousers, top + skirt, blouse + trousers, shirt + trousers + blazer)</td><td>from 72,98 €</td></tr>
+  </table>
+  <h3>Reconstructed credit total (~325)</h3>
+  <table class="small ledger">
+    <tr><th>Item</th><th>Credits</th></tr>
+    <tr><td>Smoke test (master variants + 1 swap + 1 re-pose)</td><td>~77</td></tr>
+    <tr><td>5 house masters (incl. moderation and pose re-fires)</td><td>~96</td></tr>
+    <tr><td>50 try-on swaps (~3 each)</td><td>~150</td></tr>
+    <tr><td><b>Total (stills)</b></td><td><b>~323</b></td></tr>
+    <tr><td>Motion: 5 clips at ~146 (separate capability)</td><td>~730</td></tr>
+  </table>
+  <p class="small">GPT Image 2 medium: ~12 credits, ~45s. Pruna P-Image Try-On: ~3 credits, up to 11 garment references. Seedance 2.0 Fast: ~146 credits at 5s / 720p.</p>
+  <h3>Honest gotchas (the show-your-work)</h3>
+  <ul class="small">
+    <li>GPT Image 2 output moderation occasionally re-fired a master; resolved with a more modest base wardrobe.</li>
+    <li>Pose wording matters: "glance over shoulder" produced a back view; corrected to front-facing.</li>
+    <li>C9 is a faithful render of a mislabeled SKU (burgundy "Jean large"), with a minor flare-straightening note. A win, not a miss.</li>
+    <li>C10 is a silhouette substitution: short-to-long sleeve, crop-to-full-length tucked, stripe faded. The reason the QA gate is mandatory.</li>
+  </ul>
+  <h3>Sources (studio cost benchmark)</h3>
+  <p class="src">squareshot.com, "Guide to Product Photography Rates" (per-image and one-day-shoot figures); blendnow.com, "The True Cost of a Professional Photoshoot" (day-rate line items); nightjar.so, "The Real Cost of Product Photography" (effective-cost multiple). Figures are public industry benchmarks, not La Redoute data; replace with your blended cost.</p>
+  <p class="tiny">Garments © Mango, sourced via laredoute.fr for one-time evaluation, quarantined from production claims. Faces are AI-generated. Built in Scenario on the Public Data project. Prepared for La Redoute by Scenario, Inc.</p>
+</section>
+
+</body>
+</html>
