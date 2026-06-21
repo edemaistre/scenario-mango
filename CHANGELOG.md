@@ -2,6 +2,8 @@
 
 ## v7 — 2026-06-21 — Review pass: layout harmonization, references, navigation
 
+- **Hero lead** now reads "from a single image" (was "single flat packshot").
+- **New "For the group" section** ("One platform, every team in the group"): use-case cards for Creative & studio, E-commerce & PDP, Performance & UA, Merchandising & buying, International & markets, and Brand/social/CRM. Added to the nav; sections renumbered (use cases 10, enterprise 11, pilot 12).
 - **Hero sound button** moved to the top-left so it no longer covers the reel's title.
 - **Today / Tomorrow** columns harmonized to equal height (the live PDP screenshot now fills its card).
 - **"Off the grey" (ceiling)** first row is now a consistent trio of one face (Sofia) and one garment: grey studio still, the same person placed in a Paris scene, then that same scene in motion. Equal heights. Removed the standalone honesty pill (the hero lead and footer still label the editorial/lifestyle scenes).
