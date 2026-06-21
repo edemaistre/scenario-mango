@@ -4,6 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scenario for Mango: on-model imagery from your own catalog</title>
+<meta name="description" content="Scenario rebuilt Mango's own product imagery from a single image: every face, every market, in motion, for cents of compute. A working proposal.">
+<meta name="theme-color" content="#FAF8F5">
+<link rel="icon" href="media/favicon.png">
+<link rel="apple-touch-icon" href="media/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scenario-mango-production.up.railway.app/">
+<meta property="og:title" content="Scenario for Mango: on-model imagery from your own catalog">
+<meta property="og:description" content="From a single image: every face, every market, in motion, for cents of compute. A working proposal.">
+<meta property="og:image" content="https://scenario-mango-production.up.railway.app/media/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scenario for Mango">
+<meta name="twitter:description" content="From a single image to a full campaign, in minutes. A working proposal.">
+<meta name="twitter:image" content="https://scenario-mango-production.up.railway.app/media/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -212,6 +225,42 @@
   /* numbers: right column is an equal-height panel */
   .numinfo{display:flex;flex-direction:column;gap:14px;justify-content:center}
   .numinfo .callout{margin-top:0}
+  /* === v8 polish === */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+  nav{position:sticky}
+  nav .progress{position:absolute;left:0;bottom:-1px;height:2px;background:var(--accent);width:0;transition:width .12s linear}
+  nav .links a.active{color:var(--ink);font-weight:700}
+  .stats b{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:28px;letter-spacing:-.01em}
+  /* brand-DNA house-cast strip */
+  .dna{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:8px 0 18px}
+  @media(max-width:760px){.dna{grid-template-columns:repeat(3,1fr)}}@media(max-width:430px){.dna{grid-template-columns:repeat(2,1fr)}}
+  .dna figure{margin:0}
+  .dna img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;background:#ece8e1}
+  .dna .cap{font:500 10px/1.3 "JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);margin-top:7px;text-align:center}
+  /* inline fidelity proof */
+  .fid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:8px 0 4px}
+  @media(max-width:760px){.fid{grid-template-columns:1fr}}
+  .fid figure{margin:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+  .fid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#ece8e1}
+  .fid figcaption{padding:11px 14px;font-size:12.5px;color:#2a2a2e}
+  .fid figcaption b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--good);margin-bottom:3px;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+  /* pipeline diagram */
+  .pipe{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:16px 18px;margin:6px 0 18px;font-size:13px}
+  .pipe .node{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-weight:650}
+  .pipe .node.k{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .pipe .arr{color:var(--accent);font-weight:800}
+  .pipe .fan{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--muted)}
+  @media(max-width:760px){.pipe{font-size:11.5px;gap:7px}.pipe .node{padding:6px 9px}}
+  /* corner provenance tag */
+  figure.tagged{position:relative}
+  .provtag{position:absolute;top:9px;left:9px;background:rgba(20,20,26,.6);color:#fff;font:500 9px/1.25 "JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.02em;padding:4px 7px;border-radius:5px;max-width:86%;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);pointer-events:none}
+  /* lightbox enter + sku chip */
+  #lb .stage{animation:lbin .19s ease both}
+  @keyframes lbin{from{opacity:.45;transform:scale(.965)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){#lb .stage{animation:none}}
+  #lb .skuchip{display:inline-block;font:600 11px/1 "JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.04em;color:#fff;background:var(--accent);border-radius:20px;padding:5px 11px;margin:0 0 9px}
 </style>
 </head>
 <body>
@@ -219,16 +268,18 @@
 <nav><div class="wrap">
   <b style="display:inline-flex;align-items:center;gap:9px"><img src="media/scenario-full-black.svg" alt="Scenario" style="height:21px;display:block"> <span class="muted" style="font-weight:500">for Mango</span></b>
   <div class="links">
-    <a href="#today">Today &rarr; Tomorrow</a>
-    <a href="#everyface">Every face</a>
-    <a href="#everylook">Every look</a>
-    <a href="#ceiling">Off the grey</a>
+    <a href="#today">Today</a>
+    <a href="#everyface">Faces</a>
+    <a href="#everylook">Looks</a>
+    <a href="#ceiling">Editorial</a>
     <a href="#geo">Localize</a>
     <a href="#channels">Channels</a>
     <a href="#automate">Automate</a>
-    <a href="#usecases">Use cases</a>
+    <a href="#trained">Trained</a>
+    <a href="#usecases">Teams</a>
     <a href="#pilot">Pilot</a>
   </div>
+  <div class="progress" id="navProgress"></div>
 </div></nav>
 
 <!-- HERO -->
@@ -236,7 +287,7 @@
   <div>
     <p class="kick">Scenario &times; Mango &middot; a working proposal</p>
     <h1>From one packshot to a full campaign, in minutes.</h1>
-    <p class="lead">We rebuilt Mango's own product imagery with Scenario. From a single image, with no shoot, no model booking and no samples: a diverse on-model cast, lifestyle and editorial scenes, motion for every PDP and social format, and a variant for every market. Cents of compute, minutes of time, and the whole chain can run on autopilot. This is what it looks like across your catalog.</p>
+    <p class="lead">We rebuilt Mango's own product imagery with Scenario. From a single image, with no shoot, no model booking and no samples: a diverse on-model cast, lifestyle and editorial scenes, motion for every PDP and social format, and a variant for every market, all on a house cast you train once and own. Cents of compute, minutes of time, every asset your own product, and the whole chain can run on autopilot. This is what it looks like across your catalog.</p>
     <p class="small muted">Everything on this page was generated from real Mango products listed on laredoute.fr. Faces are AI-generated; editorial and lifestyle scenes are a labelled capability demonstration, not a shipped campaign. Click any image or video to enlarge it and follow it back to the live product page.</p>
   </div>
   <div class="reelwrap">
@@ -398,6 +449,15 @@
   <p class="kick"><span class="n">07</span> The part that scales</p>
   <h2>Automate it: agents &middot; MCP &middot; Skills.</h2>
   <p class="lead">Nobody clicks buttons. Scenario is exposed over MCP (the open protocol agents speak), so an agent in your stack watches your PIM, and when a new SKU lands it runs the entire chain end to end, then publishes the SKU-keyed assets. Skills encode your house casting, art direction and acceptance rubric, so every run is on-brand.</p>
+  <div class="pipe">
+    <span class="node k">1 image in</span>
+    <span class="arr">&rarr;</span>
+    <span class="node">master</span><span class="node">try-on</span><span class="node">motion</span>
+    <span class="arr">&rarr;</span>
+    <span class="fan"><span>stills &middot; lifestyle &middot; editorial</span><span>localized &middot; social cuts &middot; video</span></span>
+    <span class="arr">&rarr;</span>
+    <span class="node k">PDP &middot; social &middot; DAM</span>
+  </div>
   <div class="flow">
     <div class="step"><b>1 New SKU</b>Packshot lands in your PIM.</div>
     <div class="step"><b>2 Generate</b>Agent calls Scenario over MCP: master, try-on, lifestyle, video, localized + social cuts.</div>
@@ -417,18 +477,47 @@
   </div>
 </div></section>
 
+<!-- TRAINED ON YOU -->
+<!-- Source of truth for claims = DPA/MSA v2.2, NOT scenario.com marketing. Never name the engine or write "LoRA" in customer copy (guardrail 5). No-training guarantee is the contract figure. The trained Mango model is a pilot deliverable; the cast shown is illustrative. -->
+<section id="trained"><div class="wrap">
+  <p class="kick"><span class="n">08</span> Trained on you</p>
+  <h2>Train it on Mango, not on the internet.</h2>
+  <p class="lead">Scenario trains a private model on your art bible, lookbooks, house casting and colour standards, on the order of five to a hundred reference images, so the house cast, the Mango light, print scale and editorial grammar are learned and held, not prompted shot by shot. Every future generation is on-brand by construction.</p>
+  <div class="dna">
+    <figure><img class="zoom" data-gal="dna" data-full="media/looks/S2__M1.jpg" data-title="House identity &middot; Sofia" data-meta="One trained house identity, reusable on every SKU" data-sku="602618087" src="media/looks/S2__M1.jpg" alt="house identity Sofia"><div class="cap">Sofia</div></figure>
+    <figure><img class="zoom" data-gal="dna" data-full="media/looks/S1__M2.jpg" data-title="House identity &middot; Mei" data-meta="One trained house identity, reusable on every SKU" data-sku="602597995" src="media/looks/S1__M2.jpg" alt="house identity Mei"><div class="cap">Mei</div></figure>
+    <figure><img class="zoom" data-gal="dna" data-full="media/looks/S6__M3.jpg" data-title="House identity &middot; Amara" data-meta="One trained house identity, reusable on every SKU" data-sku="602626907" src="media/looks/S6__M3.jpg" alt="house identity Amara"><div class="cap">Amara</div></figure>
+    <figure><img class="zoom" data-gal="dna" data-full="media/looks/S3__M4.jpg" data-title="House identity &middot; Elin" data-meta="One trained house identity, reusable on every SKU" data-sku="602545501" src="media/looks/S3__M4.jpg" alt="house identity Elin"><div class="cap">Elin</div></figure>
+    <figure><img class="zoom" data-gal="dna" data-full="media/looks/S5__M5.jpg" data-title="House identity &middot; Priya" data-meta="One trained house identity, reusable on every SKU" data-sku="602602883" src="media/looks/S5__M5.jpg" alt="house identity Priya"><div class="cap">Priya</div></figure>
+  </div>
+  <p class="small muted" style="margin:0 0 16px">Your house cast: trained once, reused on every SKU. The fifty looks below are these same five identities held across the whole assortment, the consistency a trained model gives you.</p>
+  <div class="twocol" style="align-items:start">
+    <div class="panel"><h3>Skills vs a trained model</h3>
+      <p class="small"><b>Skills</b> encode your art direction and acceptance rubric as reusable instructions (section 07). A <b>trained model</b> goes further: your house style is held in the model itself, so casting, light and print scale come back right by default, not by prompt.</p>
+    </div>
+    <div class="panel"><p class="callout small" style="margin-top:0"><b>Your style, versioned and yours.</b> The trained model is private to Mango and never shared, and a contractual no-training guarantee means your inputs and outputs never train Scenario or third-party models. It trains only on assets you warrant you have the rights to use.</p></div>
+  </div>
+  <p class="small muted" style="margin-top:14px"><span class="pill" style="background:#fbf2dd;color:var(--warn)">pilot deliverable</span> The Mango-trained model is a pilot deliverable Scenario stands up on your own assets; the cast shown here is an illustrative house identity, not Mango's trained model.</p>
+</div></section>
+
 <!-- EXPLORER -->
 <section id="explorer"><div class="wrap">
-  <p class="kick"><span class="n">08</span> The proof, on your own catalog</p>
+  <p class="kick"><span class="n">09</span> The proof, on your own catalog</p>
   <h2>One packshot in. Fifty on-model images out.</h2>
   <p class="lead">Real Mango SKUs from laredoute.fr on five house models. Each row starts with the actual source packshot on the left, then the same garment generated on five faces. Click any face to open the source packshot beside the generated result, step through the set, and follow it back to the live product page. This is the human-QA gate the pilot formalizes.</p>
+  <div class="fid">
+    <figure><img src="media/fid_s2.jpg" alt="floral print fidelity" loading="lazy"><figcaption><b>Print holds</b>The large floral repeat keeps its scale across the body, no smearing or warping.</figcaption></figure>
+    <figure><img src="media/c9_win.jpg" alt="burgundy colourway fidelity" loading="lazy"><figcaption><b>Colour holds</b>An unusual burgundy wide-leg reproduced correctly from a mislabeled source SKU.</figcaption></figure>
+    <figure><img src="media/c10_render.jpg" alt="stripe and tailoring fidelity" loading="lazy"><figcaption><b>Stripe &amp; drape hold</b>Stripe alignment, seams and tailored drape carried from the real packshot.</figcaption></figure>
+  </div>
+  <p class="small muted" style="margin:2px 0 18px">Fidelity to the source garment, verified by hand against the packshot. A shopper who trusts the on-model image is less likely to be surprised on delivery.</p>
   <div class="toggle"><button id="bLook" class="on" onclick="setView('bylook')">One garment, every face</button><button id="bFace" onclick="setView('byface')">One face, every look</button></div>
   <div id="grid" class="bylook"></div>
 </div></section>
 
 <!-- NUMBERS -->
 <section id="numbers"><div class="wrap">
-  <p class="kick"><span class="n">09</span> The numbers</p>
+  <p class="kick"><span class="n">10</span> The numbers</p>
   <h2>Unit economics, with the sources on the page.</h2>
   <div class="vs">
     <div class="vs-side studio"><span class="vs-lbl">Traditional studio</span><b class="vs-fig">~$46 to ~$96</b><span class="vs-sub">per finished on-model image</span></div>
@@ -445,11 +534,12 @@
         <tr><td>Studio rental, per day</td><td>$300 to $2,000</td><td class="s">not required</td></tr>
         <tr><td>Hair &amp; make-up, per day</td><td>$800 to $2,400</td><td class="s">not required</td></tr>
         <tr><td>Retouching, per image</td><td>$20 to $80</td><td class="s">included</td></tr>
-        <tr><td>Time to first asset</td><td>days to weeks</td><td class="s">minutes</td></tr></table>
-      <p class="small muted" style="margin:8px 0 0">Effective studio cost runs about 2 to 3x the quoted figure once coordination and re-shoots are counted.</p>
+        <tr><td>Time to first asset</td><td>days to weeks</td><td class="s">minutes</td></tr>
+        <tr><td>Human QA / approval</td><td>part of retouch + coordination</td><td class="s">non-zero, the cost that scales</td></tr></table>
+      <p class="small muted" style="margin:8px 0 0">Effective studio cost runs about 2 to 3x the quoted figure once coordination and re-shoots are counted. The ~$0.15 is compute only; human QA and art direction sit on top, and still land an order of magnitude below a studio image.</p>
     </div>
     <div class="panel numinfo">
-      <p class="callout small" style="margin-top:0"><b>Illustrative ROI:</b> shoots avoided per category per year, plus the channel and localization variants you simply could not shoot. The pilot measures your real conversion and return figures against your baseline.</p>
+      <p class="callout small" style="margin-top:0"><b>Illustrative ROI (labelled illustrative):</b> the win compounds across catalog breadth (shoots avoided per category per year), market count, format and aspect-ratio count, and refresh cadence, plus the channel, localization and size variants you simply could not shoot at any budget. Unit cost wins the analyst; portfolio scale wins the sponsor. The pilot measures your real conversion and return figures against your own baseline.</p>
       <p class="small muted" style="margin:0"><b>Read this as directional, not exact.</b> These are public, third-party benchmarks and rough best-effort estimates. Methodology, scope, market and product complexity vary widely by vendor, so treat the figures as directional rather than precise. They are not Mango's actual cost data, and the pilot is designed to measure real numbers against Mango's own internal baseline.</p>
     </div>
   </div>
@@ -458,7 +548,7 @@
 
 <!-- USE CASES -->
 <section id="usecases"><div class="wrap">
-  <p class="kick"><span class="n">10</span> For the group</p>
+  <p class="kick"><span class="n">11</span> For the group</p>
   <h2>One platform, every team in the group.</h2>
   <p class="lead">The same engine serves the whole organization, from the studio that art-directs the campaign to the performance team testing creative the day a SKU lands.</p>
   <div class="props" style="grid-template-columns:repeat(3,1fr)">
@@ -474,7 +564,7 @@
 
 <!-- ENTERPRISE / SCALE -->
 <section id="rights"><div class="wrap">
-  <p class="kick"><span class="n">11</span> Enterprise-ready</p>
+  <p class="kick"><span class="n">12</span> Enterprise-ready</p>
   <h2>Built for teams that can't compromise.</h2>
   <p class="lead">The same creative-AI infrastructure Scenario already runs in production for global brands and agencies: secure, governed, and built to scale from this pilot to your whole catalog.</p>
   <div class="logos">
@@ -485,7 +575,7 @@
     <img class="alan" src="media/logos/alan.png" alt="Alan">
     <img class="within" src="media/logos/within.svg" alt="Within">
   </div>
-  <p class="small muted" style="margin:10px 0 24px">A few of the teams building with Scenario.</p>
+  <p class="small muted" style="margin:10px 0 24px">A few of the global brands and agencies running creative-AI in production on Scenario today.</p>
   <div class="props" style="grid-template-columns:repeat(3,1fr)">
     <div class="prop"><b>Your products, your rights</b><span>Everything here is your own Mango product, captured from laredoute.fr as a one-time evaluation artifact. You own every generated asset, and a contractual no-training guarantee means your inputs and outputs never train Scenario or third-party models. AI faces; real-talent option.</span></div>
     <div class="prop"><b>Security at every layer</b><span>SOC 2 Type II (independently audited), AES-256 at rest, SSO / SAML (Okta, Azure AD), complete activity logging, and a versioned sub-processor list at <a class="inl" href="https://trust.scenario.com" target="_blank" rel="noopener">trust.scenario.com</a>. US (AWS) hosting; GDPR via EU Standard Contractual Clauses and an appointed EU representative; CCPA service-provider terms.</span></div>
@@ -496,7 +586,7 @@
 
 <!-- PILOT -->
 <section id="pilot"><div class="wrap">
-  <p class="kick"><span class="n">12</span> Next step</p>
+  <p class="kick"><span class="n">13</span> Next step</p>
   <h2>It works. Let us prove it on your catalog.</h2>
   <p class="lead">Everything on this page runs today, on real Mango SKUs, on the Scenario platform: on-model casting, lifestyle, motion, market localization, social cuts, and the agent automation that ties them together. Nothing here is a prototype waiting to be built. Point us at a slice of your assortment and we can show the same on your own products, in days.</p>
   <div class="props" style="grid-template-columns:repeat(4,1fr);margin-top:8px">
@@ -506,10 +596,20 @@
     <div class="prop"><b><a class="cardlink" href="https://scenario.com/enterprise" target="_blank" rel="noopener">The posture &rarr;</a></b><span>US (AWS) hosting, GDPR via SCCs + EU representative, CCPA service-provider terms, contractual no-training guarantee, SOC 2 Type II, assets owned by you.</span></div>
   </div>
   <p class="linkrow small" style="margin-top:16px">Explore it yourself: <a href="https://scenario.com" target="_blank" rel="noopener">scenario.com</a> &middot; <a href="https://scenario.com/models" target="_blank" rel="noopener">the models</a> &middot; <a href="https://scenario.com/providers" target="_blank" rel="noopener">the providers</a> &middot; <a href="https://mcp.scenario.com/" target="_blank" rel="noopener">connect over MCP</a> &middot; <a href="https://app.scenario.com" target="_blank" rel="noopener">app.scenario.com</a> &middot; <a href="https://scenario.com/enterprise" target="_blank" rel="noopener">enterprise</a> &middot; <a href="https://trust.scenario.com" target="_blank" rel="noopener">trust center</a></p>
+  <div class="panel" style="margin-top:22px">
+    <h3>What the pilot looks like</h3>
+    <div class="props" style="grid-template-columns:repeat(4,1fr);margin-top:8px">
+      <div class="prop"><b>You bring</b><span>About 10 SKUs from one category, plus packshots you warrant you have the rights to use.</span></div>
+      <div class="prop"><b>We deliver</b><span>On-model stills, motion, localized cuts and social variants on a locked house cast, in days. Headline deliverable: body-size and fit across XS to XXL, on your own products.</span></div>
+      <div class="prop"><b>We measure</b><span>Cost per finished asset vs your studio cost, time from SKU-live to sellable PDP, variants produced and human-QA pass rate, all against your own baseline.</span></div>
+      <div class="prop"><b>You keep</b><span>Every generated asset, and the trained model. No invented numbers, just your figures measured against your baseline.</span></div>
+    </div>
+  </div>
   <div style="text-align:center;margin-top:34px">
     <h3 style="font-size:22px">Pick a slice of your catalog. We will show you the same, on your products.</h3>
     <p class="muted">A 30-minute working session with Emmanuel de Maistre, Cofounder &amp; CEO.</p>
-    <a class="cta" href="https://scenario.com">Book the working session</a>
+    <a class="cta" href="mailto:emmanuel@scenario3d.com?subject=Mango%20x%20Scenario%20pilot&body=Hi%20Emmanuel,%20we%27d%20like%20to%20book%20the%2030-minute%20working%20session%20on%20a%20slice%20of%20our%20catalog.">Book the working session</a><!-- TODO: confirm booking URL with Emmanuel (e.g. a LinkTime/calendar link) -->
+    <p class="small muted" style="margin-top:12px">Or reach Emmanuel directly at <a class="inl" href="mailto:emmanuel@scenario3d.com">emmanuel@scenario3d.com</a>.</p>
   </div>
 </div></section>
 
@@ -537,10 +637,10 @@ const LOOKS=[
  {c:'S4',name:'Robe satinee asymetrique',price:'69,99 EUR',sku:'602627680',pack:['garment_04_satin_dress.jpg']},
  {c:'S5',name:'Robe bustier en jean',price:'49,99 EUR',sku:'602602883',pack:['garment_05_denim_bustier_dress.jpg']},
  {c:'S6',name:'Robe a fleurs cut-out',price:'79,99 EUR',sku:'602626907',pack:['garment_06_metallic_cutout_dress.jpg']},
- {c:'C7',name:'Chemise lin + pantalon wide-leg lin',price:'89,98 EUR',sku:'602619334 + 602629677',pack:['garment_07a_linen_shirt.jpg','garment_07b_linen_wideleg.jpg']},
- {c:'C8',name:'Top maille + jupe lin brodee',price:'72,98 EUR',sku:'602618819 + 602622498',pack:['garment_08a_knit_top.jpg','garment_08b_linen_skirt.jpg']},
- {c:'C9',name:'Blouse florale + pantalon wide-leg',price:'85,98 EUR',sku:'602584398 + 602507860',pack:['garment_09a_floral_blouse.jpg','garment_09b_wide_jeans.jpg'],note:{t:'Colorway win: burgundy reproduced from a mislabeled SKU.',k:'good'}},
- {c:'C10',name:'Chemise rayee + pantalon + blazer lin',price:'125,97 EUR',sku:'602617998 + 602572388 + 602562535',pack:['garment_10a_striped_shirt.jpg','garment_10b_linen_trousers.jpg','garment_10c_linen_blazer.jpg']}
+ {c:'C7',name:'Chemise lin + pantalon wide-leg lin',price:'89,98 EUR',sku:'602619334 + 602629677',pack:['garment_07a_linen_shirt.jpg','garment_07b_linen_wideleg.jpg'],disp:'combo_C7.jpg'},
+ {c:'C8',name:'Top maille + jupe lin brodee',price:'72,98 EUR',sku:'602618819 + 602622498',pack:['garment_08a_knit_top.jpg','garment_08b_linen_skirt.jpg'],disp:'combo_C8.jpg'},
+ {c:'C9',name:'Blouse florale + pantalon wide-leg',price:'85,98 EUR',sku:'602584398 + 602507860',pack:['garment_09a_floral_blouse.jpg','garment_09b_wide_jeans.jpg'],disp:'combo_C9.jpg',note:{t:'Colorway win: burgundy reproduced from a mislabeled SKU.',k:'good'}},
+ {c:'C10',name:'Chemise rayee + pantalon + blazer lin',price:'125,97 EUR',sku:'602617998 + 602572388 + 602562535',pack:['garment_10a_striped_shirt.jpg','garment_10b_linen_trousers.jpg','garment_10c_linen_blazer.jpg'],disp:'combo_C10.jpg'}
 ];
 const grid=document.getElementById('grid');
 const li=(c,m)=>`media/looks/${c}__${m}.jpg`;
@@ -553,8 +653,8 @@ function render(v){grid.className=v;let h='';
  }}
  else{for(const M of MODELS){const gal='face-'+M.id;h+=`<div class="rowhead">${M.name} <span class="price">${M.desc}</span></div>`;for(const L of LOOKS)h+=cell(L,M,L.c,gal);}}
  grid.innerHTML=h;}
-function refCell(L,gal){const p='media/packshots/'+L.pack[0];const multi=L.pack.length>1?` &middot; +${L.pack.length-1}`:'';return `<button class="ref zoom" data-gal="${gal}" data-kind="image" data-full="${p}" data-title="${esc(L.name)} &middot; source packshot" data-meta="Source packshot from laredoute.fr &middot; ${L.price} &middot; Mango &middot; SKU ${L.sku}" data-sku="${L.sku}"><div class="refbox"><span class="reftag">packshot in${multi}</span><img loading="lazy" src="${p}" alt=""></div><div class="rl">Source &middot; laredoute.fr</div></button>`;}
-function cell(L,M,cap,gal){const src=li(L.c,M.id);return `<button class="cell zoom" data-gal="${gal}" data-kind="image" data-full="${src}" data-title="${esc(L.name)}" data-meta="${L.price} &middot; Mango &middot; SKU ${L.sku} &middot; on ${M.name} (${M.desc})" data-sku="${L.sku}" data-pack="${L.pack[0]}"><img loading="lazy" src="${src}"><div class="cap">${cap}</div></button>`;}
+function refCell(L,gal){const p='media/packshots/'+(L.disp||L.pack[0]);const multi=L.pack.length>1?` &middot; ${L.pack.length} pieces`:'';return `<button class="ref zoom" data-gal="${gal}" data-kind="image" data-full="${p}" data-title="${esc(L.name)} &middot; source packshot" data-meta="Source packshot from laredoute.fr &middot; ${L.price} &middot; Mango &middot; SKU ${L.sku}" data-sku="${L.sku}"><div class="refbox"><span class="reftag">packshot in${multi}</span><img loading="lazy" src="${p}" alt=""></div><div class="rl">Source &middot; laredoute.fr</div></button>`;}
+function cell(L,M,cap,gal){const src=li(L.c,M.id);return `<button class="cell zoom" data-gal="${gal}" data-kind="image" data-full="${src}" data-title="${esc(L.name)}" data-meta="${L.price} &middot; Mango &middot; SKU ${L.sku} &middot; on ${M.name} (${M.desc})" data-sku="${L.sku}" data-pack="${L.disp||L.pack[0]}"><img loading="lazy" src="${src}"><div class="cap">${cap}</div></button>`;}
 function setView(v){document.getElementById('bLook').classList.toggle('on',v==='bylook');document.getElementById('bFace').classList.toggle('on',v==='byface');render(v);}
 render('bylook');
 
@@ -576,6 +676,7 @@ function show(){
   document.getElementById('lbTitle').textContent=it.title;
   document.getElementById('lbMeta').textContent=it.meta;
   const links=[];
+  if(it.sku) links.push(`<span class="skuchip">SKU ${String(it.sku).split('+')[0].trim()}</span>`);
   if(it.sku) links.push(`<a href="${prodUrl(it.sku)}" target="_blank" rel="noopener">View on laredoute.fr &rarr;</a>`);
   document.getElementById('lbLinks').innerHTML=links.join('');
   const multi=CUR.items.length>1;
@@ -610,6 +711,25 @@ document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return
   function off(){ evs.forEach(function(e){window.removeEventListener(e,on);}); }
   evs.forEach(function(e){window.addEventListener(e,on,{once:true,passive:true});});
   sync();
+})();
+/* scroll-reveal + nav progress + active-section (subtle, reduced-motion aware) */
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce && 'IntersectionObserver' in window){
+    var blocks=[].slice.call(document.querySelectorAll('section > .wrap'));
+    blocks.forEach(function(b){ b.classList.add('reveal'); });
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:0.08,rootMargin:'0px 0px -7% 0px'});
+    blocks.forEach(function(b){ io.observe(b); });
+  }
+  var bar=document.getElementById('navProgress');
+  function prog(){ if(!bar)return; var h=document.documentElement; var max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%'; }
+  window.addEventListener('scroll',prog,{passive:true}); prog();
+  var links=[].slice.call(document.querySelectorAll('nav .links a')); var map={};
+  links.forEach(function(a){ var id=a.getAttribute('href').slice(1); if(document.getElementById(id)) map[id]=a; });
+  if('IntersectionObserver' in window){
+    var no=new IntersectionObserver(function(es){es.forEach(function(en){ var a=map[en.target.id]; if(!a)return; if(en.isIntersecting){ links.forEach(function(x){x.classList.remove('active');}); a.classList.add('active'); } });},{rootMargin:'-45% 0px -50% 0px'});
+    Object.keys(map).forEach(function(id){ no.observe(document.getElementById(id)); });
+  }
 })();
 </script>
 </body>

@@ -1,5 +1,10 @@
 # ROADMAP
 
+## v8 follow-ups (no generation)
+- **Mirror v8 into the deck for full parity (guardrail 9).** The site gained a "Trained on you" section (08), an inline fidelity-proof block, a "Human QA / approval" numbers row + compute-only footnote, a scoped "What the pilot looks like" panel, and a pipeline diagram. The deck (deck.html / PDF) was NOT re-synced this round (it is the secondary leave-behind and is excluded from the live deploy). Add a "Trained on your brand DNA" page + the QA row to deck.html and re-render before the deck is sent.
+- **Swap the booking CTA** (`mailto:emmanuel@scenario3d.com`) for Emmanuel's real calendar/LinkTime link.
+- **Confirm the reference wall** (Lacoste/Ogilvy/Epic Games/Deel/Alan/Within) is the intended set; CLAUDE.md's older list names only four. Confirm within.co vs within.com.
+
 ## v7 pending (needs new Scenario generation, GATE 1 cost approval)
 - **Fix the C7/C8/C9 combo bottoms.** The multi-piece looks render the bottom garment off: C7 "linen wide-leg" rendered near-black, C9 wide-leg rendered straight (not wide), C8 skirt is faint. Re-generate those try-ons (correct colours, wide-leg cut, skirt visible). Estimate: a few dollars of credits per look x models.
 - **Replace the satin dress (S4).** Remove "Robe satinee asymetrique" and scrape + generate a better Mango garment from laredoute.fr (master is reused; ~$0.15 x 5 try-ons + a packshot). Then drop S4 from LOOKS and add the new look.

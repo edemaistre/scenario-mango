@@ -1,5 +1,18 @@
 # Changelog
 
+## v8 — 2026-06-22 — Push to 10/10 (judge-panel pass, additive only)
+
+Driven by a 5-lens expert judge panel (avg 8.54, target 10). All additive, nothing removed, honesty spine intact.
+- **NEW section 08 "Trained on you"** ("Train it on Mango, not on the internet."): frames Scenario training a private model on Mango's art bible, house casting and colour standards (the scenario.com "built on your DNA" story), shown via a 5-identity house-cast strip and the 50-look consistency below. Distinguishes Skills (reusable instructions) from a trained model (style held in the model). Honest: never names the engine or "LoRA"; the trained model is a pilot deliverable; trains only on rights-warranted assets; contractual no-training guarantee. Sections renumbered (explorer 09, numbers 10, teams 11, enterprise 12, pilot 13); nav gains "Trained".
+- **Hero lead** seeds ownership ("a house cast you train once and own", "every asset your own product").
+- **Inline fidelity-proof block** in the explorer (Print holds / Colour holds / Stripe and drape hold) using the verified fid_s2 / c9_win / c10_render crops, framed as fidelity-to-source, not a returns number.
+- **Numbers:** added a "Human QA / approval" row + a "compute only, QA on top" footnote; ROI callout reframed to portfolio-scale compounding (still labelled illustrative, no invented figures).
+- **Pilot:** a scoped "What the pilot looks like" panel (you bring / we deliver / we measure / you keep), measured against the client's own baseline; the primary CTA is now a real mailto booking link (TODO: swap for a calendar link).
+- **"How it works" pipeline diagram** in Automate (one image, master/try-on/motion, channels, PDP/social/DAM).
+- **Polish:** favicon + OpenGraph/Twitter share card (media/og.jpg) + meta description + theme-color; scroll-reveal (reduced-motion aware); nav scroll-progress bar + active-section highlight; serif big-number treatment in the stat band; lightbox SKU chip + enter animation; grounded logo-wall caption.
+- `.railwayignore`: un-excluded fid_s2 / c9_win / c10_render (now shown on the live site).
+- **Deck not re-synced this round** (secondary, excluded from the live deploy); see ROADMAP to mirror the Trained section + v8 claims into deck.html for full parity.
+
 ## v7 — 2026-06-21 — Review pass: layout harmonization, references, navigation
 
 - **Hero lead** now reads "from a single image" (was "single flat packshot").
