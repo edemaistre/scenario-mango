@@ -1,5 +1,10 @@
 # BUGS and known issues
 
+## Fixed in v6 (2026-06-21)
+- **Explorer ref tile too tall / white box.** The source packshot tile in the "one garment, every face" view rendered taller than the model tiles and sat inside a white padded/bordered box (`.refbox` had `border`, `padding`, `background:#fff`, `object-fit:contain`). Fixed: the row is now a single six-column grid (packshot + 5 models), and the packshot fills its tile edge to edge (`object-fit:cover`, no padding/border), so all six tiles share one height (measured: 288px each).
+- **Lightbox before/after unequal heights / white box.** The source packshot and the generated image opened at different heights, the packshot in a white box (`background:#fff`). Fixed: both panes use a fixed `height` (72vh) with `object-fit:contain` and no background box, so they are always the same height (measured: 648px each). The white that remains on a packshot is the product photo's own baked-in background, not a CSS box, and cannot be removed without re-cropping the source.
+- **Deck still used Scenario "credits".** The method table and motion cards in `deck.html` quoted "~12 credits / ~3 credits / ~176 credits / ~120 to 400 credits"; converted to dollars (~$0.60 / ~$0.15 / ~$9 / ~$6 to $20) to match the dollars-not-credits rule and the site.
+
 ## Fixed in v5 (Mango edition, 2026-06-21)
 - **Hero reel collapsed to 0 height.** Sizing the hero `.reelwrap` with `aspect-ratio` + `width:auto` + `justify-self:end` + an absolutely-positioned video gave the box no intrinsic size, so it rendered invisible (audio still played). Fixed with a definite `height:80vh; width:calc(80vh*9/16)` box and a non-absolute video at `object-fit:cover`. The whole 9:16 film now shows and never exceeds the viewport.
 - **Reel opened on a black title card** (weak first impression). Fixed: the reel now opens on a model in the garment with the title overlaid; `poster="media/hero_s2.jpg"` covers the load.

@@ -4,12 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scenario for Mango: on-model imagery from your own catalog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{ --ink:#16161a; --muted:#6b6b73; --line:#e6e6e9; --bg:#fff; --accent:#1a1a1a; --good:#1f7a4d; --warn:#9a6a00; }
+  :root{ --ink:#15151a; --muted:#75726b; --line:#e7e2d9; --bg:#faf8f5; --accent:#c0492b; --accent-dk:#a23b20; --good:#1f7a4d; --warn:#9a6a00; }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
-  body{background:#f3f3f5;color:var(--ink);
-       font:14.5px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  body{background:#ece8e1;color:var(--ink);
+       font:14.5px/1.6 "Instrument Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
        -webkit-font-smoothing:antialiased;}
   .page{position:relative;width:210mm;min-height:297mm;background:var(--bg);margin:14px auto;
         padding:22mm 20mm 18mm;box-shadow:0 6px 26px rgba(0,0,0,.10);overflow:hidden}
@@ -18,11 +21,11 @@
         display:flex;justify-content:space-between}
   .page::before{counter-increment:pg;content:counter(pg);position:absolute;bottom:9mm;right:20mm;font-size:9.5px;color:#aaa;z-index:2}
   body{counter-reset:pg}
-  .kick{letter-spacing:.18em;text-transform:uppercase;font-size:10.5px;color:var(--muted);font-weight:700;margin:0 0 12px}
-  h1{font-size:33px;line-height:1.08;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
-  h2{font-size:22px;line-height:1.15;letter-spacing:-.015em;margin:0 0 12px;font-weight:750}
+  .kick{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.15em;text-transform:uppercase;font-size:10px;color:var(--accent);font-weight:500;margin:0 0 12px}
+  h1{font-size:38px;line-height:1.05;letter-spacing:-.01em;margin:0 0 14px;font-weight:400}
+  h2{font-size:26px;line-height:1.12;letter-spacing:-.01em;margin:0 0 12px;font-weight:400}
   h3{font-size:14px;margin:18px 0 5px;font-weight:700;letter-spacing:.01em}
-  h1,h2{font-family:"Hoefler Text","Iowan Old Style",Georgia,"Times New Roman",serif}
+  h1,h2{font-family:"Instrument Serif",Georgia,"Times New Roman",serif}
   .ceilgrid img{width:100%;border-radius:8px;border:1px solid var(--line)}
   .honesty{font-size:11px;color:var(--warn);background:#fbf2dd;border-radius:8px;padding:8px 12px;margin:10px 0}
   p{margin:0 0 11px} .lead{font-size:16px;line-height:1.5;color:#2a2a2e}
@@ -36,7 +39,7 @@
   .stat span{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-  .card{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#fafafa}
+  .card{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#f3efe9}
   .card h3{margin-top:0}
   figure{margin:14px 0}
   img{max-width:100%;display:block;border-radius:8px}
@@ -57,6 +60,10 @@
   .two-img{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .cmp img{max-height:300px;width:auto;margin:0 auto;object-fit:contain}
   .ledger td:last-child{text-align:right;white-space:nowrap}
+  .logos{display:flex;flex-wrap:wrap;align-items:center;gap:16px 30px;margin:10px 0 6px}
+  .logos img{height:22px;width:auto;filter:brightness(0);opacity:.6}
+  .logos .lacoste{height:30px}.logos .alan{height:18px}.logos .within{height:15px}
+  .deeplinks a{color:var(--accent);font-weight:600;text-decoration:none}
   @page{ size:A4; margin:0; }
   @media print{
     body{background:#fff}
@@ -130,8 +137,8 @@
   <h3>The method, in three steps</h3>
   <table>
     <tr><th>Step</th><th>Model</th><th>What it does</th></tr>
-    <tr><td>1 · Master</td><td>GPT Image 2</td><td>Generates one full-body studio house model per casting (~12 credits, ~45s).</td></tr>
-    <tr><td>2 · Try-on</td><td>Scenario Try-On</td><td>Dresses that model in a garment packshot (~3 credits). Up to 11 garment images at once, so a 2 or 3 piece outfit is dressed in a single pass.</td></tr>
+    <tr><td>1 · Master</td><td>GPT Image 2</td><td>Generates one full-body studio house model per casting (~$0.60, ~45s).</td></tr>
+    <tr><td>2 · Try-on</td><td>Scenario Try-On</td><td>Dresses that model in a garment packshot (~$0.15). Up to 11 garment images at once, so a 2 or 3 piece outfit is dressed in a single pass.</td></tr>
     <tr><td>3 · Motion</td><td>Seedance 2.0 Fast</td><td>Animates the approved still into a 6s 9:16 PDP clip, two-keyframe, so the motion is provably the same garment and face.</td></tr>
   </table>
   <p class="callout"><b>The boundary, stated plainly.</b> What you see here is one frontal hero per look, one held pose per identity, on a seamless grey backdrop. Back views, multiple angles and alternate poses per model are on the roadmap. Body-size range across the cast is the headline pilot deliverable. They are not implied as done here.</p>
@@ -221,7 +228,7 @@
   <hr class="rule">
   <h3>Data and platform posture (per the DPA and MSA)</h3>
   <ul>
-    <li>GDPR, UK GDPR, Swiss FADP and CCPA compliance, with international transfers under EU Standard Contractual Clauses (plus the UK Addendum) and an appointed EU representative. Data is hosted in the US on AWS (us-east-1, us-west-2); region-specific residency is not offered today and would be set in the Order Form.</li>
+    <li>GDPR, UK GDPR and Swiss FADP compliance, with international transfers under EU Standard Contractual Clauses (plus the UK Addendum) and an appointed EU representative; CCPA via service-provider terms. Data is hosted in the US on AWS (us-east-1, us-west-2); region-specific residency is not offered today and would be set in the Order Form.</li>
     <li>A contractual no-training guarantee (your inputs and outputs never train Scenario or third-party models); Enterprise-Ready models (heightened no-training) available as an Order Form option, otherwise the standard no-training guarantee governs; and retention controls with deletion on termination.</li>
     <li>A versioned sub-processor list (including third-party AI model providers) at trust.scenario.com, with 30-day change notice and an objection right. SOC 2 Type II (under NDA) and AES-256 encryption at rest. Production runs only on assets you warrant you have rights to.</li>
   </ul>
@@ -279,7 +286,7 @@
   </table>
   <p class="small">A lean one-day shoot lands near <b>~$46 per finished image</b> (about 60 images for ~$2,750). A worked two-day, 200-image shoot lands near <b>~$96 per image</b> on line items alone, and the sources note that effective per-image cost runs <b>2 to 3 times</b> the quoted rate once coordination, sample logistics and re-shoots are counted. Set against a Scenario image at cents of compute plus minutes of QA, the order-of-magnitude case does not depend on a single number.</p>
   <p class="callout small"><b>Illustrative ROI (labelled illustrative):</b> shoots avoided per category per year from the cost and speed delta, with a sensitivity range on conversion lift and return reduction. The pilot measures your real figures against your own baseline; we do not assert a conversion percentage here.</p>
-  <p class="src">Sources: squareshot.com (per-image and one-day-shoot benchmark); blendnow.com and nightjar.so (day-rate line items and the 2 to 3x effective-cost finding). Full citations in the appendix. Replace any figure with your own blended cost.</p>
+  <p class="src">Read these as directional, not exact: they are public, third-party benchmarks and rough estimates, methodology and scope vary by vendor, and they are not Mango data. Replace any figure with your own blended cost. Sources: squareshot.com (per-image and one-day-shoot benchmark); blendnow.com and nightjar.so (day-rate line items and the 2 to 3x effective-cost finding). Full citations in the appendix.</p>
 </section>
 
 <!-- 12. COMPETITIVE -->
@@ -301,11 +308,11 @@
   <h2>Real clips, not a storyboard.</h2>
   <p>Five 9:16 on-model clips, one garment (the floral jumpsuit) across all five castings, each generated from an already-approved try-on still via Seedance 2.0 Fast. The clips are two-keyframe interpolations: pose A is the still you inspected, pose B is a re-posed walk of the same garment, so the motion is provably the same garment and the same face, with the garment length pinned at both ends. The drape and hem movement is the part a flat image cannot sell. These cut together into a branded film on the microsite, which also carries one lifestyle beat: the same jumpsuit walking a Paris street, motion grown from the editorial still.</p>
   <div class="grid3">
-    <div class="card"><h3>The format</h3><p class="small">9:16, 720p, ~6s, the everyday PDP and social format. ~176 credits per clip.</p></div>
+    <div class="card"><h3>The format</h3><p class="small">9:16, 720p, ~6s, the everyday PDP and social format. ~$9 per clip.</p></div>
     <div class="card"><h3>How it is made</h3><p class="small">Two-keyframe mode reuses the approved still as the first frame and a re-pose as the last. No new shoot, no continuity gap, no garment drift.</p></div>
     <div class="card"><h3>What it proves</h3><p class="small">Stills-to-video on one platform is real, today, removing the last unproven capability from the pitch.</p></div>
   </div>
-  <p class="small muted">The clips ship as real files in this package (media/video) and play in the microsite. A cross-model morph (one garment moving across faces) is an optional capability, deliberately held behind a garment-shape and face-stability QA pass before it represents the brand. Any additional clip volumes in a rollout are projected at the platform rate (~120 to 400 credits per clip), labelled as estimates.</p>
+  <p class="small muted">The clips ship as real files in this package (media/video) and play in the microsite. A cross-model morph (one garment moving across faces) is an optional capability, deliberately held behind a garment-shape and face-stability QA pass before it represents the brand. Any additional clip volumes in a rollout are projected at the platform rate (~$6 to $20 per clip), labelled as estimates.</p>
   <figure>
     <img src="media/video_strip_s2.jpg" alt="One frame from each of the five jumpsuit clips, one per casting">
     <figcaption>One frame from each of the five real clips: the floral jumpsuit on M1, M2, M3, M4 and M5. One garment, every face, in motion.</figcaption>
@@ -317,6 +324,13 @@
   <p class="kick">Next step</p>
   <h2>It works. Let us prove it on your catalog.</h2>
   <p class="lead">This is not a concept that needs months to validate. Everything in this deck already runs: the master, the try-on, the editorial placement, the localization and the motion. Scenario has the models, the pipeline and the governance in place today.</p>
+  <div class="logos">
+    <img class="lacoste" src="media/logos/lacoste.svg" alt="Lacoste">
+    <img class="ogilvy" src="media/logos/ogilvy.svg" alt="Ogilvy">
+    <img class="alan" src="media/logos/alan.png" alt="Alan">
+    <img class="within" src="media/logos/within.svg" alt="Within">
+  </div>
+  <p class="tiny" style="margin:0 0 12px">A few of the global brands and agencies already building with Scenario.</p>
   <div class="grid2">
     <div class="card"><h3>What we can show, fast</h3>
       <ul class="small">
@@ -337,6 +351,7 @@
     </div>
   </div>
   <p class="callout"><b>Emmanuel offers a 30-minute working session to pick the SKU slice and lock the success metric.</b><br>Cordialement.</p>
+  <p class="small deeplinks" style="margin-top:6px">Explore it yourself: <a href="https://scenario.com">scenario.com</a> &middot; <a href="https://scenario.com/models">the models</a> &middot; <a href="https://scenario.com/providers">the providers</a> &middot; <a href="https://docs.scenario.com/get-started/mcp/mcp">connect over MCP</a> &middot; <a href="https://app.scenario.com">app.scenario.com</a> &middot; <a href="https://scenario.com/enterprise">enterprise</a></p>
 </section>
 
 <!-- 15. APPENDIX -->

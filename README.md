@@ -1,4 +1,4 @@
-# Scenario for Mango: virtual try-on pitch (Mango edition, v5)
+# Scenario for Mango: virtual try-on pitch (Mango edition, v6)
 
 An enterprise pitch package from Scenario (Emmanuel de Maistre, Cofounder and CEO) to **Mango**, demonstrating Scenario's on-model try-on built on Mango's own products. The garments were captured from **laredoute.fr** (the capture source); the proposal is addressed to **Mango**. It ships as a static microsite plus a print-ready PDF, and deploys to Railway.
 
@@ -36,7 +36,16 @@ Note: Railway deploys from a local `railway up` (not GitHub auto-deploy). After 
 - **PDF:** `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --no-pdf-header-footer --virtual-time-budget=20000 --print-to-pdf="Scenario-La-Redoute-Proposal.pdf" "file://$PWD/deck.html"`
 - **Sizzle reel:** `bash reel/build_hero_reel.sh` (requires ffmpeg + ImageMagick; the `loop_*` clips, the Scenario logo PNGs and `media/audio/bed.mp3` must be present).
 
-## What is new in v5 (Mango edition, 2026-06-21)
+## What is new in v6 (2026-06-21)
+The **web microsite is the primary deliverable**; the PDF is kept in sync but secondary. Full detail in `CHANGELOG.md`. Headlines:
+- **Restyled to the Scenario brand** ("warm / editorial / light", from scenario.com and the Scenario design system): Instrument Serif headings, Instrument Sans body, JetBrains Mono numbered kickers, warm paper, terracotta accent.
+- **Explorer shows the source packshot on the left** of each "one garment, every face" row (uniform tile heights), and clicking a face opens a **before to after** (packshot left, generated right) in the lightbox.
+- **Numbers reframed as a studio vs Scenario comparison** (~$46 to ~$96 vs ~$0.15) with a line-by-line table and a "directional, not exact" caution disclaimer.
+- **Reference logo wall** (B&W: Lacoste, Ogilvy, Alan, Within) under the enterprise block. Note: `within.co` was used; confirm it is the intended "Within".
+- **Deep links** to scenario.com, the models, the providers, MCP, app.scenario.com and enterprise (all verified 200).
+- Deck kept at parity; remaining "credits" converted to dollars. Fixed explorer/lightbox heights and removed the white packshot box.
+
+## What was new in v5 (Mango edition, 2026-06-21)
 Full detail in `CHANGELOG.md`. Headlines:
 - **Re-aimed at Mango** (recipient), captured from laredoute.fr (source). New URL `scenario-mango-production.up.railway.app`.
 - **Removed the "Every brand" section** (it showed non-Mango brands); for Mango every garment shown is the customer's own product.

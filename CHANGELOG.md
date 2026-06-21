@@ -1,5 +1,33 @@
 # Changelog
 
+## v6 — 2026-06-21 — Scenario brand restyle, garment-left explorer, references, deep links
+
+The **web microsite is the primary deliverable.** This pass restyles it to the Scenario brand and adds what an enterprise buyer looks for. The PDF deck (`deck.html`) was kept at parity in the same commit but is secondary.
+
+### Brand / visual design (matches scenario.com and the Scenario design system, "warm / editorial / light")
+- **Instrument Serif** display headings (weight 400), **Instrument Sans** body, **JetBrains Mono** section labels, loaded from Google Fonts.
+- Warm paper background (`#FAF8F5`), near-black ink, **terracotta accent (`#C0492B`)** for the primary CTA, links and highlights; warm-gray borders; sharper, editorial corners.
+- Section kickers are mono, uppercase, numbered 01 to 11 with a terracotta numeral.
+
+### Explorer: garment in, faces out
+- The "one garment, every face" view now shows the **actual source packshot on the left of each row**, then the five model examples, all the same tile size and height (one six-column grid).
+- Clicking any face opens a **before to after** in the lightbox: the source packshot (left) beside the generated on-model image (right), equal height, no white box, with the "View on laredoute.fr" link.
+
+### Numbers: a real comparison
+- Rebuilt into a **studio vs Scenario** comparison: a large "~$46 to ~$96 per finished image vs ~$0.15" header, a line-by-line table (photographer, model, studio, hair and make-up, retouching, time to first asset), and a **"read this as directional, not exact" caution disclaimer**. Benchmarks re-verified (squareshot, blendnow, nightjar).
+
+### Enterprise references
+- Added a **black-and-white reference logo wall** (Lacoste, Ogilvy, Alan, Within) under "Built for teams that can't compromise." NOTE: the asset used is `within.co` (the NYC creative agency); confirm this is the intended "Within" before sending (within.com does not resolve).
+
+### Deep links
+- The pilot section now links to **scenario.com, the models, the providers, connect over MCP (`docs.scenario.com/get-started/mcp/mcp`), app.scenario.com and enterprise** (all verified 200). The four prop cards link to the relevant pages.
+
+### Deck (kept at parity, secondary)
+- Same brand restyle, the reference logo wall and the deep links on the pilot page, the "directional, not exact" numbers disclaimer, and the remaining Scenario "credits" converted to dollars. 15 pages.
+
+### Fixes (from review feedback)
+- Explorer ref tile and lightbox source image **heights harmonized**; removed the white padding/border box around the packshot.
+
 ## v5 — 2026-06-21 — Mango edition
 
 This deliverable was re-aimed at **Mango** (the brand whose garments these are), not La Redoute. The garments were captured from laredoute.fr, but the proposal and site are addressed to Mango. A separate, larger **La Redoute edition** (La Redoute Collections + La Redoute Intérieurs + AM.PM) is planned later; see `ROADMAP.md`.

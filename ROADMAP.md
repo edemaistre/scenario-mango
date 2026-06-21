@@ -1,5 +1,9 @@
 # ROADMAP
 
+## v6 done (2026-06-21)
+- Scenario brand restyle (warm/editorial/light, from scenario.com + the design system), garment-left explorer with a before/after lightbox, studio-vs-Scenario numbers with a "directional, not exact" disclaimer, a B&W reference logo wall, and deep links to scenario.com / models / providers / MCP / app / enterprise. The web microsite is the primary deliverable; the deck is kept at parity.
+- **Confirm the "Within" reference.** The logo wall uses `within.co` (NYC creative agency) because `within.com` does not resolve. Verify with Emmanuel which "Within" is the intended Scenario reference and swap `media/logos/within.svg` if needed.
+
 ## v5 (Mango edition) follow-ups
 - **The La Redoute edition (bigger).** A separate site/deck for La Redoute as a marketplace: La Redoute Collections (own label, `brndid=la-redoute-collections`), La Redoute Intérieurs (`brndid=la-redoute-interieurs`) and AM.PM. Reuses this codebase; restores the "every brand" story and the `media/brands/*` assets. Likely its own Railway service `scenario-laredoute` and possibly its own repo.
 - **Reel Act 3: "one face, one look, every environment."** Generate the same model (clean base image) in varied backgrounds, actions, angles and positions via GPT Image 2 img2img, then animate each with Seedance so the reel stays video-only. NEEDS a GATE 1 cost approval (Scenario credits, est. a few tens of $ for ~8 environment clips).

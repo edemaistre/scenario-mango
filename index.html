@@ -4,13 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scenario for Mango: on-model imagery from your own catalog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{ --ink:#16161a; --muted:#6b6b73; --line:#e8e8ec; --bg:#fff; --panel:#fafafb; --good:#1f7a4d; --warn:#9a6a00; }
+  :root{ --ink:#15151a; --muted:#75726b; --line:#e7e2d9; --bg:#faf8f5; --panel:#f2eee6; --accent:#c0492b; --accent-dk:#a23b20; --good:#1f7a4d; --warn:#9a6a00; }
   *{box-sizing:border-box} html{scroll-behavior:smooth}
-  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-  a{color:inherit} img,video{display:block}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.62 "Instrument Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-underline-offset:2px} img,video{display:block}
   .wrap{max-width:1260px;margin:0 auto;padding:0 24px}
-  h1,h2{font-family:"Hoefler Text","Iowan Old Style",Georgia,"Times New Roman",serif;letter-spacing:-.015em}
+  h1,h2{font-family:"Instrument Serif",Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.01em}
   nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.9);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
   nav b{font-weight:800}
@@ -18,10 +21,11 @@
   nav .links a{color:var(--muted);text-decoration:none;white-space:nowrap}
   nav .links a:hover{color:var(--ink)}
   @media(max-width:900px){nav .links{display:none}}
-  .kick{letter-spacing:.18em;text-transform:uppercase;font-size:11px;color:var(--muted);font-weight:700;margin:0 0 12px}
+  .kick{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.15em;text-transform:uppercase;font-size:11px;color:var(--muted);font-weight:500;margin:0 0 14px}
+  .kick .n{color:var(--accent);font-weight:600;margin-right:2px}
   section{padding:74px 0;border-top:1px solid var(--line)}
-  h1{font-size:clamp(34px,5vw,60px);line-height:1.03;margin:0 0 18px;font-weight:850}
-  h2{font-size:clamp(25px,3.2vw,38px);line-height:1.08;margin:0 0 14px;font-weight:800}
+  h1{font-size:clamp(40px,5.6vw,82px);line-height:1.03;margin:0 0 18px;font-weight:400}
+  h2{font-size:clamp(28px,3.6vw,48px);line-height:1.06;margin:0 0 14px;font-weight:400}
   h3{font-size:17px;margin:0 0 6px;font-weight:700}
   p{margin:0 0 14px} .lead{font-size:clamp(17px,2vw,21px);line-height:1.5;color:#2a2a2e;max-width:840px}
   .muted{color:var(--muted)} .small{font-size:13.5px}
@@ -36,21 +40,21 @@
   .reeltag{position:absolute;top:12px;left:12px;background:rgba(20,20,26,.6);color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px;pointer-events:none}
   .soundbtn{position:absolute;bottom:14px;left:14px;z-index:6;background:rgba(20,20,26,.62);color:#fff;border:0;font:inherit;font-size:12px;font-weight:700;padding:8px 13px;border-radius:20px;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
   .soundbtn:hover{background:rgba(20,20,26,.85)}
-  .stats{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:30px 0 54px}
+  .stats{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:30px 0 54px;background:var(--panel)}
   @media(max-width:760px){.stats{grid-template-columns:repeat(3,1fr)}}
   .stats div{padding:15px 13px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
   .stats b{display:block;font-size:23px;font-weight:850} .stats span{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
   .props{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px}
   @media(max-width:880px){.props{grid-template-columns:repeat(2,1fr)}}
-  .prop{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--panel)}
+  .prop{border:1px solid var(--line);border-radius:8px;padding:18px;background:var(--panel)}
   .prop b{display:block;margin-bottom:5px} .prop span{font-size:13.5px;color:var(--muted)}
   .loopgrid{display:grid;gap:14px} .lg5{grid-template-columns:repeat(5,1fr)} .lg4{grid-template-columns:repeat(4,1fr)} .lg3{grid-template-columns:repeat(3,1fr)}
   @media(max-width:900px){.lg5,.lg4,.lg3{grid-template-columns:repeat(2,1fr)}}
-  .loopgrid figure{margin:0} .loopgrid video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:12px;background:#f2f2f4}
+  .loopgrid figure{margin:0} .loopgrid video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:8px;background:#ece8e1}
   .loopgrid .cap{font-size:12px;color:var(--muted);margin-top:7px;text-align:center}
   .twocol{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
   @media(max-width:880px){.twocol{grid-template-columns:1fr}}
-  .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
   .callout{border-left:3px solid var(--ink);padding:6px 0 6px 16px;margin:14px 0;color:#2a2a2e}
   .honestypill{display:inline-block;font-size:12px;font-weight:650;color:var(--warn);background:#fbf2dd;border-radius:20px;padding:6px 14px;margin:2px 0 16px}
   /* provenance */
@@ -115,14 +119,15 @@
   .rowhead .note{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
   .note.good{background:#e7f4ec;color:var(--good)}
   .cell{cursor:zoom-in;border:0;padding:0;background:none;text-align:left;font:inherit}
-  .cell img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;background:#f2f2f4;transition:transform .18s,box-shadow .18s}
+  .cell img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:8px;background:#ece8e1;transition:transform .18s,box-shadow .18s}
   .cell:hover img{transform:translateY(-3px);box-shadow:0 12px 26px rgba(0,0,0,.12)}
   .cell .cap{font-size:11px;color:var(--muted);margin-top:5px}
   .cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .cmp img{width:100%;border-radius:12px;border:1px solid var(--line);object-fit:cover;max-height:430px}
   .cmp .cap{font-size:12px;color:var(--muted);margin-top:7px}
   table{width:100%;border-collapse:collapse;font-size:13.5px} th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line)} th{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)} td:last-child,th:last-child{text-align:right}
-  .cta{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;padding:15px 26px;border-radius:12px;font-weight:700;margin-top:8px}
+  .cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:15px 32px;border-radius:3px;font-weight:600;font-size:15px;letter-spacing:.01em;margin-top:8px;transition:background .15s}
+  .cta:hover{background:var(--accent-dk)}
   .src{font-size:11.5px;color:#9a9aa2;margin-top:10px}
   footer{padding:40px 0 70px;color:var(--muted);font-size:12.5px}
   /* universal lightbox */
@@ -145,7 +150,54 @@
   #lb .nav:hover{background:rgba(255,255,255,.22)} #lb .nav.prev{left:18px} #lb .nav.next{right:18px}
   #lb .count{position:fixed;top:24px;left:24px;color:#b9b9c2;font-size:12px;letter-spacing:.04em}
   @media(max-width:680px){#lb .nav{width:40px;height:52px;font-size:24px}}
-  .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;background:#ececf0}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;background:#ece8e1}
+  /* B&W reference logo wall */
+  .logos{display:flex;flex-wrap:wrap;align-items:center;gap:30px 50px;margin:22px 0 4px}
+  .logos img{height:30px;width:auto;filter:brightness(0);opacity:.58;transition:opacity .18s}
+  .logos img:hover{opacity:.92}
+  .logos .lacoste{height:42px} .logos .alan{height:25px} .logos .within{height:21px}
+  @media(max-width:680px){.logos{gap:20px 32px}.logos img{height:24px}.logos .lacoste{height:34px}.logos .alan{height:20px}.logos .within{height:17px}}
+  /* explorer "by look": garment ref to the left, model examples to the right */
+  #grid.bylook{display:block}
+  #grid.byface{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+  @media(max-width:880px){#grid.byface{grid-template-columns:repeat(3,1fr)}}@media(max-width:520px){#grid.byface{grid-template-columns:repeat(2,1fr)}}
+  .lookblock{margin:0 0 30px;padding:0 0 26px;border-bottom:1px solid var(--line)}
+  .lookblock:last-child{border-bottom:0}
+  .lookblock .lh{font-weight:700;font-size:15px;margin:0 0 12px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .lookblock .lh .price{font-size:12.5px;color:var(--muted);font-weight:500}
+  .lookblock .lh .note{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+  .lookrow{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;align-items:start}
+  @media(max-width:760px){.lookrow{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:430px){.lookrow{grid-template-columns:repeat(2,1fr)}}
+  .ref{cursor:zoom-in;border:0;padding:0;background:none;text-align:left;font:inherit;display:block}
+  .ref .refbox{position:relative}
+  .ref .refbox img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:8px;background:#ece8e1;transition:transform .18s,box-shadow .18s}
+  .ref .reftag{position:absolute;top:8px;left:8px;z-index:2;background:var(--ink);color:#fff;font:500 9px/1 "JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border-radius:3px}
+  .ref .rl{font:500 10px/1.3 "JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);margin-top:7px;text-align:center}
+  .ref:hover .refbox img{transform:translateY(-3px);box-shadow:0 12px 26px rgba(0,0,0,.12)}
+  /* lightbox: source packshot -> generated, side by side */
+  #lb .ba{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
+  #lb .ba figure{margin:0;display:flex;flex-direction:column;align-items:center}
+  #lb .ba img{height:72vh;width:auto;max-width:46vw;object-fit:contain;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  #lb .ba .bacap{color:#cfcfd6;font:500 11px/1 "JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.05em;text-transform:uppercase;margin-top:10px}
+  @media(max-width:760px){#lb .ba{gap:8px}#lb .ba img{height:52vh;width:auto;max-width:46vw}#lb .ba .bacap{font-size:9px}}
+  /* studio vs Scenario */
+  .vs{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:8px 0 20px;background:var(--panel)}
+  @media(max-width:620px){.vs{grid-template-columns:1fr}}
+  .vs-side{padding:22px 26px;display:flex;flex-direction:column;gap:5px}
+  .vs-side.scenario{background:#fff}
+  .vs-lbl{font:500 11px/1 "JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .vs-fig{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(30px,4.4vw,52px);line-height:1.02;letter-spacing:-.01em}
+  .vs-side.scenario .vs-fig{color:var(--accent)}
+  .vs-sub{font-size:12.5px;color:var(--muted)}
+  .vs-mid{display:flex;align-items:center;justify-content:center;padding:0 16px;font:500 11px/1 "JetBrains Mono",ui-monospace,Menlo,monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+  @media(max-width:620px){.vs-mid{border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:9px}}
+  .cmp-table td:nth-child(2),.cmp-table th:nth-child(2){text-align:right}
+  .cmp-table td.s{color:var(--accent);font-weight:600}
+  /* inline brand links */
+  .cardlink{color:var(--accent);text-decoration:none} .cardlink:hover{text-decoration:underline}
+  .linkrow a,.prop .inl,.inl{color:var(--accent);text-decoration:none;font-weight:600} .linkrow a:hover,.inl:hover{text-decoration:underline}
+  .linkrow{color:var(--muted)}
 </style>
 </head>
 <body>
@@ -189,13 +241,13 @@
 
 <!-- TODAY -> TOMORROW -->
 <section id="today"><div class="wrap">
-  <p class="kick">Where the images come from</p>
+  <p class="kick"><span class="n">01</span> Where the images come from</p>
   <h2>Your PDP today, and what it could be.</h2>
   <p class="lead">This is the real, live product page for one Mango jumpsuit, listed on laredoute.fr: one shoot, one model, a handful of fixed studio frames, no video. That is the ceiling of a physical shoot. From the very same packshot, Scenario generates effectively unlimited on-model content: any face, any market, in motion, for cents each. Fixed content in, infinite content out.</p>
   <div class="prov">
     <div class="col today">
       <h3>Today <span class="pill">live on laredoute.fr</span></h3>
-      <div class="lbl">Combinaison imprime floral &middot; Mango &middot; 49,99 &euro; &middot; <a href="https://www.laredoute.fr/ppdp/prod-602618087.aspx" target="_blank" rel="noopener" style="color:var(--ink);font-weight:700">See the real product page on laredoute.fr &rarr;</a></div>
+      <div class="lbl">Combinaison imprime floral &middot; Mango &middot; 49,99 &euro; &middot; <a href="https://www.laredoute.fr/ppdp/prod-602618087.aspx" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">See the real product page on laredoute.fr &rarr;</a></div>
       <div class="shots one">
         <img class="zoom" data-gal="today" data-kind="image" data-full="media/provenance/lr_today_2.jpg" data-title="The real live PDP on laredoute.fr" data-meta="Combinaison imprime floral &middot; Mango &middot; 49,99 EUR &middot; SKU 602618087" data-sku="602618087" src="media/provenance/lr_today_2.jpg" alt="the live Mango product page on laredoute.fr today">
       </div>
@@ -219,7 +271,7 @@
 
 <!-- EVERY FACE -->
 <section id="everyface"><div class="wrap">
-  <p class="kick">One garment, every face</p>
+  <p class="kick"><span class="n">02</span> One garment, every face</p>
   <h2>Shoot once. Show everyone.</h2>
   <p class="lead">The same Mango jumpsuit on a diverse cast, in motion, each clip a seamless loop generated from the verified try-on still. No casting, no travel, no re-shoot. Representation becomes a parameter, not a budget line.</p>
   <div class="loopgrid lg5">
@@ -234,7 +286,7 @@
 
 <!-- EVERY LOOK -->
 <section id="everylook"><div class="wrap">
-  <p class="kick">One face, every look</p>
+  <p class="kick"><span class="n">03</span> One face, every look</p>
   <h2>Don't book a model. Generate one.</h2>
   <p class="lead">The house model is an AI identity, not a booking: one generated face wears the entire assortment, each look a clean loop from a single base shot. No day rate, no agency, no re-shoot, and she stays perfectly consistent across every look. The lookbook and the PDP carousel, on tap.</p>
   <div class="loopgrid lg3">
@@ -246,7 +298,7 @@
 
 <!-- OFF THE GREY -->
 <section id="ceiling"><div class="wrap">
-  <p class="kick">The ceiling</p>
+  <p class="kick"><span class="n">04</span> The ceiling</p>
   <h2>The same image, off the grey.</h2>
   <p class="lead">Studio is the floor. The exact verified try-on, moved into editorial light: same face, same garment, real world. And it moves.</p>
   <span class="honestypill">AI capability demonstration &middot; AI environment and AI face &middot; same identity and garment, preserved from the verified studio still &middot; not a shipped campaign</span>
@@ -267,7 +319,7 @@
 
 <!-- GEO -->
 <section id="geo"><div class="wrap">
-  <p class="kick">Localize per market</p>
+  <p class="kick"><span class="n">05</span> Localize per market</p>
   <h2>One product. Every market.</h2>
   <p class="lead">The same Mango jumpsuit, casting and setting matched to the market, from the one packshot. Localized representation for each storefront, generated, not re-shot.</p>
   <div class="geo">
@@ -283,7 +335,7 @@
 
 <!-- CHANNELS -->
 <section id="channels"><div class="wrap">
-  <p class="kick">One asset, every channel</p>
+  <p class="kick"><span class="n">06</span> One asset, every channel</p>
   <h2>From the PDP to the For You page.</h2>
   <p class="lead">The same generated asset is born ready for every surface: the product page, an Instagram feed post, a TikTok or Reels ad, a Story. Spin up dozens of creative variants for performance marketing and UA the same day a SKU lands, and test what converts.</p>
   <div class="channels">
@@ -330,7 +382,7 @@
 
 <!-- AUTOMATE -->
 <section id="automate"><div class="wrap">
-  <p class="kick">The part that scales</p>
+  <p class="kick"><span class="n">07</span> The part that scales</p>
   <h2>Automate it: agents &middot; MCP &middot; Skills.</h2>
   <p class="lead">Nobody clicks buttons. Scenario is exposed over MCP (the open protocol agents speak), so an agent in your stack watches your PIM, and when a new SKU lands it runs the entire chain end to end, then publishes the SKU-keyed assets. Skills encode your house casting, art direction and acceptance rubric, so every run is on-brand.</p>
   <div class="flow">
@@ -354,34 +406,55 @@
 
 <!-- EXPLORER -->
 <section id="explorer"><div class="wrap">
-  <p class="kick">The proof, on your own catalog</p>
-  <h2>Fifty on-model images. Click any one.</h2>
-  <p class="lead">Real Mango SKUs from laredoute.fr on five house models. Toggle the view, then click any image to open it large, step left and right through the set, and follow it back to the live product page. This is the human-QA gate the pilot formalizes.</p>
+  <p class="kick"><span class="n">08</span> The proof, on your own catalog</p>
+  <h2>One packshot in. Fifty on-model images out.</h2>
+  <p class="lead">Real Mango SKUs from laredoute.fr on five house models. Each row starts with the actual source packshot on the left, then the same garment generated on five faces. Click any face to open the source packshot beside the generated result, step through the set, and follow it back to the live product page. This is the human-QA gate the pilot formalizes.</p>
   <div class="toggle"><button id="bLook" class="on" onclick="setView('bylook')">One garment, every face</button><button id="bFace" onclick="setView('byface')">One face, every look</button></div>
   <div id="grid" class="bylook"></div>
 </div></section>
 
 <!-- NUMBERS -->
 <section id="numbers"><div class="wrap">
-  <p class="kick">The numbers</p>
+  <p class="kick"><span class="n">09</span> The numbers</p>
   <h2>Unit economics, with the sources on the page.</h2>
-  <div class="twocol">
-    <div><p>50 on-model images for about <b>$16</b> of compute, in minutes. <b>~$0.15</b> per try-on; a new casting ~$0.60; a looping clip ~$8. Compute is cents; the cost that scales is human QA on hard SKUs, which is non-zero. Even fully loaded, a Scenario image lands an order of magnitude below a studio image.</p>
-      <p class="callout small"><b>Illustrative ROI:</b> shoots avoided per category per year, plus channel and localization variants you simply could not shoot. The pilot measures your real conversion and return figures against your baseline.</p>
+  <div class="vs">
+    <div class="vs-side studio"><span class="vs-lbl">Traditional studio</span><b class="vs-fig">~$46 to ~$96</b><span class="vs-sub">per finished on-model image</span></div>
+    <div class="vs-mid">vs</div>
+    <div class="vs-side scenario"><span class="vs-lbl">Scenario</span><b class="vs-fig">~$0.15</b><span class="vs-sub">per on-model image, in minutes</span></div>
+  </div>
+  <p class="lead" style="font-size:17px">A finished studio image runs roughly $46 to $96. Scenario produces a comparable on-model image for about $0.15, on the order of a few hundred times less per image. The 50 images here cost about <b>$16</b> of compute in total, in minutes. A new casting is about $0.60; a looping clip about $9. Compute is cents; the cost that actually scales is human QA on the hard SKUs, which is non-zero.</p>
+  <div class="twocol" style="align-items:start">
+    <div class="panel"><h3>Studio vs Scenario, line by line</h3>
+      <table class="cmp-table"><tr><th>Cost line</th><th>Traditional studio</th><th>Scenario</th></tr>
+        <tr><td>Per finished image</td><td>~$46 to ~$96</td><td class="s">~$0.15</td></tr>
+        <tr><td>Photographer, per day</td><td>$1,000 to $2,000+</td><td class="s">not required</td></tr>
+        <tr><td>Model (agency), per day</td><td>$500 to $3,000 +fee</td><td class="s">not required</td></tr>
+        <tr><td>Studio rental, per day</td><td>$300 to $2,000</td><td class="s">not required</td></tr>
+        <tr><td>Hair &amp; make-up, per day</td><td>$800 to $2,400</td><td class="s">not required</td></tr>
+        <tr><td>Retouching, per image</td><td>$20 to $80</td><td class="s">included</td></tr>
+        <tr><td>Time to first asset</td><td>days to weeks</td><td class="s">minutes</td></tr></table>
+      <p class="small muted" style="margin:8px 0 0">Effective studio cost runs about 2 to 3x the quoted figure once coordination and re-shoots are counted.</p>
     </div>
-    <div class="panel"><h3>Studio benchmark (cited)</h3>
-      <table><tr><th>Per finished image</th><th>~$46 to ~$96</th></tr><tr><td>Photographer / day</td><td>$1,000 to $2,000+</td></tr><tr><td>Model (agency) / day</td><td>$500 to $3,000 +fee</td></tr><tr><td>Studio / day</td><td>$300 to $2,000</td></tr><tr><td>Hair &amp; make-up / day</td><td>$800 to $2,400</td></tr><tr><td>Retouching / image</td><td>$20 to $80</td></tr></table>
-      <p class="small muted" style="margin:6px 0 0">Effective cost runs 2 to 3x quoted once coordination and re-shoots are counted.</p>
+    <div>
+      <p class="callout small"><b>Illustrative ROI:</b> shoots avoided per category per year, plus the channel and localization variants you simply could not shoot. The pilot measures your real conversion and return figures against your baseline.</p>
+      <p class="small muted"><b>Read this as directional, not exact.</b> These are public, third-party benchmarks and rough best-effort estimates. Methodology, scope, market and product complexity vary widely by vendor, so treat the figures as directional rather than precise. They are not Mango's actual cost data, and the pilot is designed to measure real numbers against Mango's own internal baseline.</p>
     </div>
   </div>
-  <p class="src">Sources: squareshot.com, blendnow.com, nightjar.so. Public benchmarks, not Mango data.</p>
+  <p class="src">Studio benchmarks: squareshot.com, blendnow.com, nightjar.so (public figures, 2026), plus public commercial model and hair-and-make-up day rates. Not Mango data. The ~$0.15 Scenario per-image figure is Scenario's own (1 credit is about $0.05).</p>
 </div></section>
 
 <!-- ENTERPRISE / SCALE -->
 <section id="rights"><div class="wrap">
-  <p class="kick">Enterprise-ready</p>
+  <p class="kick"><span class="n">10</span> Enterprise-ready</p>
   <h2>Built for teams that can't compromise.</h2>
-  <p class="lead">The same creative-AI infrastructure Scenario already runs in production for global game and consumer brands: secure, governed, and built to scale from this pilot to your whole catalog.</p>
+  <p class="lead">The same creative-AI infrastructure Scenario already runs in production for global brands and agencies: secure, governed, and built to scale from this pilot to your whole catalog.</p>
+  <div class="logos">
+    <img class="lacoste" src="media/logos/lacoste.svg" alt="Lacoste">
+    <img class="ogilvy" src="media/logos/ogilvy.svg" alt="Ogilvy">
+    <img class="alan" src="media/logos/alan.png" alt="Alan">
+    <img class="within" src="media/logos/within.svg" alt="Within">
+  </div>
+  <p class="small muted" style="margin:10px 0 24px">A few of the teams building with Scenario.</p>
   <div class="props" style="grid-template-columns:repeat(3,1fr)">
     <div class="prop"><b>Your products, your rights</b><span>Everything here is your own Mango product, captured from laredoute.fr as a one-time evaluation artifact. You own every generated asset, and a contractual no-training guarantee means your inputs and outputs never train Scenario or third-party models. AI faces; real-talent option.</span></div>
     <div class="prop"><b>Security at every layer</b><span>SOC 2 Type II (independently audited), AES-256 at rest, SSO / SAML (Okta, Azure AD), complete activity logging, and a versioned sub-processor list. US (AWS) hosting; GDPR via EU Standard Contractual Clauses and an appointed EU representative; CCPA service-provider terms.</span></div>
@@ -392,15 +465,16 @@
 
 <!-- PILOT -->
 <section id="pilot"><div class="wrap">
-  <p class="kick">Next step</p>
+  <p class="kick"><span class="n">11</span> Next step</p>
   <h2>It works. Let us prove it on your catalog.</h2>
   <p class="lead">Everything on this page runs today, on real Mango SKUs, on the Scenario platform: on-model casting, lifestyle, motion, market localization, social cuts, and the agent automation that ties them together. Nothing here is a prototype waiting to be built. Point us at a slice of your assortment and we can show the same on your own products, in days.</p>
   <div class="props" style="grid-template-columns:repeat(4,1fr);margin-top:8px">
-    <div class="prop"><b>The platform</b><span>Generation, editing, video, training, asset management. Live and in production.</span></div>
-    <div class="prop"><b>The models</b><span>Try-on, image, video, localization, the full chain, already wired together.</span></div>
-    <div class="prop"><b>The automation</b><span>Exposed over MCP. Agents and Skills run the chain on your PIM, on a schedule.</span></div>
-    <div class="prop"><b>The posture</b><span>US (AWS) hosting, GDPR via SCCs + EU representative, CCPA service-provider terms, contractual no-training guarantee, SOC 2 Type II, assets owned by you.</span></div>
+    <div class="prop"><b><a class="cardlink" href="https://scenario.com" target="_blank" rel="noopener">The platform &rarr;</a></b><span>Generation, editing, video, training, asset management. Live and in production.</span></div>
+    <div class="prop"><b><a class="cardlink" href="https://scenario.com/models" target="_blank" rel="noopener">The models &rarr;</a></b><span>Try-on, image, video and localization across many <a class="inl" href="https://scenario.com/providers" target="_blank" rel="noopener">providers</a>, already wired together.</span></div>
+    <div class="prop"><b><a class="cardlink" href="https://docs.scenario.com/get-started/mcp/mcp" target="_blank" rel="noopener">The automation &rarr;</a></b><span>Exposed over <a class="inl" href="https://docs.scenario.com/get-started/mcp/mcp" target="_blank" rel="noopener">MCP</a>. Agents and Skills run the chain on your PIM, on a schedule.</span></div>
+    <div class="prop"><b><a class="cardlink" href="https://scenario.com/enterprise" target="_blank" rel="noopener">The posture &rarr;</a></b><span>US (AWS) hosting, GDPR via SCCs + EU representative, CCPA service-provider terms, contractual no-training guarantee, SOC 2 Type II, assets owned by you.</span></div>
   </div>
+  <p class="linkrow small" style="margin-top:16px">Explore it yourself: <a href="https://scenario.com" target="_blank" rel="noopener">scenario.com</a> &middot; <a href="https://scenario.com/models" target="_blank" rel="noopener">the models</a> &middot; <a href="https://scenario.com/providers" target="_blank" rel="noopener">the providers</a> &middot; <a href="https://docs.scenario.com/get-started/mcp/mcp" target="_blank" rel="noopener">connect over MCP</a> &middot; <a href="https://app.scenario.com" target="_blank" rel="noopener">app.scenario.com</a> &middot; <a href="https://scenario.com/enterprise" target="_blank" rel="noopener">enterprise</a></p>
   <div style="text-align:center;margin-top:34px">
     <h3 style="font-size:22px">Pick a slice of your catalog. We will show you the same, on your products.</h3>
     <p class="muted">A 30-minute working session with Emmanuel de Maistre, Cofounder &amp; CEO.</p>
@@ -441,9 +515,14 @@ const grid=document.getElementById('grid');
 const li=(c,m)=>`media/looks/${c}__${m}.jpg`;
 const esc=s=>String(s).replace(/"/g,'&quot;');
 function render(v){grid.className=v;let h='';
- if(v==='bylook'){for(const L of LOOKS){h+=`<div class="rowhead">${L.name} <span class="price">${L.price} &middot; Mango</span>${L.note?`<span class="note ${L.note.k}">win</span>`:''}</div>`;for(const M of MODELS)h+=cell(L,M,`${M.name} &middot; ${M.desc}`);}}
+ if(v==='bylook'){for(const L of LOOKS){
+   h+=`<div class="lookblock"><div class="lh">${L.name} <span class="price">${L.price} &middot; Mango</span>${L.note?`<span class="note ${L.note.k}">win</span>`:''}</div><div class="lookrow">${refCell(L)}`;
+   for(const M of MODELS)h+=cell(L,M,`${M.name} &middot; ${M.desc}`);
+   h+=`</div></div>`;
+ }}
  else{for(const M of MODELS){h+=`<div class="rowhead">${M.name} <span class="price">${M.desc}</span></div>`;for(const L of LOOKS)h+=cell(L,M,L.c);}}
  grid.innerHTML=h;}
+function refCell(L){const p='media/packshots/'+L.pack[0];const multi=L.pack.length>1?` &middot; +${L.pack.length-1}`:'';return `<button class="ref zoom" data-kind="image" data-full="${p}" data-title="${esc(L.name)} &middot; source packshot" data-meta="Source packshot from laredoute.fr &middot; ${L.price} &middot; Mango &middot; SKU ${L.sku}" data-sku="${L.sku}"><div class="refbox"><span class="reftag">packshot in${multi}</span><img loading="lazy" src="${p}" alt=""></div><div class="rl">Source &middot; laredoute.fr</div></button>`;}
 function cell(L,M,cap){const src=li(L.c,M.id);return `<button class="cell zoom" data-gal="explorer" data-kind="image" data-full="${src}" data-title="${esc(L.name)}" data-meta="${L.price} &middot; Mango &middot; SKU ${L.sku} &middot; on ${M.name} (${M.desc})" data-sku="${L.sku}" data-pack="${L.pack[0]}"><img loading="lazy" src="${src}"><div class="cap">${cap}</div></button>`;}
 function setView(v){document.getElementById('bLook').classList.toggle('on',v==='bylook');document.getElementById('bFace').classList.toggle('on',v==='byface');render(v);}
 render('bylook');
@@ -455,14 +534,18 @@ const prodUrl=sku=>'https://www.laredoute.fr/ppdp/prod-'+String(sku).split('+')[
 function toItem(el){return{kind:el.dataset.kind||(el.tagName==='VIDEO'?'video':'image'),src:el.dataset.full||el.currentSrc||el.getAttribute('src'),title:el.dataset.title||'',meta:el.dataset.meta||'',sku:el.dataset.sku||'',pack:el.dataset.pack||''};}
 function show(){
   const it=CUR.items[CUR.i];if(!it)return;
-  document.getElementById('lbMedia').innerHTML = it.kind==='video'
-    ? `<video src="${it.src}" autoplay loop playsinline controls></video>`
-    : `<img src="${it.src}" alt="">`;
+  const media=document.getElementById('lbMedia');
+  if(it.kind==='video'){
+    media.innerHTML=`<video src="${it.src}" autoplay loop playsinline controls></video>`;
+  } else if(it.pack){
+    media.innerHTML=`<div class="ba"><figure><img src="media/packshots/${it.pack}" alt=""><figcaption class="bacap">Source packshot &middot; laredoute.fr</figcaption></figure><figure><img src="${it.src}" alt=""><figcaption class="bacap">Generated on Scenario</figcaption></figure></div>`;
+  } else {
+    media.innerHTML=`<img src="${it.src}" alt="">`;
+  }
   document.getElementById('lbTitle').textContent=it.title;
   document.getElementById('lbMeta').textContent=it.meta;
   const links=[];
   if(it.sku) links.push(`<a href="${prodUrl(it.sku)}" target="_blank" rel="noopener">View on laredoute.fr &rarr;</a>`);
-  if(it.pack) links.push(`<span class="srcthumb"><img src="media/packshots/${it.pack}" alt="">source packshot (laredoute.fr)</span>`);
   document.getElementById('lbLinks').innerHTML=links.join('');
   const multi=CUR.items.length>1;
   document.getElementById('lbCount').textContent=multi?`${CUR.i+1} / ${CUR.items.length}`:'';

@@ -75,4 +75,13 @@ The leave-behind (`deck.html` -> `Scenario-La-Redoute-Proposal.pdf`) was refresh
 Build montages: see the `magick montage` commands used for `geo_strip.jpg`, `brands_grid.jpg`, `provenance_strip.jpg`, `video_strip_s2.jpg`; `hero_s2.jpg` is `media/looks/S2__M3.jpg` resized to 2:3.
 
 ## 13. Cost (this build, approx)
-50 stills ~325 cr; 6 jumpsuit walk re-poses + 5 geo + 1 lifestyle re-pose (Gemini, ~13 cr each) ~156 cr; 6 motion clips (Seedance, 176 cr each) ~1,056 cr; 2 GPT Image 2 geo redos ~26 cr; 6 brand try-ons (Pruna, 3 cr each) ~18 cr; music ~15 cr. A few dollars to low tens, on the Public Data project.
+50 stills ~325 cr; 6 jumpsuit walk re-poses + 5 geo + 1 lifestyle re-pose (Gemini, ~13 cr each) ~156 cr; 6 motion clips (Seedance, 176 cr each) ~1,056 cr; 2 GPT Image 2 geo redos ~26 cr; 6 brand try-ons (3 cr each) ~18 cr; music ~15 cr. A few dollars to low tens, on the Public Data project. (Internal credit figures; all customer-facing copy is in dollars at 1 credit ~= $0.05.)
+
+## 14. v6: Scenario brand restyle, garment-left explorer, references, deep links
+- **Brand.** Restyled the site and deck to the Scenario design system / scenario.com ("warm / editorial / light"): Instrument Serif headings (400), Instrument Sans body, JetBrains Mono numbered kickers, paper `#FAF8F5`, terracotta `#C0492B` accent, sharper corners. Tokens were read directly off scenario.com and the design-system reference via Playwright (`browser_evaluate` on computed styles + CSS custom properties).
+- **Explorer.** "By look" is now one six-column grid per look: the source packshot (`media/packshots`) on the left at the same tile size as the five model cells. Clicking a face opens a before/after in the lightbox (packshot left, generated right, equal height via fixed `height:72vh` + `object-fit:contain`, no white box). `refCell()` renders the packshot tile; `show()` branches on `it.pack` to build the `.ba` before/after.
+- **Numbers.** Studio vs Scenario comparison (`~$46 to ~$96` vs `~$0.15`) + line-by-line table + a "directional, not exact" disclaimer. Benchmarks re-verified (squareshot, blendnow, nightjar) via a research subagent.
+- **References.** B&W logo wall in `media/logos/` (alan.png, lacoste.svg, ogilvy.svg, within.svg), forced black with CSS `filter:brightness(0)` over transparent source logos. `within.co` used (within.com 500s); confirm intended brand.
+- **Deep links.** scenario.com, /models, /providers, docs.scenario.com/get-started/mcp/mcp, app.scenario.com, /enterprise (all HTTP 200).
+- **Deck** kept at parity (15 pages); remaining Scenario "credits" converted to dollars; CCPA corrected to service-provider terms (not via SCCs).
+- The customer-facing try-on is named "Scenario Try-On"; the engine name in the section-1 pipeline diagram is internal documentation only and never appears in the site, deck or reel.
