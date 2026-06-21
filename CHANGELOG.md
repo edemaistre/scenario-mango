@@ -28,6 +28,9 @@ The **web microsite is the primary deliverable.** This pass restyles it to the S
 ### Fixes (from review feedback)
 - Explorer ref tile and lightbox source image **heights harmonized**; removed the white padding/border box around the packshot.
 
+### Performance
+- **Compressed the hero reel** `sizzle_9x16.mp4` from 1080x1920 at ~5 Mbps (19 MB) to 720x1280 at CRF 24 (~5 MB), and `sizzle_16x9.mp4` to ~2.4 MB. Visually identical at the hero display size, much faster to load, and small enough to deploy reliably (ROADMAP item: compress video). The loop clips were left untouched (product-quality proof).
+
 ## v5 — 2026-06-21 — Mango edition
 
 This deliverable was re-aimed at **Mango** (the brand whose garments these are), not La Redoute. The garments were captured from laredoute.fr, but the proposal and site are addressed to Mango. A separate, larger **La Redoute edition** (La Redoute Collections + La Redoute Intérieurs + AM.PM) is planned later; see `ROADMAP.md`.
