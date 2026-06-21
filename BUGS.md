@@ -1,5 +1,14 @@
 # BUGS and known issues
 
+## Fixed in v5 (Mango edition, 2026-06-21)
+- **Hero reel collapsed to 0 height.** Sizing the hero `.reelwrap` with `aspect-ratio` + `width:auto` + `justify-self:end` + an absolutely-positioned video gave the box no intrinsic size, so it rendered invisible (audio still played). Fixed with a definite `height:80vh; width:calc(80vh*9/16)` box and a non-absolute video at `object-fit:cover`. The whole 9:16 film now shows and never exceeds the viewport.
+- **Reel opened on a black title card** (weak first impression). Fixed: the reel now opens on a model in the garment with the title overlaid; `poster="media/hero_s2.jpg"` covers the load.
+- **No sound control.** Added a visible sound toggle button on the hero; sound also turns on after the first page gesture (browser autoplay policy blocks unmuted autoplay).
+- **Stale geo images via browser cache.** v3 shipped red-satin geo at the same filenames as v4's jumpsuit geo, so browsers served the cached red-satin version (looked like a regression; the server was correct). Lesson: cache-bust or rename when content changes under an unchanged filename.
+- **Legal overclaims removed** (grounded in DPA/MSA v2.2): "EU data residency" (false; US/AWS), indemnity-for-output (MSA 9.5 excludes it), "CCPA via SCCs" (it is service-provider terms), "Enterprise-Ready by default" (Order Form option). A 6-agent adversarial verification checked 60 claims.
+- **Squished editorial stills in the reel** (interim): the first reel rebuild force-fit 2:3 stills into 9:16; replaced with blurred-fill, then the whole stills approach was dropped (reel is now video only).
+
+
 Status as of 2026-06-21. "Documented" means it is surfaced honestly in the deliverable on purpose, not hidden.
 
 ## Fixed in v4 (2026-06-21)

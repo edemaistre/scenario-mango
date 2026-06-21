@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scenario for La Redoute: on-model imagery from your own catalog</title>
+<title>Scenario for Mango: on-model imagery from your own catalog</title>
 <style>
   :root{ --ink:#16161a; --muted:#6b6b73; --line:#e8e8ec; --bg:#fff; --panel:#fafafb; --good:#1f7a4d; --warn:#9a6a00; }
   *{box-sizing:border-box} html{scroll-behavior:smooth}
@@ -28,9 +28,15 @@
   .hero{display:grid;grid-template-columns:1.08fr .92fr;gap:42px;align-items:center;padding:60px 0 46px}
   @media(max-width:880px){.hero{grid-template-columns:1fr;gap:24px}}
   .reelwrap{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.14);background:#000}
-  .reelwrap video{width:100%;aspect-ratio:9/16;object-fit:cover}
+  .reelwrap video{width:100%;aspect-ratio:9/16;object-fit:contain;background:#000}
+  /* hero reel: definite 9:16 box sized to the viewport height, so the whole film is visible and never taller than the screen */
+  header .reelwrap{height:80vh;width:calc(80vh * 9 / 16);max-width:100%;justify-self:end}
+  header .reelwrap video{width:100%;height:100%;aspect-ratio:auto;object-fit:cover}
+  @media(max-width:880px){header .reelwrap{height:auto;width:100%;aspect-ratio:9/16}}
   .reeltag{position:absolute;top:12px;left:12px;background:rgba(20,20,26,.6);color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px;pointer-events:none}
-  .stats{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:30px 0 0}
+  .soundbtn{position:absolute;bottom:14px;left:14px;z-index:6;background:rgba(20,20,26,.62);color:#fff;border:0;font:inherit;font-size:12px;font-weight:700;padding:8px 13px;border-radius:20px;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+  .soundbtn:hover{background:rgba(20,20,26,.85)}
+  .stats{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:30px 0 54px}
   @media(max-width:760px){.stats{grid-template-columns:repeat(3,1fr)}}
   .stats div{padding:15px 13px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
   .stats b{display:block;font-size:23px;font-weight:850} .stats span{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
@@ -54,7 +60,9 @@
   .prov .col h3{padding:14px 18px 0}
   .prov .col .lbl{padding:0 18px 8px;font-size:12.5px;color:var(--muted)}
   .prov .today .shots{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:10px}
+  .prov .today .shots.one{grid-template-columns:1fr}
   .prov .today .shots img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+  .prov .today .shots.one img{aspect-ratio:auto;height:auto}
   .prov .tom .strip{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:10px}
   .prov .tom .strip img,.prov .tom .strip video{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:8px}
   /* geo */
@@ -143,14 +151,13 @@
 <body>
 
 <nav><div class="wrap">
-  <b>Scenario <span class="muted" style="font-weight:500">for La Redoute</span></b>
+  <b style="display:inline-flex;align-items:center;gap:9px"><img src="media/scenario-full-black.svg" alt="Scenario" style="height:21px;display:block"> <span class="muted" style="font-weight:500">for Mango</span></b>
   <div class="links">
     <a href="#today">Today &rarr; Tomorrow</a>
     <a href="#everyface">Every face</a>
     <a href="#everylook">Every look</a>
     <a href="#ceiling">Off the grey</a>
     <a href="#geo">Localize</a>
-    <a href="#brands">Every brand</a>
     <a href="#channels">Channels</a>
     <a href="#automate">Automate</a>
     <a href="#pilot">Pilot</a>
@@ -160,22 +167,22 @@
 <!-- HERO -->
 <header class="wrap"><div class="hero">
   <div>
-    <p class="kick">Scenario &middot; Pruna P-Image Try-On</p>
-    <h1>From product packshot to full campaign, in minutes.</h1>
-    <p class="lead">Built on real Mango garments from laredoute.fr. One product packshot becomes a diverse on-model cast, lifestyle imagery, looping video, market localization and social-ad formats, for a few dollars of compute and minutes of time. And the whole chain can run on autopilot, by agents.</p>
-    <p class="small muted">Faces are AI-generated. Editorial and lifestyle imagery is a labelled AI capability demonstration, not a shipped La Redoute campaign. Click any image or video to enlarge it and follow it back to the live product page.</p>
+    <p class="kick">Scenario &times; Mango &middot; a working proposal</p>
+    <h1>From one packshot to a full campaign, in minutes.</h1>
+    <p class="lead">We rebuilt Mango's own product imagery with Scenario. From a single flat packshot, with no shoot, no model booking and no samples: a diverse on-model cast, lifestyle and editorial scenes, motion for every PDP and social format, and a variant for every market. Cents of compute, minutes of time, and the whole chain can run on autopilot. This is what it looks like across your catalog.</p>
+    <p class="small muted">Everything on this page was generated from real Mango products listed on laredoute.fr. Faces are AI-generated; editorial and lifestyle scenes are a labelled capability demonstration, not a shipped campaign. Click any image or video to enlarge it and follow it back to the live product page.</p>
   </div>
   <div class="reelwrap">
-    <video class="zoom" data-gal="hero" data-kind="video" data-full="media/video/loop_S2_M3.mp4" data-title="Combinaison imprime floral, in motion" data-meta="Mango &middot; 49,99 EUR &middot; AI on-model, seamless loop" data-sku="602618087" src="media/video/loop_S2_M3.mp4" poster="media/hero.jpg" muted autoplay loop playsinline></video>
-    <span class="reeltag">Seamless loop &middot; AI on-model</span>
+    <video class="zoom" data-gal="hero" data-kind="video" data-full="media/video/sizzle_9x16.mp4" data-title="From packshot to full campaign, in minutes" data-meta="Combinaison florale &middot; Mango &middot; the 30s film, AI on-model" data-sku="602618087" src="media/video/sizzle_9x16.mp4" poster="media/hero_s2.jpg" muted autoplay loop playsinline></video>
+    <button class="soundbtn" id="soundBtn" type="button" aria-label="Toggle sound">&#128266; Tap for sound</button>
   </div>
 </div>
 <div class="stats">
   <div><b>1</b><span>packshot in</span></div>
-  <div><b>5</b><span>castings</span></div>
-  <div><b>6</b><span>markets / settings</span></div>
+  <div><b>&infin;</b><span>castings &middot; 5 shown</span></div>
+  <div><b>&infin;</b><span>markets &middot; 6 shown</span></div>
   <div><b>video</b><span>+ social-ready</span></div>
-  <div><b>~3 cr</b><span>per try-on</span></div>
+  <div><b>~$0.15</b><span>per on-model image</span></div>
   <div><b>minutes</b><span>not weeks</span></div>
 </div>
 </header>
@@ -184,20 +191,19 @@
 <section id="today"><div class="wrap">
   <p class="kick">Where the images come from</p>
   <h2>Your PDP today, and what it could be.</h2>
-  <p class="lead">This is the live La Redoute page for one Mango jumpsuit. One shoot, one model, a handful of studio frames, no video. From the same packshot, the page below it can hold a diverse cast, lifestyle context, a looping clip and per-market variants, without booking a second shoot.</p>
+  <p class="lead">This is the real, live product page for one Mango jumpsuit, listed on laredoute.fr: one shoot, one model, a handful of fixed studio frames, no video. That is the ceiling of a physical shoot. From the very same packshot, Scenario generates effectively unlimited on-model content: any face, any market, in motion, for cents each. Fixed content in, infinite content out.</p>
   <div class="prov">
     <div class="col today">
       <h3>Today <span class="pill">live on laredoute.fr</span></h3>
-      <div class="lbl">Combinaison imprime floral &middot; Mango &middot; 49,99 &euro;</div>
-      <div class="shots">
-        <img class="zoom" data-gal="today" data-kind="image" data-full="media/provenance/lr_today_1.jpg" data-title="Live PDP on laredoute.fr" data-meta="Combinaison imprime floral &middot; Mango &middot; 49,99 EUR" data-sku="602618087" src="media/provenance/lr_today_1.jpg" alt="live La Redoute PDP today">
-        <img class="zoom" data-gal="today" data-kind="image" data-full="media/provenance/lr_today_2.jpg" data-title="Live PDP on laredoute.fr" data-meta="The same product, second studio frame" data-sku="602618087" src="media/provenance/lr_today_2.jpg" alt="live La Redoute PDP today, image 2">
-        <img class="zoom" data-gal="today" data-kind="image" data-full="media/provenance/lr_today_3.jpg" data-title="Live PDP on laredoute.fr" data-meta="The same product, third studio frame" data-sku="602618087" src="media/provenance/lr_today_3.jpg" alt="live La Redoute PDP today, image 3">
+      <div class="lbl">Combinaison imprime floral &middot; Mango &middot; 49,99 &euro; &middot; <a href="https://www.laredoute.fr/ppdp/prod-602618087.aspx" target="_blank" rel="noopener" style="color:var(--ink);font-weight:700">See the real product page on laredoute.fr &rarr;</a></div>
+      <div class="shots one">
+        <img class="zoom" data-gal="today" data-kind="image" data-full="media/provenance/lr_today_2.jpg" data-title="The real live PDP on laredoute.fr" data-meta="Combinaison imprime floral &middot; Mango &middot; 49,99 EUR &middot; SKU 602618087" data-sku="602618087" src="media/provenance/lr_today_2.jpg" alt="the live Mango product page on laredoute.fr today">
       </div>
+      <div class="lbl" style="padding-top:0"><b>Fixed:</b> one model, a few frames, no motion.</div>
     </div>
     <div class="col tom">
       <h3>Tomorrow <span class="pill" style="background:#e7f4ec;color:var(--good)">same SKU, no re-shoot</span></h3>
-      <div class="lbl">A richer page from the same packshot, generated.</div>
+      <div class="lbl"><b>Infinite:</b> any face, any market, in motion. Generated from the same packshot, not re-shot.</div>
       <div class="strip">
         <video class="zoom" data-gal="tomorrow" data-kind="video" data-full="media/video/loop_S2_M3.mp4" data-title="Same SKU, in motion" data-meta="Combinaison florale &middot; generated loop" data-sku="602618087" src="media/video/loop_S2_M3.mp4" muted autoplay loop playsinline></video>
         <img class="zoom" data-gal="tomorrow" data-full="media/looks/S2__M1.jpg" data-title="On-model casting" data-meta="Sofia &middot; same packshot, new face" data-sku="602618087" src="media/looks/S2__M1.jpg" alt="">
@@ -208,7 +214,7 @@
       </div>
     </div>
   </div>
-  <p class="small muted" style="margin-top:14px">Left: the actual live page today, three studio frames, captured from laredoute.fr (click to enlarge). Right: a diverse cast, an editorial scene, a looping clip and two market variants, all generated from the same source. AI faces; capability demonstration.</p>
+  <p class="small muted" style="margin-top:14px">Left: the actual live product page today on laredoute.fr (click to enlarge, or open it directly via the link above). Right: a diverse cast, an editorial scene, a looping clip and two market variants, all generated from that same packshot. AI faces; capability demonstration.</p>
 </div></section>
 
 <!-- EVERY FACE -->
@@ -229,8 +235,8 @@
 <!-- EVERY LOOK -->
 <section id="everylook"><div class="wrap">
   <p class="kick">One face, every look</p>
-  <h2>Book a model once. She wears the rail.</h2>
-  <p class="lead">One house model, the whole assortment, each look a clean loop from a single base shot. This is the lookbook and PDP carousel, on tap.</p>
+  <h2>Don't book a model. Generate one.</h2>
+  <p class="lead">The house model is an AI identity, not a booking: one generated face wears the entire assortment, each look a clean loop from a single base shot. No day rate, no agency, no re-shoot, and she stays perfectly consistent across every look. The lookbook and the PDP carousel, on tap.</p>
   <div class="loopgrid lg3">
     <figure><video class="zoom" data-gal="everylook" data-kind="video" data-full="media/video/loop_S2_M1.mp4" data-title="Combinaison imprime floral" data-meta="Mango &middot; 49,99 EUR &middot; on Sofia" data-sku="602618087" src="media/video/loop_S2_M1.mp4" muted autoplay loop playsinline></video><div class="cap">Combinaison florale &middot; 49,99 &euro;</div></figure>
     <figure><video class="zoom" data-gal="everylook" data-kind="video" data-full="media/video/loop_M1_S6.mp4" data-title="Robe a fleurs cut-out" data-meta="Mango &middot; 79,99 EUR &middot; on Sofia" data-sku="602626907" src="media/video/loop_M1_S6.mp4" muted autoplay loop playsinline></video><div class="cap">Robe a fleurs &middot; 79,99 &euro;</div></figure>
@@ -273,29 +279,7 @@
   </div>
 </div></section>
 
-<!-- BRANDS (other La Redoute labels) -->
-<section id="brands"><div class="wrap">
-  <p class="kick">Not just Mango</p>
-  <h2>Any brand on the rail. Your own labels included.</h2>
-  <p class="lead">Mango is one tenant brand. The same chain runs on every label La Redoute carries, and on your own collections, where the rights are unambiguous. Here is a La Redoute own-brand garment, taken from the live site and dressed on the house cast, exactly as a Mango look.</p>
-  <div id="brandsWrap">
-    <div class="brandhead">La Redoute Collections <span class="pill" style="background:#16161a;color:#fff">your own label</span> <span class="price">Robe en lin Signature HELOISE &middot; 59,99 &euro; &middot; from laredoute.fr</span></div>
-    <div class="brandrow">
-      <figure class="pack"><img class="zoom" data-gal="brands" data-full="media/packshots/garment_LRC1.jpg" data-title="Source packshot &middot; La Redoute Collections" data-meta="Robe en lin Signature HELOISE &middot; 59,99 EUR" data-sku="601946493" src="media/packshots/garment_LRC1.jpg" alt=""><div class="cap">Source packshot (laredoute.fr)</div></figure>
-      <figure><img class="zoom" data-gal="brands" data-full="media/brands/LRC_M1.jpg" data-title="La Redoute Collections on Sofia" data-meta="Robe en lin Signature HELOISE &middot; 59,99 EUR &middot; on Sofia" data-sku="601946493" data-pack="garment_LRC1.jpg" src="media/brands/LRC_M1.jpg" alt=""><div class="cap">Sofia</div></figure>
-      <figure><img class="zoom" data-gal="brands" data-full="media/brands/LRC_M2.jpg" data-title="La Redoute Collections on Mei" data-meta="Robe en lin Signature HELOISE &middot; 59,99 EUR &middot; on Mei" data-sku="601946493" data-pack="garment_LRC1.jpg" src="media/brands/LRC_M2.jpg" alt=""><div class="cap">Mei</div></figure>
-      <figure><img class="zoom" data-gal="brands" data-full="media/brands/LRC_M4.jpg" data-title="La Redoute Collections on Elin" data-meta="Robe en lin Signature HELOISE &middot; 59,99 EUR &middot; on Elin" data-sku="601946493" data-pack="garment_LRC1.jpg" src="media/brands/LRC_M4.jpg" alt=""><div class="cap">Elin</div></figure>
-    </div>
-    <div class="brandhead" style="margin-top:26px">Vero Moda <span class="price">Robe a sequins &middot; 44,99 &euro; &middot; from laredoute.fr</span></div>
-    <div class="brandrow">
-      <figure class="pack"><img class="zoom" data-gal="brands" data-full="media/packshots/garment_X2.jpg" data-title="Source packshot &middot; Vero Moda" data-meta="Robe a sequins &middot; 44,99 EUR" data-sku="602417412" src="media/packshots/garment_X2.jpg" alt=""><div class="cap">Source packshot (laredoute.fr)</div></figure>
-      <figure><img class="zoom" data-gal="brands" data-full="media/brands/X2_M3.jpg" data-title="Vero Moda on Amara" data-meta="Robe a sequins &middot; 44,99 EUR &middot; on Amara" data-sku="602417412" data-pack="garment_X2.jpg" src="media/brands/X2_M3.jpg" alt=""><div class="cap">Amara</div></figure>
-      <figure><img class="zoom" data-gal="brands" data-full="media/brands/X2_M5.jpg" data-title="Vero Moda on Priya" data-meta="Robe a sequins &middot; 44,99 EUR &middot; on Priya" data-sku="602417412" data-pack="garment_X2.jpg" src="media/brands/X2_M5.jpg" alt=""><div class="cap">Priya</div></figure>
-      <figure><img class="zoom" data-gal="brands" data-full="media/brands/X2_M2.jpg" data-title="Vero Moda on Mei" data-meta="Robe a sequins &middot; 44,99 EUR &middot; on Mei" data-sku="602417412" data-pack="garment_X2.jpg" src="media/brands/X2_M2.jpg" alt=""><div class="cap">Mei</div></figure>
-    </div>
-    <p class="small muted" style="margin-top:16px">La Redoute Collections is your own label, where rights are unambiguous: this is the own-brand proof, rendered from your live site. Vero Moda is a tenant brand, shown as a one-time evaluation artifact like Mango. Same chain, same minutes, any brand on the rail. AI faces; click any image to enlarge and follow it to the live product page.</p>
-  </div>
-</div></section>
+<!-- (Every-brand section removed for the Mango edition: it showed La Redoute Collections + Vero Moda, which are not Mango. That marketplace story belongs to the La Redoute edition.) -->
 
 <!-- CHANNELS -->
 <section id="channels"><div class="wrap">
@@ -382,7 +366,7 @@
   <p class="kick">The numbers</p>
   <h2>Unit economics, with the sources on the page.</h2>
   <div class="twocol">
-    <div><p>50 on-model images for a reconstructed <b>~325 credits</b>, in minutes. <b>~3 credits</b> per try-on; a new casting ~12 credits; a looping clip ~150 to 175 credits. Compute is cents; the cost that scales is human QA on hard SKUs, which is non-zero. Even fully loaded, a Scenario image lands an order of magnitude below a studio image.</p>
+    <div><p>50 on-model images for about <b>$16</b> of compute, in minutes. <b>~$0.15</b> per try-on; a new casting ~$0.60; a looping clip ~$8. Compute is cents; the cost that scales is human QA on hard SKUs, which is non-zero. Even fully loaded, a Scenario image lands an order of magnitude below a studio image.</p>
       <p class="callout small"><b>Illustrative ROI:</b> shoots avoided per category per year, plus channel and localization variants you simply could not shoot. The pilot measures your real conversion and return figures against your baseline.</p>
     </div>
     <div class="panel"><h3>Studio benchmark (cited)</h3>
@@ -390,31 +374,32 @@
       <p class="small muted" style="margin:6px 0 0">Effective cost runs 2 to 3x quoted once coordination and re-shoots are counted.</p>
     </div>
   </div>
-  <p class="src">Sources: squareshot.com, blendnow.com, nightjar.so. Public benchmarks, not La Redoute data.</p>
+  <p class="src">Sources: squareshot.com, blendnow.com, nightjar.so. Public benchmarks, not Mango data.</p>
 </div></section>
 
-<!-- RIGHTS -->
+<!-- ENTERPRISE / SCALE -->
 <section id="rights"><div class="wrap">
-  <p class="kick">The gates that decide the deal</p>
-  <h2>Rights, synthetic media, security.</h2>
+  <p class="kick">Enterprise-ready</p>
+  <h2>Built for teams that can't compromise.</h2>
+  <p class="lead">The same creative-AI infrastructure Scenario already runs in production for global game and consumer brands: secure, governed, and built to scale from this pilot to your whole catalog.</p>
   <div class="props" style="grid-template-columns:repeat(3,1fr)">
-    <div class="prop"><b>Own-brand &amp; tenant brands</b><span>Your own collections, where rights are unambiguous, plus tenant brands you carry. The own-brand look in this deck is rendered from your live site.</span></div>
-    <div class="prop"><b>Rights-clean inputs</b><span>The Mango packshots were a one-time evaluation artifact, quarantined from production. You feed only assets you warrant rights to.</span></div>
-    <div class="prop"><b>Synthetic media</b><span>AI faces, owned by you. Directional indemnity stance; EU AI Act and French disclosure posture; real-talent option.</span></div>
+    <div class="prop"><b>Your products, your rights</b><span>Everything here is your own Mango product, captured from laredoute.fr as a one-time evaluation artifact. You own every generated asset, and a contractual no-training guarantee means your inputs and outputs never train Scenario or third-party models. AI faces; real-talent option.</span></div>
+    <div class="prop"><b>Security at every layer</b><span>SOC 2 Type II (independently audited), AES-256 at rest, SSO / SAML (Okta, Azure AD), complete activity logging, and a versioned sub-processor list. US (AWS) hosting; GDPR via EU Standard Contractual Clauses and an appointed EU representative; CCPA service-provider terms.</span></div>
+    <div class="prop"><b>Production at scale</b><span>An API with custom rate limits and batch processing, volume-based pricing, custom integrations and workflow automation over MCP, a named account manager with a dedicated Slack channel, and a 99.0% uptime SLA with service credits.</span></div>
   </div>
-  <p class="small muted" style="margin-top:14px">EU data residency, GDPR / DPA, no-training-on-your-assets default, per-model license terms in-platform, named SLA. A platform your teams operate, exposed over MCP, not a consultancy that runs your catalog.</p>
+  <p class="small muted" style="margin-top:14px">A platform your teams operate, exposed over MCP, not a consultancy that runs your catalog. Full enterprise terms at scenario.com/enterprise.</p>
 </div></section>
 
 <!-- PILOT -->
 <section id="pilot"><div class="wrap">
   <p class="kick">Next step</p>
   <h2>It works. Let us prove it on your catalog.</h2>
-  <p class="lead">Everything on this page runs today, on real La Redoute SKUs, on the Scenario platform: on-model casting, lifestyle, motion, market localization, social cuts, and the agent automation that ties them together. Nothing here is a prototype waiting to be built. Point us at a slice of your assortment and we can show the same on your own products, in days.</p>
+  <p class="lead">Everything on this page runs today, on real Mango SKUs, on the Scenario platform: on-model casting, lifestyle, motion, market localization, social cuts, and the agent automation that ties them together. Nothing here is a prototype waiting to be built. Point us at a slice of your assortment and we can show the same on your own products, in days.</p>
   <div class="props" style="grid-template-columns:repeat(4,1fr);margin-top:8px">
     <div class="prop"><b>The platform</b><span>Generation, editing, video, training, asset management. Live and in production.</span></div>
     <div class="prop"><b>The models</b><span>Try-on, image, video, localization, the full chain, already wired together.</span></div>
     <div class="prop"><b>The automation</b><span>Exposed over MCP. Agents and Skills run the chain on your PIM, on a schedule.</span></div>
-    <div class="prop"><b>The posture</b><span>EU residency, GDPR, no-training default, AI faces owned by you, rights-clean inputs.</span></div>
+    <div class="prop"><b>The posture</b><span>US (AWS) hosting, GDPR via SCCs + EU representative, CCPA service-provider terms, contractual no-training guarantee, SOC 2 Type II, assets owned by you.</span></div>
   </div>
   <div style="text-align:center;margin-top:34px">
     <h3 style="font-size:22px">Pick a slice of your catalog. We will show you the same, on your products.</h3>
@@ -423,7 +408,7 @@
   </div>
 </div></section>
 
-<footer><div class="wrap"><p>Garments belong to Mango and to La Redoute own brands, sourced via laredoute.fr as a one-time demonstration and evaluation artifact, quarantined from production claims. Editorial, lifestyle, localized and social imagery is a labelled AI capability demonstration on AI-generated faces, not a shipped La Redoute campaign. Built in Scenario, by an agent over MCP. Prepared for La Redoute by Scenario, Inc. Confidential.</p></div></footer>
+<footer><div class="wrap"><p>Garments belong to Mango, sourced via laredoute.fr as a one-time demonstration and evaluation artifact, quarantined from production claims. Editorial, lifestyle, localized and social imagery is a labelled AI capability demonstration on AI-generated faces, not a shipped campaign. Built in Scenario, by an agent over MCP. Prepared for Mango by Scenario, Inc. Confidential.</p></div></footer>
 
 <!-- UNIVERSAL LIGHTBOX -->
 <div id="lb">
@@ -471,7 +456,7 @@ function toItem(el){return{kind:el.dataset.kind||(el.tagName==='VIDEO'?'video':'
 function show(){
   const it=CUR.items[CUR.i];if(!it)return;
   document.getElementById('lbMedia').innerHTML = it.kind==='video'
-    ? `<video src="${it.src}" autoplay loop muted playsinline controls></video>`
+    ? `<video src="${it.src}" autoplay loop playsinline controls></video>`
     : `<img src="${it.src}" alt="">`;
   document.getElementById('lbTitle').textContent=it.title;
   document.getElementById('lbMeta').textContent=it.meta;
@@ -499,6 +484,19 @@ document.querySelector('#lb .nav.prev').addEventListener('click',()=>navLB(-1));
 document.querySelector('#lb .nav.next').addEventListener('click',()=>navLB(1));
 lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('stage'))closeLB();});
 document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLB();if(e.key==='ArrowLeft')navLB(-1);if(e.key==='ArrowRight')navLB(1);});
+/* Hero reel sound: a real toggle button, plus sound-on after the first page gesture (browsers block unmuted autoplay). */
+(function(){
+  var hv=document.querySelector('header .reelwrap video'), btn=document.getElementById('soundBtn');
+  if(!hv||!btn)return;
+  function sync(){ btn.innerHTML = hv.muted ? '&#128266; Tap for sound' : '&#128263; Mute'; }
+  function setMuted(m){ hv.muted=m; if(!m)hv.volume=1; var p=hv.play&&hv.play(); if(p&&p.catch)p.catch(function(){}); sync(); }
+  btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); setMuted(!hv.muted); });
+  var evs=['pointerdown','keydown','touchstart','wheel','scroll'];
+  function on(){ if(hv.muted) setMuted(false); off(); }
+  function off(){ evs.forEach(function(e){window.removeEventListener(e,on);}); }
+  evs.forEach(function(e){window.addEventListener(e,on,{once:true,passive:true});});
+  sync();
+})();
 </script>
 </body>
 </html>

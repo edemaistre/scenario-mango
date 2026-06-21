@@ -1,34 +1,48 @@
 # CLAUDE.md : working in this repo
 
-This repo is a confidential B2B pitch from Scenario to La Redoute. The product of the pitch is **credibility**. If you edit anything, protect the honesty spine below. It is what makes the deck land with an enterprise buyer.
+This repo is a confidential B2B pitch from Scenario. The product of the pitch is **credibility**. If you edit anything, protect the honesty spine below. It is what makes it land with an enterprise buyer.
+
+## Who it is for (read first)
+- **This is the MANGO edition.** The recipient is **Mango**, the brand whose garments these are. Everything shown is a real Mango product, captured from **laredoute.fr** (the capture source, which you may name) and addressed to Mango. Live URL: `scenario-mango-production.up.railway.app`.
+- A separate, larger **La Redoute edition** is planned (La Redoute Collections + La Redoute Intérieurs + AM.PM). That is where the "marketplace / many brands / own-label" story lives. Do NOT put La Redoute Collections or Vero Moda content in the Mango edition.
 
 ## Hard guardrails (never break)
-1. **Say "every face", never "every body".** All five models share one slim build. Body-size and fit inclusivity is a **Phase-1 pilot deliverable**, not a proven result. Do not imply otherwise.
-2. **The editorial "ceiling" images are a labelled AI capability demonstration.** AI environment + AI face, same identity and garment preserved from the verified studio still. Never present them as a shipped La Redoute campaign or as own-brand proof.
-3. **Own-brand render now exists (v4).** A real La Redoute Collections garment scraped from laredoute.fr is rendered on the house cast in `#brands`, beside a Vero Moda tenant-brand garment. This is honest proof: a real garment from their live site, on AI faces, grey studio (same fidelity basis as Mango). Do not downgrade it back to a "Phase-1 promise"; do not fabricate additional own-brand claims beyond what is rendered.
-4. **The Mango packshots are a one-time evaluation artifact, quarantined from production claims.** Production runs only on assets La Redoute warrants it has rights to.
-5. **Every fidelity claim is verified against the source packshot at zoom.** Do not assert a fidelity hold or miss you have not checked against pixels. C9 = colorway win (burgundy reproduced from a mislabeled "Jean large"), kept. NOTE (v4): the dedicated accuracy/C10 confession section and the explorer C10 "caveat" badge were REMOVED from BOTH the site AND the PDF deck at the client's direction ("everything is supposed to hold; no need to shoot ourselves in the foot"). Do not re-add them. The C10 case still informs the human-QA-gate rationale, which is kept (site Automate/Explorer copy; deck fidelity callout on page 8, framed positively as why the gate is mandatory). The C10 source/render files stay in the repo, unsurfaced.
-6. **No em dashes in any copy.** Use a colon, comma, or rewrite. Cost benchmarks must stay cited (squareshot, blendnow, nightjar) and the effective-overrun figure is "2 to 3x", the sourced number.
-7. **Two text files, two jobs:** `deck.html` renders the PDF; `index.html` is the site. Keep claims identical across both. (v4: BOTH are now at parity, jumpsuit lead, brands page, 3-screenshot provenance, geo/localize, measured pilot, accuracy/C10 removed. If you change one, change the other in the same commit.)
-8. **Hero example = the floral jumpsuit (S2, SKU 602618087), v4.** Do not re-anchor featured spots to the red satin dress (S4); it stays only in the 50-grid explorer.
-9. **Motion = two-keyframe.** Seedance 2.0 Fast with `image` (the verified try-on still, pose A) + `lastFrameImage` (a Gemini re-pose of the SAME garment mid-walk, pose B), 6s, 720p, 9:16, `generateAudio:false`. Never single-first-frame (garment drifts) or first=last (static/boring).
-10. **Full-body person-into-environment placement: use GPT Image 2 img2img, NOT Gemini.** Gemini 3.1 Flash stretches body proportions on full-body scene swaps (it elongated two geo renders). Gemini is fine for the same-framing studio walk re-pose; for geo/editorial placement prefer GPT Image 2 (`referenceImages` + prompt demanding natural proportions, 1024x1536, quality medium). Pruna try-on accepts a dressed still as `personImage` (it re-dresses) and `preserveInputSize:true` keeps natural proportions.
+1. **Say "every face", never "every body".** All five models share one slim build. Body-size and fit inclusivity is a pilot deliverable, not a proven result. Faces/castings can be framed as effectively infinite; body range cannot.
+2. **The editorial / geo images are a labelled AI capability demonstration.** AI environment + AI face, same identity and garment preserved from the verified studio still. Never present them as a shipped campaign.
+3. **Everything shown is Mango's own product.** That is the rights story: clean by construction. Do NOT reintroduce the "Every brand" section (La Redoute Collections + Vero Moda) into the Mango edition; it was removed on purpose. The brand montages (`media/brands_grid.jpg`, `media/brands/*`) stay in the repo for the future La Redoute edition, unsurfaced here.
+4. **The Mango packshots are a one-time evaluation artifact, quarantined from production claims.** Production runs only on assets the client warrants it has rights to.
+5. **Never name the try-on model.** Do NOT mention "Pruna" or "P-Image" in any customer-facing copy (site, deck, reel). It is the secret sauce. Call it "Scenario Try-On" or just "try-on". (GPT Image 2 / Seedance are not the secret sauce, but the deck genericises the pipeline to "master / try-on / motion" anyway.)
+6. **Dollars, not credits, in customer-facing copy.** 1 credit ~= $0.05. Use ~$0.15 per try-on, ~$16 for the 50-image set, ~$79 whole build. Keep the cited studio benchmark (squareshot, blendnow, nightjar) and the "2 to 3x" overrun figure.
+7. **No em dashes in any copy.** Colon, comma, or rewrite.
+8. **No internal sales-speak in customer-facing copy.** This is prospect-facing. Banned: "the gates that decide the deal", "first/second gate", "Why us", "signable pilot", "earns the pilot", "the moat". Use plain section titles (Rights and IP, Security and scale, What makes this different).
+9. **Two files, two jobs:** `deck.html` renders the PDF; `index.html` is the site. Keep claims identical across both; change both in the same commit.
+10. **Hero example = the floral jumpsuit (S2, SKU 602618087).** Do not re-anchor featured spots to the red satin dress (S4); it stays only in the 50-grid explorer.
+11. **Legal claims are grounded in the DPA/MSA v2.2** (extracted text was at `/tmp/scenario_contracts/`). The true posture: US (AWS us-east-1, us-west-2) hosting, **NO EU data residency** (Order Form only); GDPR/UK/Swiss compliance via **EU SCCs + UK Addendum + appointed EU representative (DataRep, Ireland)**; **CCPA via service-provider terms, NOT "via SCCs"**; a contractual **no-training guarantee**; client **owns all Generated Assets (MSA 5.3)**; SOC 2 Type II (under NDA), AES-256 at rest, SSO/SAML, 30-day sub-processor notice; **99.0% uptime SLA** (the contract figure, NOT the marketing 99.9%). Indemnity covers **authorized platform use** against third-party IP, NOT the content of generated output (MSA 9.5); the human-QA gate + rights-clean inputs are the control. Enterprise-Ready models are an **Order Form option**, not a standing default.
 
-## How it was built (tools)
-- Scrape: Playwright clears Cloudflare on laredoute.fr; product JSON-LD gives the authoritative image array; packshots downloaded via canvas export (CDN is CORS-locked to fetch).
-- Master model: GPT Image 2 (`model_openai-gpt-image-2`, quality medium, 1024x1536, ~12 CU).
-- Try-on: Pruna P-Image Try-On (`model_pruna-p-image-try-on`, ~3 CU, up to 11 garment refs, combos in one pass, `preserveInputSize:true`).
-- Re-pose / editorial environments: Gemini 3.1 Flash img2img (`model_google-gemini-3-1-flash`, ~13 CU at 1K).
-- Motion: Seedance 2.0 Fast (`model_bytedance-seedance-2-0-fast`, 146 CU at 5s/720p, first-frame mode from the approved still).
-- Music: Sonilo (`model_sonilo-v1-1-text-to-music`).
-- Scenario project: Public Data Default (team/project `bftve3VtQgmpXxwAPUFWTQ`).
+## Hero reel
+- Hero plays `media/video/sizzle_9x16.mp4` (the 30s reel), in a definite 9:16 box sized to `80vh` so the whole film is visible and never taller than the viewport (do NOT use `width:auto`/`aspect-ratio` alone on the reelwrap, it collapses to 0 height). `poster="media/hero_s2.jpg"` is the load placeholder.
+- The reel **opens on a model in the garment** with the title overlaid (frame 1 must not be a black card). A visible **sound toggle button** controls audio; sound also turns on after the first page gesture (browser autoplay policy).
+
+## The reel (`reel/build_hero_reel.sh`)
+- **Video only, no stills.** Acts: title-over-model -> "one garment, every face" (loop_S2_M1..M5) -> "one face, every look" (loop_M1_S2/S6/C7) -> Paris lifestyle (loop_S2_life) -> "Infinite on-model content" CTA. Scenario logo (white) on the cards.
+- All clips are 720x1280 (clean 9:16); `clipseg` scales with `force_original_aspect_ratio=increase,crop` (no squish). The old `build_reel.sh`/`build_films.sh` reference deleted `turn_/face_/look_/life_` clips and are red-satin-led; do not use them.
+- This ffmpeg has **no drawtext** (all text is pre-rendered PNG overlays). Music is the interim `media/audio/bed.mp3`; a custom ElevenLabs score is pending an API key.
+
+## Motion clips (the looping galleries)
+- Two-keyframe: Seedance 2.0 Fast with `image` (verified try-on still) + `lastFrameImage` (a Gemini re-pose of the SAME garment mid-walk), 6s, 720p, 9:16, `generateAudio:false`. Never single-first-frame (drifts) or first=last (static).
+
+## Full-body placement
+- Use **GPT Image 2 img2img**, NOT Gemini, for placing a person into an environment (Gemini stretches body proportions). Gemini is fine for same-framing studio re-pose. The try-on accepts a dressed still as `personImage` with `preserveInputSize:true` to keep proportions.
+
+## Models / project (do not name Pruna in copy)
+- Master: GPT Image 2 (`model_openai-gpt-image-2`, medium, 1024x1536). Try-on: the Scenario try-on model (~3 CU, up to 11 refs, `preserveInputSize:true`). Re-pose/editorial: Gemini 3.1 Flash. Motion: Seedance 2.0 Fast. Project: Public Data Default (team/project `bftve3VtQgmpXxwAPUFWTQ`).
 
 ## Rebuild commands
-- PDF: see README. Re-render after any `deck.html` change. 16 pages (v4); QC pages for footer overlap. NOTE: `.page` is `overflow:hidden`, so content that overflows is silently CLIPPED, not paginated. Cap tall portrait images (e.g. the fidelity hero is capped at `max-height:330px`) and split dense pages (the appendix runs across two pages) so nothing, especially the cited cost sources, gets cut.
-- Reel: `bash reel/build_reel.sh`. This ffmpeg build has **no drawtext filter**: all text is pre-rendered PNG overlays composited with `overlay` / concat. Do not add `drawtext`.
+- PDF: `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --no-pdf-header-footer --virtual-time-budget=20000 --print-to-pdf="Scenario-La-Redoute-Proposal.pdf" "file://$PWD/deck.html"`. 15 pages (Mango edition). `.page` is `overflow:hidden`, so overflow is silently CLIPPED, not paginated: cap tall images and split dense pages, QC every page after a content change.
+- Reel: `bash reel/build_hero_reel.sh` (ImageMagick + ffmpeg).
 
 ## Deploy
-Static Express server (`server.js`) on Railway. `railway up` then `railway domain`. One deploy per change set; batch edits.
+Static Express server (`server.js`) on Railway. Mango edition deploys to the `scenario-mango` service -> `scenario-mango-production.up.railway.app`. One deploy per change set; batch edits. NOTE: same-named asset files (e.g. `media/geo/*.jpg`) changed between versions are browser-cached; hard-refresh or cache-bust when content changes under an unchanged filename.
 
 ## Doc hygiene (Emmanuel's standard)
-Any change that alters behavior updates, in the same commit: `README.md`, `DOCS.md`, `BUGS.md` (if a bug is found or fixed), `ROADMAP.md` (if priorities shift), and this file (if a new pattern is learned).
+Any behavior change updates, in the same commit: `README.md`, `DOCS.md`, `BUGS.md`, `ROADMAP.md`, `CHANGELOG.md`, and this file.

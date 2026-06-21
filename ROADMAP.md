@@ -1,5 +1,14 @@
 # ROADMAP
 
+## v5 (Mango edition) follow-ups
+- **The La Redoute edition (bigger).** A separate site/deck for La Redoute as a marketplace: La Redoute Collections (own label, `brndid=la-redoute-collections`), La Redoute Intérieurs (`brndid=la-redoute-interieurs`) and AM.PM. Reuses this codebase; restores the "every brand" story and the `media/brands/*` assets. Likely its own Railway service `scenario-laredoute` and possibly its own repo.
+- **Reel Act 3: "one face, one look, every environment."** Generate the same model (clean base image) in varied backgrounds, actions, angles and positions via GPT Image 2 img2img, then animate each with Seedance so the reel stays video-only. NEEDS a GATE 1 cost approval (Scenario credits, est. a few tens of $ for ~8 environment clips).
+- **Custom ElevenLabs music** for the reel, matched to the cuts. BLOCKED: no ElevenLabs API key found locally; needs a key from Emmanuel (or fall back to Scenario Sonilo).
+- **Favicon + OpenGraph/Twitter cards** (silences the console 404; nice link previews). One small change, batch with the next deploy.
+- **Password-protect the site** before wide external sharing (confidential).
+
+
+
 Ordered by leverage. (v4 note: item 1, own-brand, is DONE. Item 0, the PDF deck refresh, is DONE: site and deck are now at parity. The top open item is now body-size range, item 2.)
 
 ## v4 follow-up
