@@ -1,5 +1,10 @@
 # ROADMAP
 
+## v7 pending (needs new Scenario generation, GATE 1 cost approval)
+- **Fix the C7/C8/C9 combo bottoms.** The multi-piece looks render the bottom garment off: C7 "linen wide-leg" rendered near-black, C9 wide-leg rendered straight (not wide), C8 skirt is faint. Re-generate those try-ons (correct colours, wide-leg cut, skirt visible). Estimate: a few dollars of credits per look x models.
+- **Replace the satin dress (S4).** Remove "Robe satinee asymetrique" and scrape + generate a better Mango garment from laredoute.fr (master is reused; ~$0.15 x 5 try-ons + a packshot). Then drop S4 from LOOKS and add the new look.
+- **Confirm "Within" reference** (within.co vs within.com) and Epic Games / Deel / Alan are intended Scenario references before sending.
+
 ## v6 done (2026-06-21)
 - Scenario brand restyle (warm/editorial/light, from scenario.com + the design system), garment-left explorer with a before/after lightbox, studio-vs-Scenario numbers with a "directional, not exact" disclaimer, a B&W reference logo wall, and deep links to scenario.com / models / providers / MCP / app / enterprise. The web microsite is the primary deliverable; the deck is kept at parity.
 - **Confirm the "Within" reference.** The logo wall uses `within.co` (NYC creative agency) because `within.com` does not resolve. Verify with Emmanuel which "Within" is the intended Scenario reference and swap `media/logos/within.svg` if needed.

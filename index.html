@@ -38,7 +38,7 @@
   header .reelwrap video{width:100%;height:100%;aspect-ratio:auto;object-fit:cover}
   @media(max-width:880px){header .reelwrap{height:auto;width:100%;aspect-ratio:9/16}}
   .reeltag{position:absolute;top:12px;left:12px;background:rgba(20,20,26,.6);color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px;pointer-events:none}
-  .soundbtn{position:absolute;bottom:14px;left:14px;z-index:6;background:rgba(20,20,26,.62);color:#fff;border:0;font:inherit;font-size:12px;font-weight:700;padding:8px 13px;border-radius:20px;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+  .soundbtn{position:absolute;top:14px;left:14px;z-index:6;background:rgba(20,20,26,.62);color:#fff;border:0;font:inherit;font-size:12px;font-weight:700;padding:8px 13px;border-radius:20px;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
   .soundbtn:hover{background:rgba(20,20,26,.85)}
   .stats{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:30px 0 54px;background:var(--panel)}
   @media(max-width:760px){.stats{grid-template-columns:repeat(3,1fr)}}
@@ -152,11 +152,11 @@
   @media(max-width:680px){#lb .nav{width:40px;height:52px;font-size:24px}}
   .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;background:#ece8e1}
   /* B&W reference logo wall */
-  .logos{display:flex;flex-wrap:wrap;align-items:center;gap:30px 50px;margin:22px 0 4px}
-  .logos img{height:30px;width:auto;filter:brightness(0);opacity:.58;transition:opacity .18s}
-  .logos img:hover{opacity:.92}
-  .logos .lacoste{height:42px} .logos .alan{height:25px} .logos .within{height:21px}
-  @media(max-width:680px){.logos{gap:20px 32px}.logos img{height:24px}.logos .lacoste{height:34px}.logos .alan{height:20px}.logos .within{height:17px}}
+  .logos{display:flex;flex-wrap:wrap;align-items:center;gap:24px 42px;margin:22px 0 4px}
+  .logos img{height:27px;width:auto;filter:brightness(0);opacity:.55;transition:opacity .18s}
+  .logos img:hover{opacity:.9}
+  .logos .lacoste{height:38px} .logos .ogilvy{height:26px} .logos .epicgames{height:42px} .logos .deel{height:40px} .logos .alan{height:46px} .logos .within{height:24px}
+  @media(max-width:680px){.logos{gap:16px 26px}.logos img{height:22px}.logos .lacoste{height:30px}.logos .epicgames{height:34px}.logos .ogilvy{height:21px}.logos .deel{height:32px}.logos .alan{height:36px}.logos .within{height:19px}}
   /* explorer "by look": garment ref to the left, model examples to the right */
   #grid.bylook{display:block}
   #grid.byface{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
@@ -198,6 +198,20 @@
   .cardlink{color:var(--accent);text-decoration:none} .cardlink:hover{text-decoration:underline}
   .linkrow a,.prop .inl,.inl{color:var(--accent);text-decoration:none;font-weight:600} .linkrow a:hover,.inl:hover{text-decoration:underline}
   .linkrow{color:var(--muted)}
+  /* ceiling consistent trio (one face, one garment: grey -> background -> animated) */
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+  @media(max-width:760px){.trio{grid-template-columns:1fr;max-width:340px;margin-left:auto;margin-right:auto}}
+  .trio figure{margin:0;position:relative}
+  .trio img,.trio video{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;background:#ece8e1;display:block}
+  .trio .cap{font-size:12px;color:var(--muted);margin-top:8px;text-align:center;font-weight:600}
+  /* prov: equal-height Today / Tomorrow cards */
+  .prov{align-items:stretch}
+  .prov .col{display:flex;flex-direction:column}
+  .prov .today .shots.one{flex:1;min-height:0}
+  .prov .today .shots.one img{height:100%;width:100%;object-fit:cover;object-position:center top;aspect-ratio:auto;min-height:300px}
+  /* numbers: right column is an equal-height panel */
+  .numinfo{display:flex;flex-direction:column;gap:14px;justify-content:center}
+  .numinfo .callout{margin-top:0}
 </style>
 </head>
 <body>
@@ -301,13 +315,11 @@
   <p class="kick"><span class="n">04</span> The ceiling</p>
   <h2>The same image, off the grey.</h2>
   <p class="lead">Studio is the floor. The exact verified try-on, moved into editorial light: same face, same garment, real world. And it moves.</p>
-  <span class="honestypill">AI capability demonstration &middot; AI environment and AI face &middot; same identity and garment, preserved from the verified studio still &middot; not a shipped campaign</span>
-  <div class="twocol" style="margin-bottom:24px">
-    <div class="cmp">
-      <figure style="margin:0"><img class="zoom" data-gal="ceiling" data-full="media/looks/S2__M3.jpg" data-title="Studio &middot; verified try-on" data-meta="Combinaison florale &middot; Mango &middot; on Amara" data-sku="602618087" src="media/looks/S2__M3.jpg" alt="studio"><div class="cap">Studio &middot; verified</div></figure>
-      <figure style="margin:0"><img class="zoom" data-gal="ceiling" data-full="media/geo/nyc_M3.jpg" data-title="Editorial &middot; New York" data-meta="Same identity and garment, AI environment" data-sku="602618087" src="media/geo/nyc_M3.jpg" alt="editorial"><div class="cap">Editorial &middot; AI demo</div></figure>
-    </div>
-    <figure style="margin:0" class="reelwrap"><video class="zoom" data-gal="ceiling" data-kind="video" data-full="media/video/loop_S2_life.mp4" data-title="Lifestyle, in motion" data-meta="Same garment, Paris boulevard &middot; AI environment" data-sku="602618087" src="media/video/loop_S2_life.mp4" muted autoplay loop playsinline></video><span class="reeltag">lifestyle, in motion</span></figure>
+  <p class="small muted" style="margin:0 0 14px">One face (Sofia), one garment: on the verified grey studio still, then placed in a Paris scene, then the same scene in motion. AI environment and AI face, preserved from the verified studio still.</p>
+  <div class="trio">
+    <figure><img class="zoom" data-gal="ceiling" data-full="media/looks/S2__M1.jpg" data-title="Studio &middot; verified try-on" data-meta="Combinaison florale &middot; Mango &middot; on Sofia, grey studio" data-sku="602618087" src="media/looks/S2__M1.jpg" alt="Sofia on grey studio"><div class="cap">Studio &middot; verified</div></figure>
+    <figure><img class="zoom" data-gal="ceiling" data-full="media/geo/paris_M1.jpg" data-title="Editorial &middot; Paris" data-meta="Same face and garment, placed in a Paris scene &middot; AI environment" data-sku="602618087" src="media/geo/paris_M1.jpg" alt="Sofia in a Paris scene"><div class="cap">Editorial &middot; Paris</div></figure>
+    <figure><video class="zoom" data-gal="ceiling" data-kind="video" data-full="media/video/loop_S2_life.mp4" data-title="In motion &middot; Paris" data-meta="Same face and garment, the same Paris scene in motion &middot; AI environment" data-sku="602618087" src="media/video/loop_S2_life.mp4" muted autoplay loop playsinline></video><span class="reeltag">in motion</span><div class="cap">In motion &middot; Paris</div></figure>
   </div>
   <div class="geo four">
     <figure><img class="zoom" data-gal="ceiling" data-full="media/ceiling/S2_M3_boutique.jpg" data-title="Boutique" data-meta="Same garment, AI environment" data-sku="602618087" src="media/ceiling/S2_M3_boutique.jpg" alt=""><div class="cap">Boutique</div></figure>
@@ -423,7 +435,7 @@
     <div class="vs-side scenario"><span class="vs-lbl">Scenario</span><b class="vs-fig">~$0.15</b><span class="vs-sub">per on-model image, in minutes</span></div>
   </div>
   <p class="lead" style="font-size:17px">A finished studio image runs roughly $46 to $96. Scenario produces a comparable on-model image for about $0.15, on the order of a few hundred times less per image. The 50 images here cost about <b>$16</b> of compute in total, in minutes. A new casting is about $0.60; a looping clip about $9. Compute is cents; the cost that actually scales is human QA on the hard SKUs, which is non-zero.</p>
-  <div class="twocol" style="align-items:start">
+  <div class="twocol" style="align-items:stretch">
     <div class="panel"><h3>Studio vs Scenario, line by line</h3>
       <table class="cmp-table"><tr><th>Cost line</th><th>Traditional studio</th><th>Scenario</th></tr>
         <tr><td>Per finished image</td><td>~$46 to ~$96</td><td class="s">~$0.15</td></tr>
@@ -435,9 +447,9 @@
         <tr><td>Time to first asset</td><td>days to weeks</td><td class="s">minutes</td></tr></table>
       <p class="small muted" style="margin:8px 0 0">Effective studio cost runs about 2 to 3x the quoted figure once coordination and re-shoots are counted.</p>
     </div>
-    <div>
-      <p class="callout small"><b>Illustrative ROI:</b> shoots avoided per category per year, plus the channel and localization variants you simply could not shoot. The pilot measures your real conversion and return figures against your baseline.</p>
-      <p class="small muted"><b>Read this as directional, not exact.</b> These are public, third-party benchmarks and rough best-effort estimates. Methodology, scope, market and product complexity vary widely by vendor, so treat the figures as directional rather than precise. They are not Mango's actual cost data, and the pilot is designed to measure real numbers against Mango's own internal baseline.</p>
+    <div class="panel numinfo">
+      <p class="callout small" style="margin-top:0"><b>Illustrative ROI:</b> shoots avoided per category per year, plus the channel and localization variants you simply could not shoot. The pilot measures your real conversion and return figures against your baseline.</p>
+      <p class="small muted" style="margin:0"><b>Read this as directional, not exact.</b> These are public, third-party benchmarks and rough best-effort estimates. Methodology, scope, market and product complexity vary widely by vendor, so treat the figures as directional rather than precise. They are not Mango's actual cost data, and the pilot is designed to measure real numbers against Mango's own internal baseline.</p>
     </div>
   </div>
   <p class="src">Studio benchmarks: squareshot.com, blendnow.com, nightjar.so (public figures, 2026), plus public commercial model and hair-and-make-up day rates. Not Mango data. The ~$0.15 Scenario per-image figure is Scenario's own (1 credit is about $0.05).</p>
@@ -451,13 +463,15 @@
   <div class="logos">
     <img class="lacoste" src="media/logos/lacoste.svg" alt="Lacoste">
     <img class="ogilvy" src="media/logos/ogilvy.svg" alt="Ogilvy">
+    <img class="epicgames" src="media/logos/epicgames.svg" alt="Epic Games">
+    <img class="deel" src="media/logos/deel.svg" alt="Deel">
     <img class="alan" src="media/logos/alan.png" alt="Alan">
     <img class="within" src="media/logos/within.svg" alt="Within">
   </div>
   <p class="small muted" style="margin:10px 0 24px">A few of the teams building with Scenario.</p>
   <div class="props" style="grid-template-columns:repeat(3,1fr)">
     <div class="prop"><b>Your products, your rights</b><span>Everything here is your own Mango product, captured from laredoute.fr as a one-time evaluation artifact. You own every generated asset, and a contractual no-training guarantee means your inputs and outputs never train Scenario or third-party models. AI faces; real-talent option.</span></div>
-    <div class="prop"><b>Security at every layer</b><span>SOC 2 Type II (independently audited), AES-256 at rest, SSO / SAML (Okta, Azure AD), complete activity logging, and a versioned sub-processor list. US (AWS) hosting; GDPR via EU Standard Contractual Clauses and an appointed EU representative; CCPA service-provider terms.</span></div>
+    <div class="prop"><b>Security at every layer</b><span>SOC 2 Type II (independently audited), AES-256 at rest, SSO / SAML (Okta, Azure AD), complete activity logging, and a versioned sub-processor list at <a class="inl" href="https://trust.scenario.com" target="_blank" rel="noopener">trust.scenario.com</a>. US (AWS) hosting; GDPR via EU Standard Contractual Clauses and an appointed EU representative; CCPA service-provider terms.</span></div>
     <div class="prop"><b>Production at scale</b><span>An API with custom rate limits and batch processing, volume-based pricing, custom integrations and workflow automation over MCP, a named account manager with a dedicated Slack channel, and a 99.0% uptime SLA with service credits.</span></div>
   </div>
   <p class="small muted" style="margin-top:14px">A platform your teams operate, exposed over MCP, not a consultancy that runs your catalog. Full enterprise terms at scenario.com/enterprise.</p>
@@ -471,10 +485,10 @@
   <div class="props" style="grid-template-columns:repeat(4,1fr);margin-top:8px">
     <div class="prop"><b><a class="cardlink" href="https://scenario.com" target="_blank" rel="noopener">The platform &rarr;</a></b><span>Generation, editing, video, training, asset management. Live and in production.</span></div>
     <div class="prop"><b><a class="cardlink" href="https://scenario.com/models" target="_blank" rel="noopener">The models &rarr;</a></b><span>Try-on, image, video and localization across many <a class="inl" href="https://scenario.com/providers" target="_blank" rel="noopener">providers</a>, already wired together.</span></div>
-    <div class="prop"><b><a class="cardlink" href="https://docs.scenario.com/get-started/mcp/mcp" target="_blank" rel="noopener">The automation &rarr;</a></b><span>Exposed over <a class="inl" href="https://docs.scenario.com/get-started/mcp/mcp" target="_blank" rel="noopener">MCP</a>. Agents and Skills run the chain on your PIM, on a schedule.</span></div>
+    <div class="prop"><b><a class="cardlink" href="https://mcp.scenario.com/" target="_blank" rel="noopener">The automation &rarr;</a></b><span>Exposed over <a class="inl" href="https://mcp.scenario.com/" target="_blank" rel="noopener">MCP</a>. Agents and Skills run the chain on your PIM, on a schedule.</span></div>
     <div class="prop"><b><a class="cardlink" href="https://scenario.com/enterprise" target="_blank" rel="noopener">The posture &rarr;</a></b><span>US (AWS) hosting, GDPR via SCCs + EU representative, CCPA service-provider terms, contractual no-training guarantee, SOC 2 Type II, assets owned by you.</span></div>
   </div>
-  <p class="linkrow small" style="margin-top:16px">Explore it yourself: <a href="https://scenario.com" target="_blank" rel="noopener">scenario.com</a> &middot; <a href="https://scenario.com/models" target="_blank" rel="noopener">the models</a> &middot; <a href="https://scenario.com/providers" target="_blank" rel="noopener">the providers</a> &middot; <a href="https://docs.scenario.com/get-started/mcp/mcp" target="_blank" rel="noopener">connect over MCP</a> &middot; <a href="https://app.scenario.com" target="_blank" rel="noopener">app.scenario.com</a> &middot; <a href="https://scenario.com/enterprise" target="_blank" rel="noopener">enterprise</a></p>
+  <p class="linkrow small" style="margin-top:16px">Explore it yourself: <a href="https://scenario.com" target="_blank" rel="noopener">scenario.com</a> &middot; <a href="https://scenario.com/models" target="_blank" rel="noopener">the models</a> &middot; <a href="https://scenario.com/providers" target="_blank" rel="noopener">the providers</a> &middot; <a href="https://mcp.scenario.com/" target="_blank" rel="noopener">connect over MCP</a> &middot; <a href="https://app.scenario.com" target="_blank" rel="noopener">app.scenario.com</a> &middot; <a href="https://scenario.com/enterprise" target="_blank" rel="noopener">enterprise</a> &middot; <a href="https://trust.scenario.com" target="_blank" rel="noopener">trust center</a></p>
   <div style="text-align:center;margin-top:34px">
     <h3 style="font-size:22px">Pick a slice of your catalog. We will show you the same, on your products.</h3>
     <p class="muted">A 30-minute working session with Emmanuel de Maistre, Cofounder &amp; CEO.</p>
@@ -515,15 +529,15 @@ const grid=document.getElementById('grid');
 const li=(c,m)=>`media/looks/${c}__${m}.jpg`;
 const esc=s=>String(s).replace(/"/g,'&quot;');
 function render(v){grid.className=v;let h='';
- if(v==='bylook'){for(const L of LOOKS){
-   h+=`<div class="lookblock"><div class="lh">${L.name} <span class="price">${L.price} &middot; Mango</span>${L.note?`<span class="note ${L.note.k}">win</span>`:''}</div><div class="lookrow">${refCell(L)}`;
-   for(const M of MODELS)h+=cell(L,M,`${M.name} &middot; ${M.desc}`);
+ if(v==='bylook'){for(const L of LOOKS){const gal='look-'+L.c;
+   h+=`<div class="lookblock"><div class="lh">${L.name} <span class="price">${L.price} &middot; Mango</span>${L.note?`<span class="note ${L.note.k}">win</span>`:''}</div><div class="lookrow">${refCell(L,gal)}`;
+   for(const M of MODELS)h+=cell(L,M,`${M.name} &middot; ${M.desc}`,gal);
    h+=`</div></div>`;
  }}
- else{for(const M of MODELS){h+=`<div class="rowhead">${M.name} <span class="price">${M.desc}</span></div>`;for(const L of LOOKS)h+=cell(L,M,L.c);}}
+ else{for(const M of MODELS){const gal='face-'+M.id;h+=`<div class="rowhead">${M.name} <span class="price">${M.desc}</span></div>`;for(const L of LOOKS)h+=cell(L,M,L.c,gal);}}
  grid.innerHTML=h;}
-function refCell(L){const p='media/packshots/'+L.pack[0];const multi=L.pack.length>1?` &middot; +${L.pack.length-1}`:'';return `<button class="ref zoom" data-kind="image" data-full="${p}" data-title="${esc(L.name)} &middot; source packshot" data-meta="Source packshot from laredoute.fr &middot; ${L.price} &middot; Mango &middot; SKU ${L.sku}" data-sku="${L.sku}"><div class="refbox"><span class="reftag">packshot in${multi}</span><img loading="lazy" src="${p}" alt=""></div><div class="rl">Source &middot; laredoute.fr</div></button>`;}
-function cell(L,M,cap){const src=li(L.c,M.id);return `<button class="cell zoom" data-gal="explorer" data-kind="image" data-full="${src}" data-title="${esc(L.name)}" data-meta="${L.price} &middot; Mango &middot; SKU ${L.sku} &middot; on ${M.name} (${M.desc})" data-sku="${L.sku}" data-pack="${L.pack[0]}"><img loading="lazy" src="${src}"><div class="cap">${cap}</div></button>`;}
+function refCell(L,gal){const p='media/packshots/'+L.pack[0];const multi=L.pack.length>1?` &middot; +${L.pack.length-1}`:'';return `<button class="ref zoom" data-gal="${gal}" data-kind="image" data-full="${p}" data-title="${esc(L.name)} &middot; source packshot" data-meta="Source packshot from laredoute.fr &middot; ${L.price} &middot; Mango &middot; SKU ${L.sku}" data-sku="${L.sku}"><div class="refbox"><span class="reftag">packshot in${multi}</span><img loading="lazy" src="${p}" alt=""></div><div class="rl">Source &middot; laredoute.fr</div></button>`;}
+function cell(L,M,cap,gal){const src=li(L.c,M.id);return `<button class="cell zoom" data-gal="${gal}" data-kind="image" data-full="${src}" data-title="${esc(L.name)}" data-meta="${L.price} &middot; Mango &middot; SKU ${L.sku} &middot; on ${M.name} (${M.desc})" data-sku="${L.sku}" data-pack="${L.pack[0]}"><img loading="lazy" src="${src}"><div class="cap">${cap}</div></button>`;}
 function setView(v){document.getElementById('bLook').classList.toggle('on',v==='bylook');document.getElementById('bFace').classList.toggle('on',v==='byface');render(v);}
 render('bylook');
 
@@ -558,9 +572,9 @@ function closeLB(){lb.classList.remove('open');document.getElementById('lbMedia'
 document.addEventListener('click',e=>{
   const el=e.target.closest('.zoom');if(!el)return;
   e.preventDefault();
-  const gal=el.dataset.gal||'_solo';
-  const els=[...document.querySelectorAll('.zoom[data-gal="'+gal+'"]')];
-  openItems(els.map(toItem),els.indexOf(el));
+  const gal=el.dataset.gal;
+  const els=gal?[...document.querySelectorAll('.zoom[data-gal="'+gal+'"]')]:[el];
+  openItems(els.map(toItem),Math.max(0,els.indexOf(el)));
 });
 document.querySelector('#lb .x').addEventListener('click',closeLB);
 document.querySelector('#lb .nav.prev').addEventListener('click',()=>navLB(-1));

@@ -1,3 +1,53 @@
+# Railway only needs what the live site (index.html) serves.
+# Everything below stays in GitHub but is NOT uploaded, to keep the deploy
+# under the CLI's ~30s upload timeout on slow connections.
 node_modules
 reel
 .git
+.playwright-mcp
+
+# Leave-behind / PDF source (not served by the live site)
+Scenario-La-Redoute-Proposal.pdf
+deck.html
+media/audio
+media/brands
+
+# Deck-only montages and source crops (index.html does not load these)
+media/geo_strip.jpg
+media/ceiling_grid.jpg
+media/brands_grid.jpg
+media/overview_50.jpg
+media/model_M1.jpg
+media/model_M2.jpg
+media/model_M3.jpg
+media/model_M4.jpg
+media/model_M5.jpg
+media/pose_strip.jpg
+media/pose_hair.jpg
+media/pose_walk.jpg
+media/provenance_strip.jpg
+media/video_strip.jpg
+media/video_strip_s2.jpg
+media/fid_s2.jpg
+media/fid_s4.jpg
+media/hero.jpg
+media/c10_render.jpg
+media/c10_shirt_src.jpg
+media/c9_trousers_src.jpg
+media/c9_win.jpg
+
+# Unused provenance screenshots (only lr_today_2.jpg is shown)
+media/provenance/lr_today_1.jpg
+media/provenance/lr_today_3.jpg
+media/provenance/lr_pdp_s2_today.jpg
+media/provenance/lr_pdp_s4_today.jpg
+
+# Video clips not referenced by index.html
+media/video/loop_M1_S2.mp4
+media/video/loop_S4_M1.mp4
+media/video/loop_S4_M2.mp4
+media/video/loop_S4_M3.mp4
+media/video/loop_S4_M4.mp4
+media/video/loop_S4_M5.mp4
+media/video/loop_terrace.mp4
+media/video/sizzle_16x9.mp4

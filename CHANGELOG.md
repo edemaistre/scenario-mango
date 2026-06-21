@@ -1,5 +1,17 @@
 # Changelog
 
+## v7 — 2026-06-21 — Review pass: layout harmonization, references, navigation
+
+- **Hero sound button** moved to the top-left so it no longer covers the reel's title.
+- **Today / Tomorrow** columns harmonized to equal height (the live PDP screenshot now fills its card).
+- **"Off the grey" (ceiling)** first row is now a consistent trio of one face (Sofia) and one garment: grey studio still, the same person placed in a Paris scene, then that same scene in motion. Equal heights. Removed the standalone honesty pill (the hero lead and footer still label the editorial/lifestyle scenes).
+- **Reference logo wall:** added Epic Games and Deel; harmonized heights (Deel and Alan enlarged so the lowercase wordmarks read at the same weight as the others). Epic Games uses a single-path monochrome mark so it stays legible under the black filter (the stacked-shield SVG flattened to a blob).
+- **Unit economics** columns harmonized to equal height (right column is now a matching panel).
+- **The automation link** points to https://mcp.scenario.com/ ; added a **trust center** link (trust.scenario.com) in the Security card and the pilot links row.
+- **Explorer navigation:** clicking a garment opens the source packshot, and arrow keys / nav now step through that same garment on each of the five models (per-garment gallery, e.g. "1 / 6"), instead of a separate packshots gallery. "By face" steps through one model's looks.
+- **Deploy:** `.railwayignore` now ships only what the live site serves (the PDF, deck montages and 8 unused clips stay in GitHub), so the upload fits under the CLI's ~30s timeout on slow links. Video re-compressed earlier (media 91MB -> 38MB).
+- **Pending (needs new generation, gated):** C7/C8/C9 combo bottoms render off (linen wide-leg too dark, wide-leg too straight, skirt faint); and replacing the satin dress (S4) with a better Mango garment. Both require Scenario credits, see ROADMAP.
+
 ## v6 — 2026-06-21 — Scenario brand restyle, garment-left explorer, references, deep links
 
 The **web microsite is the primary deliverable.** This pass restyles it to the Scenario brand and adds what an enterprise buyer looks for. The PDF deck (`deck.html`) was kept at parity in the same commit but is secondary.
