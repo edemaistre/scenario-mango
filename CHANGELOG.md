@@ -29,7 +29,7 @@ The **web microsite is the primary deliverable.** This pass restyles it to the S
 - Explorer ref tile and lightbox source image **heights harmonized**; removed the white padding/border box around the packshot.
 
 ### Performance
-- **Compressed the hero reel** `sizzle_9x16.mp4` from 1080x1920 at ~5 Mbps (19 MB) to 720x1280 at CRF 24 (~5 MB), and `sizzle_16x9.mp4` to ~2.4 MB. Visually identical at the hero display size, much faster to load, and small enough to deploy reliably (ROADMAP item: compress video). The loop clips were left untouched (product-quality proof).
+- **Compressed all video** for faster load and reliable deploy (ROADMAP item: compress video). Hero `sizzle_9x16.mp4` 1080x1920 at ~5 Mbps (19 MB) to 720x1280 CRF 24 (~5 MB); `sizzle_16x9.mp4` to ~2.4 MB; the 15 loop clips re-encoded to 720x1280 CRF 25 with audio dropped (they autoplay muted), roughly 0.7 to 1.4 MB each. Total media dropped from ~91 MB to ~38 MB. Visually unchanged at the display sizes used on the page.
 
 ## v5 — 2026-06-21 — Mango edition
 
