@@ -40,7 +40,7 @@ Six verified try-ons were placed into editorial environments with Gemini 3.1 Fla
 - `reel/build_reel.sh` assembles the 30-second film: Act 1 (studio clips + lower-thirds + AI tag), Act 2 (the lifestyle clip + editorial Ken-Burns beats + capability label), Act 3 (CTA card), scored to `media/audio/bed.mp3`. Text is pre-rendered PNG (ffmpeg here lacks drawtext); composited via `overlay`, segments concatenated, music muxed with `loudnorm` + `afade`. Outputs `media/video/sizzle_9x16.mp4` and `sizzle_16x9.mp4`.
 
 ## 7. The documents
-- `deck.html` -> Chrome headless `--print-to-pdf` -> `Scenario-La-Redoute-Proposal.pdf` (16 pages, A4, v4). Swiss-minimal, serif display headings, per-page confidential footer.
+- `deck.html` -> Chrome headless `--print-to-pdf` -> `Scenario-Mango-Proposal.pdf` (16 pages, A4, v4). Swiss-minimal, serif display headings, per-page confidential footer.
 - `index.html`: self-contained microsite, vanilla HTML/CSS/JS, lazy-loaded explorer, lightbox, autoplay-muted hero reel.
 
 ## 8. Cost benchmark (cited)
@@ -62,7 +62,7 @@ Studio: ~$46 per finished image lean (one-day, ~60 images, ~$2,750), ~$96 fully-
 The per-model and lifestyle clips are Seedance 2.0 Fast, 6s, 720p, 9:16, `generateAudio:false`, run with BOTH `image` (pose A = the verified try-on still) and `lastFrameImage` (pose B = a Gemini re-pose of the SAME garment mid-walk). Seedance interpolates A to B, producing real walking motion while the garment is pinned at both ends. Single-first-frame drifts (garment reinvented); first=last is static. Jumpsuit clips: `media/video/loop_S2_M1..M5.mp4` (every face) and `loop_S2_life.mp4` (Paris lifestyle).
 
 ## 12. The PDF deck at v4 parity
-The leave-behind (`deck.html` -> `Scenario-La-Redoute-Proposal.pdf`) was refreshed to match the site (16 pages). Changes from the prior 15-page deck:
+The leave-behind (`deck.html` -> `Scenario-Mango-Proposal.pdf`) was refreshed to match the site (16 pages). Changes from the prior 15-page deck:
 - **Cover** leads on the floral jumpsuit (`media/hero_s2.jpg`), stat block carries "3 brands incl. your own", and the own-brand note flips from "Phase-1 promise" to "rendered in this deck".
 - **Page 3** adds the three-screenshot provenance strip (`media/provenance_strip.jpg`, "Today on laredoute.fr").
 - **Page 4** combines off-the-grey (editorial `media/ceiling_grid.jpg`) with Localize (`media/geo_strip.jpg`, 5 markets), noting GPT Image 2 for full-body placement.

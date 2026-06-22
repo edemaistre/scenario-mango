@@ -8,7 +8,7 @@ An enterprise pitch package from Scenario (Emmanuel de Maistre, Cofounder and CE
 
 ## What is in here
 - **`index.html`** : interactive microsite (v5), led by the floral jumpsuit. Hero plays the 30s sizzle reel (opens on a model, sound toggle, fits the viewport). Sections: Today to Tomorrow (one live laredoute.fr screenshot + link, fixed-vs-infinite), one-garment-every-face and one-face-every-look looping galleries, off-the-grey (studio to editorial), Localize per market (geo), One asset every channel (Instagram / TikTok / UA mockups), Automate (agents / MCP / Skills), the 50-look explorer, numbers (in dollars), an enterprise "Built for teams that can't compromise" block, measured pilot CTA. A universal lightbox makes every image and video click-to-enlarge, with navigation and a link to the live product page.
-- **`Scenario-La-Redoute-Proposal.pdf`** : the 15-page leave-behind, rendered from `deck.html`, at parity with the Mango site. (Filename kept for continuity; content is the Mango edition.)
+- **`Scenario-Mango-Proposal.pdf`** : the 15-page leave-behind, rendered from `deck.html`, at parity with the Mango site. (Filename kept for continuity; content is the Mango edition.)
 - **`deck.html`** : source of the PDF.
 - **`media/`** : all assets. `looks/` (50 try-ons), `ceiling/` (6 editorial renders), `packshots/` (15 source packshots), `video/` (5 per-model clips, 1 lifestyle clip, the 9:16 + 16:9 sizzle reels), `audio/` (music bed), plus montages and the hero frame.
 - **`reel/`** : the sizzle-reel build script and its text/overlay PNGs.
@@ -33,7 +33,7 @@ railway domain     # generate / show the public URL
 Note: Railway deploys from a local `railway up` (not GitHub auto-deploy). After changing site files, run `railway up` again to publish. The site is currently public on the URL above; see ROADMAP item 11 to password-protect it before wide external sharing.
 
 ## Rebuild the artifacts
-- **PDF:** `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --no-pdf-header-footer --virtual-time-budget=20000 --print-to-pdf="Scenario-La-Redoute-Proposal.pdf" "file://$PWD/deck.html"`
+- **PDF:** `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --no-pdf-header-footer --virtual-time-budget=20000 --print-to-pdf="Scenario-Mango-Proposal.pdf" "file://$PWD/deck.html"`
 - **Sizzle reel:** `bash reel/build_hero_reel.sh` (requires ffmpeg + ImageMagick; the `loop_*` clips, the Scenario logo PNGs and `media/audio/bed.mp3` must be present).
 
 ## What is new in v6 (2026-06-21)

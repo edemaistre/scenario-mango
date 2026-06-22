@@ -1,11 +1,11 @@
 # Scenario → La Redoute pitch package
 
-Outbound enterprise pitch from Emmanuel (Scenario CEO) to La Redoute. Proof: a 50-image virtual try-on catalog built on La Redoute's own live Mango assortment, plus 5 real motion clips. Plan engineered by a generate → adversarial-judge → synthesize loop (self-scored 9.4); every fidelity claim verified against the source pixels before it was written.
+Outbound enterprise pitch from Emmanuel (Scenario CEO) to Mango. Proof: a 50-image virtual try-on catalog built on Mango's assortment captured via laredoute.fr, plus 5 real motion clips. Plan engineered by a generate → adversarial-judge → synthesize loop (self-scored 9.4); every fidelity claim verified against the source pixels before it was written.
 
 ## What to send / open
 | File | What it is | How to use |
 |---|---|---|
-| `Scenario-La-Redoute-Proposal.pdf` | 14-page pitch document | The leave-behind. Email or attach to the deal. |
+| `Scenario-Mango-Proposal.pdf` | 14-page pitch document | The leave-behind. Email or attach to the deal. |
 | `index.html` | Interactive microsite | The live demo. Open in Chrome, or host it. Self-contained (uses `media/`). |
 | `deck.html` | Source of the PDF | Edit + re-render if you want changes (command below). |
 | `media/` | All images + 5 videos | Keep alongside the two HTML files. |
@@ -14,7 +14,7 @@ The whole `la-redoute-pitch/` folder is self-contained and portable. To host the
 ```
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu \
   --no-pdf-header-footer --virtual-time-budget=15000 \
-  --print-to-pdf="Scenario-La-Redoute-Proposal.pdf" "file://$PWD/deck.html"
+  --print-to-pdf="Scenario-Mango-Proposal.pdf" "file://$PWD/deck.html"
 ```
 
 ## The spine of the pitch (deliberate)

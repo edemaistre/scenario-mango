@@ -48,7 +48,7 @@ This repo is a confidential B2B pitch from Scenario. The product of the pitch is
 - Master: GPT Image 2 (`model_openai-gpt-image-2`, medium, 1024x1536). Try-on: the Scenario try-on model (~3 CU, up to 11 refs, `preserveInputSize:true`). Re-pose/editorial: Gemini 3.1 Flash. Motion: Seedance 2.0 Fast. Project: Public Data Default (team/project `bftve3VtQgmpXxwAPUFWTQ`).
 
 ## Rebuild commands
-- PDF: `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --no-pdf-header-footer --virtual-time-budget=20000 --print-to-pdf="Scenario-La-Redoute-Proposal.pdf" "file://$PWD/deck.html"`. 15 pages (Mango edition). `.page` is `overflow:hidden`, so overflow is silently CLIPPED, not paginated: cap tall images and split dense pages, QC every page after a content change.
+- PDF: `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --no-pdf-header-footer --virtual-time-budget=20000 --print-to-pdf="Scenario-Mango-Proposal.pdf" "file://$PWD/deck.html"`. 15 pages (Mango edition). `.page` is `overflow:hidden`, so overflow is silently CLIPPED, not paginated: cap tall images and split dense pages, QC every page after a content change.
 - Reel: `bash reel/build_hero_reel.sh` (ImageMagick + ffmpeg).
 
 ## Deploy
