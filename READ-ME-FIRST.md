@@ -1,4 +1,4 @@
-# Scenario → La Redoute pitch package
+# Scenario → Mango pitch package
 
 Outbound enterprise pitch from Emmanuel (Scenario CEO) to Mango. Proof: a 50-image virtual try-on catalog built on Mango's assortment captured via laredoute.fr, plus 5 real motion clips. Plan engineered by a generate → adversarial-judge → synthesize loop (self-scored 9.4); every fidelity claim verified against the source pixels before it was written.
 
